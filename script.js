@@ -37,16 +37,16 @@ var inputHappened = function(currentInput){
         display("Your ticket is purchased at $" + soldSeatPrice + " seats left " + seatsLeft + " before price surge additional 2%");
     }
     else if (currentInput === "b" && seatsLeft > 5 && seatsLeft < 10) {
-        newTicketPrice = lastTicketPrice * priceSurge1;
+        lastTicketPrice = lastTicketPrice * priceSurge1;
         seatsLeft = seatsLeft - 1;
         console.log(seatsLeft);
-        display("Your ticket is purchased at $" + newTicketPrice + " seats left " + seatsLeft + " before price surge additional 2%");
+        display("Your ticket is purchased at $" + lastTicketPrice + " seats left " + seatsLeft + " before price surge additional 2%");
     }
     else if (currentInput === "b" && seatsLeft <= 5 && seatsLeft > 1) {
-        newTicketPrice = lastTicketPrice * priceSurge2;
+        lastTicketPrice = lastTicketPrice * priceSurge2;
         seatsLeft = seatsLeft - 1;
         console.log(seatsLeft);
-        display("Your ticket is purchased at $" + newTicketPrice + " seats left " + seatsLeft + " before price really surge exponentally");
+        display("Your ticket is purchased at $" + lastTicketPrice + " seats left " + seatsLeft + " before price really surge exponentally");
     }
     else if (currentInput === "b" && seatsLeft === 1) {
         soldSeatPrice = 91000;
@@ -57,7 +57,7 @@ var inputHappened = function(currentInput){
     else if (currentInput === "b" && seatsLeft < 1) {
         seatsLeft = seatsLeft - 1;
         console.log(seatsLeft);
-        display("tickets all sold out");
+        display("Tickets all sold out");
     }
     else {
         display("Your purchase is cancelled");
