@@ -8,16 +8,16 @@ var seatPrice = 0;
 var inputHappened = function(currentInput){
   console.log( currentInput );
   //display( "WOW SOMETHING HAPPENED" );
-  input = currentInput.toLowerCase();
+  var input = currentInput.toLowerCase();
   console.log(`Lower Case ${input}`);
-  if (input === "buy") {
+  if (input === "buy" && totalSeats > 0) {
     if (boughtSeats === 1) {
         seatPrice = 50;
         console.log(seatPrice);
         display(seatPrice);
         //return seatPrice;
-    } else if (boughtSeats > 1 || boughtSeats < 10) {
-        seatPrice = seatPrice * 1.05;
+    } else if (boughtSeats > 1 && boughtSeats < 10) {
+        seatPrice = seatPrice * 1.05; //cumulative
         console.log(seatPrice);
         display(seatPrice);
     }
@@ -25,14 +25,9 @@ var inputHappened = function(currentInput){
     totalSeats = totalSeats - 1;
     console.log(boughtSeats);
     console.log(totalSeats);
-  } else if (boughtSeats = 0) {
+  } else if (totalSeats === 0) {
     display("Tickets are sold out.")
-} else {
+    } else {
     display("Do you want to BUY the ticket?");
   }
 };
-
-
-/*var pricing = function(totalSeats) {
-
-};*/
