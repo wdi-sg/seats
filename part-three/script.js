@@ -1,10 +1,7 @@
 console.log("hello script js");
 
-//Part TWO
-// The airline boss requests finer-grained pricing:
-// For the first half of the seats, the price goes up 3% over the original price of $50.
-// For the second half it goes up by 5% over the original price of $50.
-// The last seat is $91,000.
+//Part THREE
+// When outputing a message tell the user how many tickets are left before the price bracket goes up.
 
 
 // When the plane is empty a seat is $50.
