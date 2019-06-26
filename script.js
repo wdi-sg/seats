@@ -14,12 +14,29 @@ document.getElementById("price").textContent = "$" + ticketPrice;
 
 
 function buySeat(){
-  document.getElementById("feedback").textContent = "seat bought at" + " $" + ticketPrice;
-  setTimeout(function(){
-     document.getElementById("feedback").textContent = "";
-   }, 1000);
-  totalSeats = totalSeats - 1;
-  console.log(totalSeats);
+
+   //check if there is still seat,
+   if (totalSeats > 1){
+
+     //display feedback
+     document.getElementById("feedback").textContent = "seat bought at" + " $" + ticketPrice;
+     setTimeout(function(){
+        document.getElementById("feedback").textContent = "";
+      }, 1000);
+
+      //price update
+      ticketPrice = parseInt(ticketPrice) * 1.5;
+      document.getElementById("price").textContent = "$" + ticketPrice;
+
+    //if yes totalSeats -1
+     totalSeats = totalSeats - 1;
+     console.log(totalSeats);
+   } else if (totalSeats === 1){
+     totalSeats = totalSeats - 1;
+     document.getElementById("buy").style.display = "none";
+     document.getElementById("price").textContent = "Sold out";
+   }
+
 }
 // var buySeat = function(){
 //   console.log("test");
