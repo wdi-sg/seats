@@ -47,30 +47,40 @@ var inputHappened = function (userInput) {
     if (userInput === "buy economy class") { // INPUT ECONOMY CLASS - 15 SEATS
         // ECONOMY CLASS SECTION ///////////////////////////////
         console.log("User enters buy economy class");
-        //newPrice = ticketPrice + (ticketPrice * priceIncreasedPercentage);
+
+        /* START ECONOMY CLASS PRICE CALCULATION */
         econClassSeatsSold = econClassSeatsSold + 1;
         //console.log(seatsSold + " seats sold");
-        //console.log("You ticket costs $" + newPrice );
-        //display("You ticket costs $" + newPrice );
-        if (econClassSeatsSold <= 5) {
+
+        var econHalf = Math.floor(totalEconClassSeats/2);
+        console.log(econHalf);
+        /*
+        if (econClassSeatsSold <= (Math.floor(totalEconClassSeats/2)) {
             console.log("You tickets costs 3% more");
-            console.log( (5-seatsSold) + " seats left b4 5% increase" );
-            var newPrice = ticketPrice + (ticketPrice * priceIncreased3Percent * seatsSold);
-            display( (5-seatsSold) + " seats left b4 5% increase" + "\n\n" + "Your ticket costs $" + newPrice );
-        } else if (seatsSold > 5 && seatsSold <= 9) {
+            console.log( ((Math.floor(totalEconClassSeats/2)) - econClassSeatsSold) + " seats left b4 5% increase" );
+            var newPrice = ticketPrice + (ticketPrice * priceIncreased3Percent * econClassSeatsSold);
+            display( (((Math.floor(totalEconClassSeats/2)) - econClassSeatsSold) + " seats left b4 5% increase" + "\n\n" + "Your ticket costs $" + newPrice );
+        } else if (econClassSeatsSold > ((Math.floor(totalEconClassSeats/2)) && econClassSeatsSold <= ((Math.floor(totalEconClassSeats/2)-1)) {
             console.log("You tickets costs 5% more");
-            console.log( (9-seatsSold) + " seats left b4 $91,000 seat" );
-            newPrice = ticketPrice + (ticketPrice * priceIncreased5Percent * seatsSold);
-            display( (9-seatsSold) + " seats left b4 $91,000" + "\n\n" + "You ticket costs $" + newPrice );
+            console.log( (((Math.floor(totalEconClassSeats/2)-1) - econClassSeatsSold ) + " seats left b4 $91,000 seat" );
+            newPrice = ticketPrice + (ticketPrice * priceIncreased5Percent * econClassSeatsSold );
+            display( (((Math.floor(totalEconClassSeats/2)-1)-econClassSeatsSold ) + " seats left b4 $91,000" + "\n\n" + "You ticket costs $" + newPrice );
         } else {
             console.log("You pay $91,000");
             display("You ticket costs $91,000" );
-            console.log( (seatsSold) + " seats" );
+            console.log( (econClassSeatsSold) + " seats" );
         }
-    } else if { // INPUT BUSINESS CLASS = 6 SEATS
+        */
+        /* END OF ECONOMY CLASS PRICE CALCULATION */
+
+    } else if (userInput === "buy business class") { // INPUT BUSINESS CLASS = 6 SEATS
         // BUSINESS CLASS SECTION ///////////////////////////////
-    } else if { // INPUT FIRST CLASS = 4 SEATS
+        console.log("User enters buy business class")
+
+    } else if (userInput === "buy first class") { // INPUT FIRST CLASS = 4 SEATS
         // FIRST CLASS SECTION ///////////////////////////////
+        console.log("User enters buy first class")
+
     } else { // IF USER INPUT IS NOT ECON, BIZ OR FIRST CLASS PROMPT FOR CORRECT INPUT
         console.log("Please enter 'buy' to purchase ticket.");
         display("Please enter 'buy' to purchase ticket.");
