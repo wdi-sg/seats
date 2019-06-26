@@ -1,24 +1,4 @@
 
-
-
-
-
-// console.log(50 / 100 * 5);
-// //ORIGINAL INPUT CODE
-// var inputHappened = function(currentInput){
-//   console.log( currentInput );
-//   display( "WOW SOMETHING HAPPENED" );
-// };
-
-
-
-// code:
-// create global variable starting price = 50
-// every subsequent ticket = +2.5
-//price increase (2.5) and number of buys (number) --> total increase to price
-//current price = starting price + total increase to price
-//function inputHappened MUST calculate starting price + total increase to price AND add to the numberOfBuys counter
-
 var startPrice = 50;      //standard 50
 var eachIncrement = 0;  //for part1, standard 2.5
 var numberOfBuys = 0;     //not relevant part1
