@@ -10,6 +10,7 @@ console.log("hello script js");
 // When the plane is empty a seat is $50.
 var ticketPrice = 50;
 
+
 // Number of seats sold
 seatsSold = 0;
 priceIncreased3Percent = 0.03;
