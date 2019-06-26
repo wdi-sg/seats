@@ -1,21 +1,35 @@
 //set starting variables
+var ticketPrice = 50;
+
+//number of taken seats - starts at 0, increases by 1
 var numberOfTakenSeatsEconomy = 0;
 var numberOfTakenSeatsBusiness = 0;
 var numberOfTakenSeatsFirst = 0;
-var ticketPrice = 50;
+
+//number of seats LEFT in tier per class (except most expensive)
+var seatsinTierOneE = 6;
+var seatsinTierTwoE = 6;
+
+var seatsinTierOneB = 2;
+var seatsinTierTwoB = 1;
+
+var seatsinTierOneF = 2;
+
 
 //define function that happens if user selects economy class
 var buyEconomy = function() {
     if (numberOfTakenSeatsEconomy >= 15) {
-        display(`Sorry, Economy Class seats are sold out! But we have ${(6-numberOfTakenSeatsBusiness)} seats left in Business and ${4-numberOfTakenSeatsFirst} seats left in First.`)
+        display(`Sorry, Economy Class seats are sold out! But we have ${(6-numberOfTakenSeatsBusiness)} seat(s) left in Business and ${4-numberOfTakenSeatsFirst} seat(s) left in First.`)
     } else if (numberOfTakenSeatsEconomy >= 0 && numberOfTakenSeatsEconomy < 7) {
         var tierOnePriceE = ticketPrice * 1.03;
-        var data = `Your ticket costs $${tierOnePriceE}.`;
+        var data = `Your ticket costs $${tierOnePriceE}. There are ${seatsinTierOneE} seat(s) left in this price bracket for Economy Class.`;
         display(data);
+        seatsinTierOneE -= 1;
     } else if (numberOfTakenSeatsEconomy > 6 && numberOfTakenSeatsEconomy < 14) {
         var tierTwoPriceE = ticketPrice * 1.05;
-        var data = `Your ticket costs $${tierTwoPriceE}.`;
+        var data = `Your ticket costs $${tierTwoPriceE}. There are ${seatsinTierTwoE} seat(s) left in this price bracket for Economy Class.`;
         display(data);
+        seatsinTierTwoE -= 1;
     } else if (numberOfTakenSeatsEconomy === 14) {
         var tierThreePriceE = 91000
         var data = `Your ticket costs $${tierThreePriceE}, a jet might be cheaper.`;
@@ -29,15 +43,19 @@ var buyEconomy = function() {
 //define function that happens if user selects business class
 var buyBusiness = function() {
     if (numberOfTakenSeatsBusiness >= 6) {
-        display(`Sorry, Business Class seats are sold out! But we have ${(15-numberOfTakenSeatsEconomy)} seats left in Economy and ${4-numberOfTakenSeatsFirst} seats left in First.`)
+        display(`Sorry, Business Class seats are sold out! But we have ${(15-numberOfTakenSeatsEconomy)} seat(s) left in Economy and ${4-numberOfTakenSeatsFirst} seat(s) left in First.`)
     } else if (numberOfTakenSeatsBusiness >= 0 && numberOfTakenSeatsBusiness < 3) {
         var tierOnePriceB = ticketPrice * 1.06;
-        var data = `Your ticket costs $${tierOnePriceB}.`;
+        var data = `Your ticket costs $${tierOnePriceB}.There are ${seatsinTierOneB} seat(s) left in this price bracket for Business Class.`;
         display(data);
-    } else if (numberOfTakenSeatsBusiness > 2 && numberOfTakenSeatsBusiness < 6) {
+        seatsinTierOneB -= 1;
+        console.log(seatsinTierOneB);
+    } else if (numberOfTakenSeatsBusiness > 2 && numberOfTakenSeatsBusiness < 5) {
         var tierTwoPriceB = Math.floor(ticketPrice * 1.10);
-        var data = `Your ticket costs $${tierTwoPriceB}.`;
+        var data = `Your ticket costs $${tierTwoPriceB}. There are ${seatsinTierTwoB} seat(s) left in this price bracket for Business Class.`;
         display(data);
+        seatsinTierTwoB -= 1;
+        console.log(seatsinTierTwoB);
     } else if (numberOfTakenSeatsBusiness === 5) {
         var tierThreePriceB = 91000;
         var data = `Your ticket costs $${tierThreePriceB}, a jet might be cheaper.`;
@@ -53,8 +71,9 @@ var buyFirst = function() {
         display(`Sorry, First Class seats are sold out! But we have ${(15-numberOfTakenSeatsEconomy)} seats left in Economy and ${6-numberOfTakenSeatsBusiness} seats left in Business.`)
     } else if (numberOfTakenSeatsFirst >= 0 && numberOfTakenSeatsFirst < 3) {
         var tierOnePriceF = Math.floor(ticketPrice * 1.15);
-        var data = `Your ticket costs $${tierOnePriceF}.`;
+        var data = `Your ticket costs $${tierOnePriceF}. There are ${seatsinTierOneF} seat(s) left in this price bracket for First Class.`;
         display(data);
+        seatsinTierOneF -= 1;
     } else if (numberOfTakenSeatsFirst === 3) {
         var tierTwoPriceF = 191000;
         var data = `Your ticket costs $${tierTwoPriceF}, a jet might be cheaper.`;
