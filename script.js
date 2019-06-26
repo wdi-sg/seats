@@ -73,7 +73,7 @@ var inputHappened = function(userInput){
     }
     */
 
-
+/*
 var planeSeats = 10;
 var seatPriceFirst = 50;
 var seatPriceSecond = 50;
@@ -105,6 +105,41 @@ var inputHappened = function(userInput){
             display("You have purchase at: $91,000");
             display2(" ");
         }
+        else {
+            console.log("There is no available seats.")
+            display("There is no available seats.");
+            display2(" ");
+        }
+
+    }
+*/
+
+//the price of the tickets will increase by 3% and 5%
+
+var planeSeats = 10;
+var seatPrice = 50;
+
+var inputHappened = function(userInput){
+    //if(userInput === "buy"){
+        console.log("You have purchase at: $" + seatPrice);
+        planeSeats = planeSeats - 1;
+        console.log("Seats available: " + planeSeats);
+        if (planeSeats > 5){
+            seatPrice = (seatPrice * 0.03) + seatPrice;
+            console.log("Next seat price: $" + seatPrice);
+
+            display("You have purchase at: $" + seatPrice);
+
+            display2(planeSeats + " seats left before before price increment");
+        }
+        else if (planeSeats <= 5 && planeSeats >0){
+            seatPrice = (seatPrice * 0.05) + seatPrice;
+            console.log("Next seat price: $" + seatPrice);
+
+            display("You have purchase at: $" + seatPrice);
+            display2(planeSeats + " seats left before before price increment");
+        }
+
         else {
             console.log("There is no available seats.")
             display("There is no available seats.");
