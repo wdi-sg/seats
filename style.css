@@ -2,10 +2,23 @@
   font-size:30px;
   padding:10px;
   display:block;
-  margin:40px;
+  margin:20px;
   border:3px solid blue;
 }
 
 #output{
   background-color:pink;
+}
+
+#output2{
+  background-color:yellow;
+}
+
+#output3{
+  background-color:orange;
+}
+
+button {
+	padding: 20px;
+	font-size: 20px;
 }

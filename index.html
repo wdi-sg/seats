@@ -6,6 +6,14 @@
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <p class="starter" id="output"></p>
+    <p class="starter" id="output2"></p>
+    <p class="starter" id="output3"></p>
+    <button onclick="buyETicket()">Buy Economy Class Ticket</button>
+    <button onclick="buyBTicket()">Buy Business Class Ticket</button>
+    <button onclick="buyFTicket()">Buy First Class Ticket</button>
+
+
+
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -16,6 +24,21 @@
         var output = document.querySelector('#output');
         output.innerText = data;
       }
+
+      var display2 = function( data2 ){
+        var output = document.querySelector('#output2');
+        output.innerText = data2;
+      }
+
+      var display3 = function( data3 ){
+        var output = document.querySelector('#output3');
+        output.innerText = data3;
+      }
+
+
+
+
+
     </script>
     <script src="script.js"></script>
   </body>
