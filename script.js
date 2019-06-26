@@ -2,8 +2,8 @@
 var startPrice = 50;      //standard 50
 var eachIncrement = 0;  //for part1, standard 2.5
 var numberOfBuys = 0;     //not relevant part1
-var increaseToPrice = 0;  //func(eachInc*noOfBuys)
-var currentPrice = 0;    //func(start + incToPrice)
+var increaseToPrice = 0;  //func(eachincrement*noOfBuys)
+var currentPrice = 0;    //func(start + increaseToPrice)
 
 //increase to price += number of buys * increment
 var calcIncreaseToPrice = function(numberOfBuys) {
