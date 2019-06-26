@@ -14,7 +14,7 @@ var inputHappened = function(currentInput){
 6. show output: seat sold and price seat
 */
 
-
+/*
 var planeSeats = 10;
 var seatPrice = 50;
 
@@ -33,11 +33,41 @@ var inputHappened = function(userInput){
             display("You have purchase at: $" + seatPrice)
     }
 }
+*/
 
-        // var clearField = function () {
+//first half seat price increase by 3%
+//second half seat price increase by 5%
+//last seat = $91k
 
-        //document.querySelector('#input').value
-    // }
-    // else{
-        // console.log("Type buy or leave");
-    // }
+var planeSeats = 10;
+var seatPriceFirst = 50;
+var seatPriceSecond = 50;
+
+var inputHappened = function(userInput){
+    //if(userInput === "buy"){
+        console.log("You have purchase at: $" + seatPriceFirst)
+        planeSeats = planeSeats - 1;
+        console.log("Seats available: " + planeSeats);
+        if (planeSeats > 5){
+            seatPriceFirst = (seatPriceFirst * 0.03) + seatPriceFirst;
+            console.log("Next seat price: $" + seatPriceFirst);
+            display("You have purchase at: $" + seatPriceFirst);
+        }
+        else if (planeSeats <= 5 && planeSeats >= 2){
+            seatPriceSecond = (seatPriceSecond * 0.05) + seatPriceSecond;
+            console.log("Next seat price: $" + seatPriceSecond)
+            if(planeSeats === 1){
+                console.log("Next seat price: $91,000.");
+            }
+            display("You have purchase at: $" + seatPriceSecond)
+        }
+        else if (planeSeats === 1){
+            console.log("You have purchase the last seat for: $91,000.");
+            display("You have purchase at: $91,000")
+        }
+        else {
+            console.log("There is no available seats.")
+            display("There is no available seats.")
+        }
+
+    }
