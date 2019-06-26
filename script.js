@@ -9,20 +9,20 @@ var buyEconomy = function() {
     if (numberOfTakenSeatsEconomy >= 15) {
         display(`Sorry, Economy Class seats are sold out! But we have ${(6-numberOfTakenSeatsBusiness)} seats left in Business and ${4-numberOfTakenSeatsFirst} seats left in First.`)
     } else if (numberOfTakenSeatsEconomy >= 0 && numberOfTakenSeatsEconomy < 7) {
-        ticketPrice = 51.5;
-        var data = `Your ticket costs $${ticketPrice}.`;
+        var tierOnePriceE = ticketPrice * 1.03;
+        var data = `Your ticket costs $${tierOnePriceE}.`;
         display(data);
     } else if (numberOfTakenSeatsEconomy > 6 && numberOfTakenSeatsEconomy < 14) {
-        ticketPrice = 52.5;
-        var data = `Your ticket costs $${ticketPrice}.`;
+        var tierTwoPriceE = ticketPrice * 1.05;
+        var data = `Your ticket costs $${tierTwoPriceE}.`;
         display(data);
     } else if (numberOfTakenSeatsEconomy === 14) {
-        ticketPrice = 91000;
-        var data = `Your ticket costs $${ticketPrice}, a jet might be cheaper.`;
+        var tierThreePriceE = 91000
+        var data = `Your ticket costs $${tierThreePriceE}, a jet might be cheaper.`;
         display(data);
     }
     numberOfTakenSeatsEconomy += 1;
-    console.log(numberOfTakenSeatsEconomy)
+    console.log(`${numberOfTakenSeatsEconomy} seat(s) taken in Economy`)
 };
 
 
@@ -31,20 +31,20 @@ var buyBusiness = function() {
     if (numberOfTakenSeatsBusiness >= 6) {
         display(`Sorry, Business Class seats are sold out! But we have ${(15-numberOfTakenSeatsEconomy)} seats left in Economy and ${4-numberOfTakenSeatsFirst} seats left in First.`)
     } else if (numberOfTakenSeatsBusiness >= 0 && numberOfTakenSeatsBusiness < 3) {
-        ticketPrice = 51.5;
-        var data = `Your ticket costs $${ticketPrice}.`;
+        var tierOnePriceB = ticketPrice * 1.06;
+        var data = `Your ticket costs $${tierOnePriceB}.`;
         display(data);
     } else if (numberOfTakenSeatsBusiness > 2 && numberOfTakenSeatsBusiness < 6) {
-        ticketPrice = 52.5;
-        var data = `Your ticket costs $${ticketPrice}.`;
+        var tierTwoPriceB = Math.floor(ticketPrice * 1.10);
+        var data = `Your ticket costs $${tierTwoPriceB}.`;
         display(data);
     } else if (numberOfTakenSeatsBusiness === 5) {
-        ticketPrice = 91000;
-        var data = `Your ticket costs $${ticketPrice}, a jet might be cheaper.`;
+        var tierThreePriceB = 91000;
+        var data = `Your ticket costs $${tierThreePriceB}, a jet might be cheaper.`;
         display(data);
     }
     numberOfTakenSeatsBusiness += 1;
-    console.log(numberOfTakenSeatsBusiness)
+    console.log(`${numberOfTakenSeatsBusiness} seat(s) taken in Business`)
 };
 
 //define function that happens if user selects first class
@@ -52,16 +52,16 @@ var buyFirst = function() {
     if (numberOfTakenSeatsFirst >= 4) {
         display(`Sorry, First Class seats are sold out! But we have ${(15-numberOfTakenSeatsEconomy)} seats left in Economy and ${6-numberOfTakenSeatsBusiness} seats left in Business.`)
     } else if (numberOfTakenSeatsFirst >= 0 && numberOfTakenSeatsFirst < 3) {
-        ticketPrice = 57.5;
-        var data = `Your ticket costs $${ticketPrice}.`;
+        var tierOnePriceF = Math.floor(ticketPrice * 1.15);
+        var data = `Your ticket costs $${tierOnePriceF}.`;
         display(data);
     } else if (numberOfTakenSeatsFirst === 3) {
-        ticketPrice = 91000;
-        var data = `Your ticket costs $${ticketPrice}, a jet might be cheaper.`;
+        var tierTwoPriceF = 191000;
+        var data = `Your ticket costs $${tierTwoPriceF}, a jet might be cheaper.`;
         display(data);
     }
     numberOfTakenSeatsFirst += 1;
-    console.log(numberOfTakenSeatsFirst)
+    console.log(`${numberOfTakenSeatsFirst} seat(s) taken in First`);
 };
 
 //save user input as a string and use that string to determine the function that gets called
