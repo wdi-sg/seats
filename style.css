@@ -9,3 +9,8 @@
 #output{
   background-color:pink;
 }
+
+#button{
+    margin-left: 40px;
+    font-size: 20px;
+}
