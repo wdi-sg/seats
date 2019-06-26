@@ -59,6 +59,10 @@ var inputHappened = function(currentInput){
         console.log(seatsLeft);
         display("Tickets all sold out");
     }
+    else if (currentInput !== "b") {
+        display("Invalid Input!");
+    }
+
     else {
         display("Your purchase is cancelled");
     }
