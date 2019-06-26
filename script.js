@@ -5,9 +5,11 @@ This price will be added to the global ticket sales to keep track of how much th
 */
 
 //Global variables created to record information about ticket price, overall sales, and plane capacity for various classes.
-var globalTicketSales = 0;
+
+var globalTicketSales = 0; //variable used to contain total sales figure generated from sales of different plane cabins.
 console.log("Total sales is: "+globalTicketSales);
 
+//creation of variables XXXMaxCapacity to set conditionals used in later part of the code.
 var economyClassMaxCapacity = 15;
 document.getElementById("economyclassseatsleft").textContent = economyClassMaxCapacity;
 console.log("Plane maximum capacity in economy is: "+economyClassMaxCapacity);
@@ -18,6 +20,7 @@ var firstClassMaxCapacity = 4;
 document.getElementById("firstclassseatsleft").textContent = firstClassMaxCapacity;
 console.log("Plane maximum capacity in first class is: "+firstClassMaxCapacity);
 
+//creation of variables XXXCurrentCapacity which will determine how many seats are left in each plane cabin.
 var economyClassCurrentCapacity = 0;
 console.log("Plane current capacity in economy is: "+economyClassCurrentCapacity);
 var businessClassCurrentCapacity = 0;
@@ -25,6 +28,7 @@ console.log("Plane current capacity in business is: "+businessClassCurrentCapaci
 var firstClassCurrentCapacity = 0;
 console.log("Plane current capacity in first class is: "+firstClassCurrentCapacity);
 
+//creation of variables XXXSeatNumber which will provide conditional status for price adjustment for each plane cabin.
 var economyClassSeatNumber = 1;
 console.log("Current seat number being sold in economy is: "+economyClassSeatNumber);
 var businessClassSeatNumber = 1;
@@ -32,7 +36,8 @@ console.log("Current seat number being sold in business is: "+businessClassSeatN
 var firstClassSeatNumber = 1;
 console.log("Current seat number being sold in first class is: "+firstClassSeatNumber);
 
-var startingEconomyClassTicketPrice = 50;
+//variables created to indicate starting price for each cabin.
+var startingEconomyClassTicketPrice = 50*1.03;
 document.getElementById("economyclassticketprice").textContent = `$${startingEconomyClassTicketPrice.toFixed(2)}`;
 console.log("Current economy class ticket price is: " +startingEconomyClassTicketPrice);
 var startingBusinessClassTicketPrice = 50*1.06;
@@ -42,19 +47,16 @@ var startingFirstClassTicketPrice = 50*1.15;
 document.getElementById("firstclassticketprice").textContent = `$${startingFirstClassTicketPrice.toFixed(2)}`;
 console.log("Current first class ticket price is: " +startingFirstClassTicketPrice);
 
-//this code is to display the starting price of $50.
-//document.getElementById("ticketprice").textContent = `$${startingTicketPrice}`;
-//document.getElementById("seatsleft").textContent = globalPlaneCapacity;
-
+//first function call when user enters information in the input field
 function checkInputValue(){
   var input = document.getElementById("useraction").value;
   var inputConvert = input.toLowerCase();
-
+//switch case to determine which type of action user is taking.
   switch (input){
     case "buy first class":
       console.log("First class bought!")
-      clearInput();
-      clearOutput();
+      clearInput(); //clears input field upon verification of input.
+      clearOutput(); //clears any error generated from user invalid entry.
       startFirstClassTransaction();
     break;
     case "buy business class":
@@ -70,10 +72,10 @@ function checkInputValue(){
       startEconomyClassTransaction();
     break;
     default:
-      displayError();
+      displayError(); //when user enters an invalid format.
   }
 }
-
+//function that totals global sales, increments seat and capacity numbers, and alerts and checks for price change
 function startFirstClassTransaction(){
   if (firstClassCurrentCapacity < firstClassMaxCapacity){
     globalTicketSales += startingFirstClassTicketPrice;
@@ -116,7 +118,7 @@ function startEconomyClassTransaction(){
     fullyBooked();
   }
 }
-
+//function that compares seat number with maximum capacity. Adjusts price of tickets accordingly.
 function adjustFirstClassPrice(){
   if (firstClassSeatNumber == firstClassMaxCapacity){
     startingFirstClassTicketPrice = 191000;
@@ -143,7 +145,7 @@ function adjustEconomyClassPrice(){
     document.getElementById("economyclassticketprice").textContent = startingEconomyClassTicketPrice.toFixed(2);
   }
 }
-
+//function that compares current capacity of each cabin to the maximum occupancy. Provides feedback on current status of cabin capacity. Alerts user of impending price change.
 function priceChangeWarningFirstClass(){
   if (firstClassCurrentCapacity < firstClassMaxCapacity-1){
     var difference = (firstClassMaxCapacity-1) - firstClassCurrentCapacity;
@@ -183,24 +185,20 @@ function priceChangeWarningEconomyClass(){
   }
 }
 
-
+//function that alerts user that selected cabin is fully booked.
 function fullyBooked(){
   document.getElementById("output").innerHTML = "Sorry, we are fully booked!";
 }
-
-function makeSelection(){
-  document.getElementById("output").innerHTML = "Please select from the drop down box!";
-}
-
+//function that clears the input field in preparation for next entry.
 function clearInput(){
   document.getElementById("useraction").value = "";
 }
-
+//function that lets user know if invalid format.
 function displayError(){
   document.getElementById("output").innerHTML = `The box only accepts the phrase "buy xxx class" (xxx can be first, business, or economy)`;
   clearInput();
 }
-
+//function that clears the output box. For aesthetic purposes.
 function clearOutput(){
   document.getElementById("output").innerHTML = "";
 }
