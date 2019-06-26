@@ -27,16 +27,18 @@ var currentPrice = 0;    //func(start + incToPrice)
 
 //increase to price += number of buys * increment
 var calcIncreaseToPrice = function(numberOfBuys) {
-    if (numberOfBuys <= 5) {
+    if ((numberOfBuys) === 0) {
+        increaseToPrice = 0;
+    } else if (numberOfBuys < 5) {
         increaseToPrice += 50 / 100 * 3;
         console.log ("Price increased by $" + increaseToPrice);
-    } else if (numberOfBuys > 5 && numberOfBuys < 9) {
+    } else if (numberOfBuys >= 5 && numberOfBuys < 9) {
         increaseToPrice += 50 / 100 * 5;
         console.log ("Price increased by $" + increaseToPrice);
     } else if (numberOfBuys === 9) {
         increaseToPrice = 0;
         startPrice = 91000;
-        console.log("FIRST CLASS FOR YOU!");
+        console.log("Welcome aboard, Mr. Wayne.");
         return;
     } else {
         display("OUT OF TICKETS");
@@ -50,6 +52,7 @@ var calcIncreaseToPrice = function(numberOfBuys) {
 //function = starting price + increase to price = current price
 var calcCurrentPrice = function(startPrice, increaseToPrice){
     currentPrice = startPrice + increaseToPrice;
+    display("You paid: $" + currentPrice);
 };
 // initial call to set initial price (50 + 0)
 calcCurrentPrice(startPrice, increaseToPrice);
@@ -64,8 +67,8 @@ console.log("Initial value of currentPrice :" + currentPrice);
 // update number of buys
 var inputHappened = function(currentInput) {
     calcIncreaseToPrice(numberOfBuys);
-    numberOfBuys += 1;
     calcCurrentPrice(startPrice, increaseToPrice);
+    numberOfBuys += 1;
     console.log("Number of tickets bought: " + numberOfBuys);
     console.log("You paid: " + currentPrice);
 };
