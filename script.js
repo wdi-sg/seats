@@ -156,9 +156,11 @@ var inputHappened = function(userInput){
 */
 
 //part 5
+
 var planeSeats = 10;
 var seatPrice = 50;
 
+display2("Please enter 'buy' or leave");
 var inputHappened = function(userInput){
     if(userInput == "buy"){
         console.log(userInput);
