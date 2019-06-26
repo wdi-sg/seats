@@ -64,7 +64,7 @@ var buyFirst = function() {
     console.log(numberOfTakenSeatsFirst)
 };
 
-
+//save user input as a string and use that string to determine the function that gets called
 var checkClass = function(currentInput) {
     var str = currentInput.toLowerCase();
     if (str.includes("economy")) {
