@@ -4,11 +4,12 @@
   </head>
   <body>
     <input class="starter" id="input" placeholder="input"/>
+    <input type="submit" value="submit" id="button">
     <h2>output:</h2>
     <p class="starter" id="output"></p>
     <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
+      document.querySelector('#button').addEventListener('click', function(event){
+        var currentInput = document.querySelector('#input').value;
         inputHappened(currentInput)
       });
 
