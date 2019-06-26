@@ -38,7 +38,7 @@ var inputHappened = function(userInput){
 //first half seat price increase by 3%
 //second half seat price increase by 5%
 //last seat = $91k
-
+/*
 var planeSeats = 10;
 var seatPriceFirst = 50;
 var seatPriceSecond = 50;
@@ -71,3 +71,4 @@ var inputHappened = function(userInput){
         }
 
     }
+    */
