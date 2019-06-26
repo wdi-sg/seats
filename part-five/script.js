@@ -36,6 +36,10 @@ var firstClassSeatsSold = 0;    // FIRST CLASS SEATS  //////////////////////////
 
 var priceIncreased3Percent = 0.03;
 var priceIncreased5Percent = 0.05;
+var priceIncreased6Percent = 0.06;
+var priceIncreased10Percent = 0.1;
+var priceIncreased15Percent = 0.15;
+
 
 // FOR PART 4
 //newPrice = ticketPrice + (ticketPrice * priceIncreasedPercentage * seatsSold);
@@ -72,6 +76,27 @@ var inputHappened = function (userInput) {
     } else if (userInput === "buy business class") { // INPUT BUSINESS CLASS = 6 SEATS
         // BUSINESS CLASS SECTION ///////////////////////////////
         console.log("User enters buy business class")
+
+        /* START BUSINESS CLASS PRICE CALCULATION */
+        var bizHalf = Math.floor(totalBizClassSeats/2);
+        bizClassSeatsSold = bizClassSeatsSold + 1;
+
+        if (bizClassSeatsSold <= bizHalf) { // BTW 1 TO 3 SEATS
+            console.log("You tickets costs 6% more");
+            console.log( (bizHalf - bizClassSeatsSold) + " econ seats left b4 10% increase" );
+            var newPrice = ticketPrice + (ticketPrice * priceIncreased6Percent * bizClassSeatsSold);
+            display( (bizHalf - bizClassSeatsSold) + " econ seats left b4 10% increase" + "\n\n" + "Your ticket costs $" + newPrice );
+        } else if ( (bizClassSeatsSold > bizHalf) && (bizClassSeatsSold <= (totalBizClassSeats - 1)) ) { // BTW 4 TO 5 SEATS
+            console.log("You tickets costs 5% more");
+            console.log( ( (totalBizClassSeats - 1) - bizClassSeatsSold ) + " econ seats left b4 $91,000 seat" );
+            newPrice = ticketPrice + (ticketPrice * priceIncreased10Percent * bizClassSeatsSold );
+            display( ((totalBizClassSeats-1) - bizClassSeatsSold ) + " econ seats left b4 $91,000" + "\n\n" + "You ticket costs $" + newPrice );
+        } else {
+            console.log("You pay $91,000");
+            display("You ticket costs $91,000" );
+            console.log( (bizClassSeatsSold) + " econ seats" );
+        }
+        /* END OF BUSINESS CLASS PRICE CALCULATION */
 
     } else if (userInput === "buy first class") { // INPUT FIRST CLASS = 4 SEATS
         // FIRST CLASS SECTION ///////////////////////////////
