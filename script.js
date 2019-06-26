@@ -57,32 +57,48 @@
 
 // ADDITIONAL TASKS - IF USER INPUTS NOT A NUMBER, PLEASE ASK THEM TO DECLARE OTHERWISE
 
-
-let seat = 1;
+let seat = 0;
 let price = 50;
 
 var inputHappened = function(currentInput){
 
     if (currentInput === 'buy'){
-        if (seat === 1) {
-            console.log(`seat 1: ${seat}`)
-            display(`There are ${10 - seat} seats left! The current seat is sold for ${price}.`)
-        } else if (seat > 1 && seat <= 5) {
-            price = price * 1.03;
-            display(`There are ${10 - seat} seats left! The current seat is sold for ${price}.`)
-        } else if (seat > 5 && seat < 10) {
-            price = price * 1.05;
-            display(`There are ${10 - seat} seats left! The current seat is sold for ${price}.`)
-        } else if (seat === 10) {
-            price = "$91,000";
-            display(`This is the last seat! You bought it for an astonishing $${price}!`)
-        } else {
-            display("Sorry, no seats left!")
-        }
         seat = seat + 1;
-    } else {
-        console.log('Your input is wrong!')
+        checkSeatNumber();
+    } else if (currentInput){
+        display(`Type 'buy' to purchase a seat. One ticket costs $${price}!`)
+    } else if (currentInput = null){
+        display('')
     }
-    console.log(seat);
-    console.log(price);
+    console.log(`Current seat: ${seat}`);
+    console.log(`Current price: ${price}`);
 };
+
+let checkSeatNumber = () => {
+    if (seat === 0) {
+        displayNotBought();
+    } else if (seat >= 1 && seat <= 5) {
+        price = price * 1.03;
+        displayPriceOnetoNine();
+    } else if (seat > 5 && seat < 10) {
+        price = price * 1.05;
+        displayPriceOnetoNine();
+    } else if (seat === 10) {
+        price = "$91,000";
+        displayPriceTen();
+    } else {
+        displayNoSeats()
+    }
+}
+
+
+let displayPriceOnetoNine = () => {
+    display(`There are ${10 - seat} seats left! The current seat is sold for $${price}.`)
+}
+let displayPriceTen = () => {
+    display(`This is the last seat! You bought it for an astonishing $${price}!`)
+}
+
+let displayNoSeats = () => {
+    display("Sorry, no seats left!")
+}
