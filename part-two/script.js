@@ -30,10 +30,13 @@ var inputHappened = function (userInput) {
         //display("You ticket costs $" + newPrice );
         if (seatsSold <= 5) {
             console.log("You tickets costs 3% more");
+            display("You ticket costs $" + (ticketPrice + (ticketPrice * priceIncreased3Percent)) );
         } else if (seatsSold > 5 && seatsSold <= 9) {
             console.log("You tickets costs 5% more");
+            display("You ticket costs $" + (ticketPrice + (ticketPrice * priceIncreased5Percent)) );
         } else {
             console.log("You pay $91,000");
+            display("You ticket costs $91,000" );
         }
     } else {
         console.log("Please enter 'buy' to purchase ticket.");
