@@ -4,6 +4,9 @@ When a user selects an option from the drop down menu or types "buy" into the co
 This price will be added to the global ticket sales to keep track of how much the airline will earn and how many seats have been sold. If the user clicks on the buy when the seats are full, there is no sale.
 */
 
+alert("buy first class - Buys a first class ticket.\nbuy business class - Buys a business class ticket.\nbuy economy class - Buys an economy class ticket.");
+
+
 //Global variables created to record information about ticket price, overall sales, and plane capacity for various classes.
 
 var globalTicketSales = 0; //variable used to contain total sales figure generated from sales of different plane cabins.
@@ -122,27 +125,27 @@ function startEconomyClassTransaction(){
 function adjustFirstClassPrice(){
   if (firstClassSeatNumber == firstClassMaxCapacity){
     startingFirstClassTicketPrice = 191000;
-    document.getElementById("firstclassticketprice").textContent = startingFirstClassTicketPrice.toFixed(2);
+    document.getElementById("firstclassticketprice").textContent = `$${startingFirstClassTicketPrice.toFixed(2)}`;
   }
 }
 
 function adjustBusinessClassPrice(){
   if ((businessClassSeatNumber > businessClassMaxCapacity/2) && (businessClassSeatNumber < (businessClassMaxCapacity-1))){
     startingBusinessClassTicketPrice = 50 * 1.10;
-    document.getElementById("businessclassticketprice").textContent = startingBusinessClassTicketPrice.toFixed(2);
+    document.getElementById("businessclassticketprice").textContent = `$${startingBusinessClassTicketPrice.toFixed(2)}`;
   }else if (businessClassSeatNumber == businessClassMaxCapacity){
     startingBusinessClassTicketPrice = 91000;
-    document.getElementById("businessclassticketprice").textContent = startingBusinessClassTicketPrice.toFixed(2);
+    document.getElementById("businessclassticketprice").textContent = `$${startingBusinessClassTicketPrice.toFixed(2)}`;
   }
 }
 
 function adjustEconomyClassPrice(){
   if ((economyClassSeatNumber > Math.round(economyClassMaxCapacity/2)) && (economyClassSeatNumber < (economyClassMaxCapacity-1))){
     startingEconomyClassTicketPrice = 50 * 1.05;
-    document.getElementById("economyclassticketprice").textContent = startingEconomyClassTicketPrice.toFixed(2);
+    document.getElementById("economyclassticketprice").textContent = `$${startingEconomyClassTicketPrice.toFixed(2)}`;
   }else if (economyClassSeatNumber == economyClassMaxCapacity){
     startingEconomyClassTicketPrice = 91000;
-    document.getElementById("economyclassticketprice").textContent = startingEconomyClassTicketPrice.toFixed(2);
+    document.getElementById("economyclassticketprice").textContent = `$${startingEconomyClassTicketPrice.toFixed(2)}`;
   }
 }
 //function that compares current capacity of each cabin to the maximum occupancy. Provides feedback on current status of cabin capacity. Alerts user of impending price change.
@@ -153,7 +156,7 @@ function priceChangeWarningFirstClass(){
   }else if (firstClassCurrentCapacity == (firstClassMaxCapacity-1)) {
     document.getElementById("firstclasspricechange").textContent = `Last ticket!`
   }else if (firstClassCurrentCapacity == firstClassMaxCapacity) {
-    document.getElementById("firstclasspricechange").textContent = `Sorry! We are fully booked!`
+    document.getElementById("firstclasspricechange").textContent = `Sorry! We are fully booked here!`
   }
 }
 
@@ -167,7 +170,7 @@ function priceChangeWarningBusinessClass(){
   }else if (businessClassCurrentCapacity == businessClassMaxCapacity-1){
     document.getElementById("businessclasspricechange").textContent = `Last ticket!`
   }else if (businessClassCurrentCapacity == businessClassMaxCapacity){
-    document.getElementById("businessclasspricechange").textContent = `Sorry! We are fully booked!`
+    document.getElementById("businessclasspricechange").textContent = `Sorry! We are fully booked here!`
   }
 }
 
@@ -181,13 +184,13 @@ function priceChangeWarningEconomyClass(){
   }else if (economyClassCurrentCapacity == (economyClassMaxCapacity-1)){
     document.getElementById("economyclasspricechange").textContent = `Last ticket!`
   }else if (economyClassCurrentCapacity == economyClassMaxCapacity){
-    document.getElementById("economyclasspricechange").textContent = `Sorry! We are fully booked!`
+    document.getElementById("economyclasspricechange").textContent = `Sorry! We are fully booked here!`
   }
 }
 
 //function that alerts user that selected cabin is fully booked.
 function fullyBooked(){
-  document.getElementById("output").innerHTML = "Sorry, we are fully booked!";
+  document.getElementById("output").innerHTML = "Sorry, we are fully booked here!";
 }
 //function that clears the input field in preparation for next entry.
 function clearInput(){
