@@ -5,6 +5,7 @@
   <body>
     <h1>Let's Fly Away!</h1>
     <p>By LTY</p>
+    <h3 id = "seatsLeft">Number of Seats Left in this price bracket: 5 . Total Seats Left: 10</h3>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <p class="starter" id="output"></p>
@@ -15,9 +16,11 @@
         inputHappened(currentInput)
       });
 
-      var display = function( data ){
+      var display = function( dataMessage , dataSubText ){
         var output = document.querySelector('#output');
-        output.innerText = data;
+        output.innerText = dataMessage;
+        var outputSubText = document.querySelector('#seatsLeft');
+        outputSubText.innerText = dataSubText;
       }
     </script>
   </body>
