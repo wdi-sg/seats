@@ -1,11 +1,52 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+header {
+	text-align: center;
+}
+main {
+	/*height: 400px;*/
+	background-color: darkolivegreen;
+}
+.content {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+.section {
+	background-color: peachpuff;
+	margin: 20px;
+}
+.wrapper {
+	text-align: center;
+}
+.input {
+	height: 100px;
+	width: 200px;
+	background-color: mediumturquoise;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+h1 {
+	text-align: center;
+}
+h2 {
+	text-align: center;
+}
+p {
+	text-align: center;
+	font-size: 30px;
 }
 
-#output{
-  background-color:pink;
+input {
+	font-size: 30px;
+	align-items: center;
+	grid-column-gap: 10px;
+	background-color: teal;
+	margin: 20px 0px;
+	height: 50px;
+	width: 200px;
 }
