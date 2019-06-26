@@ -2,6 +2,7 @@ console.log("hello script js");
 
 var numSeats = 10;
 var priceSeat = 50;
+var beginningPriceSeat = 50;
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
@@ -10,7 +11,8 @@ var inputHappened = function(currentInput){
 
   if (currentInput === "buy" && numSeats > 0) {
     message = "Seat Sold. Price: $"+priceSeat.toFixed(2);
-    priceSeat *= 1.05;
+    //priceSeat *= 1.05;
+    priceSeat += beginningPriceSeat * 0.05
     numSeats--;
   }
   else if (currentInput === "buy"){
