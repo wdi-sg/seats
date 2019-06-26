@@ -2,139 +2,126 @@
 
 //Price of empty seat (number)
 var emptySeatPrice = 50;
-console.log(emptySeatPrice + " " + typeof emptySeatPrice);
-
-// Price of sold seat (number) - part 1
-var soldSeatPrice = 1.05 * emptySeatPrice;
+console.log("Empty Seat Price: " + emptySeatPrice + " " + typeof emptySeatPrice);
 
 // No of seats left (number)
-var seatsLeft = 10;
-console.log(seatsLeft + " " + typeof seatsLeft);
-
-// priceSurge(number)
-var priceSurge1 = 1.03;
-var priceSurge2 = 1.05;
-
-//Last ticket price (number)
-var lastTicketPrice = emptySeatPrice;
-console.log(lastTicketPrice + " " + typeof lastTicketPrice);
-
-//New ticket price (number)
-var newTicketPrice = null;
-console.log(newTicketPrice + " " + typeof newTicketPrice);
+var economySeatsLeft = 10;
+var businessSeatsLeft = 6;
+var firstSeatsLeft = 4;
+console.log("Eseats: " + economySeatsLeft + "/10  Bseats: " + businessSeatsLeft + "/6  Fseats: " + firstSeatsLeft + "/4");
 
 // Function Purpose, Show buyer the purchased seat price
 var inputHappened = function(currentInput){
     console.log(currentInput + " " + typeof currentInput);
 
-    // currentInput(Buy) && seatLeft(<5) => soldSeatPrice(Show 3% price)
+    // Economy Class if function
+    if (currentInput === "be" && economySeatsLeft === 10) {
+        economySeatPrice = 1.03 * emptySeatPrice;
+        lastEconomyPrice = economySeatPrice;
+        economySeatsLeft = economySeatsLeft - 1;
+        display("Your ticket is purchased at $" + economySeatPrice + " only " + economySeatsLeft + " economy seats left before price surge additional 2%");
+    }
+    else if (currentInput === "be" && economySeatsLeft > 5 && economySeatsLeft < 10) {
+        lastEconomyPrice = lastEconomyPrice * 1.03;
+        economySeatsLeft = economySeatsLeft - 1;
+        display("Your ticket is purchased at $" + lastEconomyPrice + " only " + economySeatsLeft + " economy seats left before price surge additional 2%");
+    }
+    else if (currentInput === "be" && economySeatsLeft <= 5 && economySeatsLeft > 1) {
+        lastEconomyPrice = lastEconomyPrice * 1.05;
+        economySeatsLeft = economySeatsLeft - 1;
+        display("Your ticket is purchased at $" + lastEconomyPrice + " only " + economySeatsLeft + " economy seats left before price really surge exponentally");
+    }
+    else if (currentInput === "be" && economySeatsLeft === 1) {
+        economySeatPrice = 91000;
+        economySeatsLeft = economySeatsLeft - 1;
+        display("Your ticket is purchased at $" + economySeatPrice + " no seats left ");
+    }
+    else if (currentInput === "be" && economySeatsLeft < 1) {
+        economySeatsLeft = economySeatsLeft - 1;
+        display("All economy class tickets are sold out");
+    }
 
-    if (currentInput === "b" && seatsLeft === 10) {
-        soldSeatPrice = 1.03 * emptySeatPrice;
-        lastTicketPrice = soldSeatPrice;
-        seatsLeft = seatsLeft - 1;
-        console.log(seatsLeft);
-        display("Your ticket is purchased at $" + soldSeatPrice + " seats left " + seatsLeft + " before price surge additional 2%");
+
+    // Business Class if function
+    else if (currentInput === "bb" && businessSeatsLeft === 6) {
+        businessSeatsPrice = 1.06 * emptySeatPrice;
+        lastbusinessPrice = businessSeatsPrice;
+        businessSeatsLeft = businessSeatsLeft - 1;
+        display("Your ticket is purchased at $" + businessSeatsPrice + " only " + businessSeatsLeft + " business seats left before price surge additional 4%");
     }
-    else if (currentInput === "b" && seatsLeft > 5 && seatsLeft < 10) {
-        lastTicketPrice = lastTicketPrice * priceSurge1;
-        seatsLeft = seatsLeft - 1;
-        console.log(seatsLeft);
-        display("Your ticket is purchased at $" + lastTicketPrice + " seats left " + seatsLeft + " before price surge additional 2%");
+    else if (currentInput === "bb" && businessSeatsLeft > 3 && businessSeatsLeft < 6) {
+        lastbusinessPrice = lastbusinessPrice * 1.06;
+        businessSeatsLeft = businessSeatsLeft - 1;
+        display("Your ticket is purchased at $" + lastbusinessPrice + " only " + businessSeatsLeft + " business seats left before price surge additional 4%");
     }
-    else if (currentInput === "b" && seatsLeft <= 5 && seatsLeft > 1) {
-        lastTicketPrice = lastTicketPrice * priceSurge2;
-        seatsLeft = seatsLeft - 1;
-        console.log(seatsLeft);
-        display("Your ticket is purchased at $" + lastTicketPrice + " seats left " + seatsLeft + " before price really surge exponentally");
+    else if (currentInput === "bb" && businessSeatsLeft <= 3 && businessSeatsLeft > 1) {
+        lastbusinessPrice = lastbusinessPrice * 1.1;
+        businessSeatsLeft = businessSeatsLeft - 1;
+        display("Your ticket is purchased at $" + lastbusinessPrice + " only " + businessSeatsLeft + " business seats left before price really surge");
     }
-    else if (currentInput === "b" && seatsLeft === 1) {
-        soldSeatPrice = 91000;
-        seatsLeft = seatsLeft - 1;
-        console.log(seatsLeft);
-        display("Your ticket is purchased at $" + soldSeatPrice + " no seats left ");
+    else if (currentInput === "bb" && businessSeatsLeft === 1) {
+        businessSeatsPrice = 91000;
+        businessSeatsLeft = businessSeatsLeft - 1;
+        display("Your ticket is purchased at $" + businessSeatsPrice + " no seats left ");
     }
-    else if (currentInput === "b" && seatsLeft < 1) {
-        seatsLeft = seatsLeft - 1;
-        console.log(seatsLeft);
-        display("Tickets all sold out");
+    else if (currentInput === "bb" && businessSeatsLeft < 1) {
+        businessSeatsLeft = businessSeatsLeft - 1;
+        display("All business class tickets are sold out");
     }
-    else if (currentInput !== "b") {
+
+
+    // First Class if function
+    else if (currentInput === "bf" && firstSeatsLeft <= 4 && firstSeatsLeft >= 2) {
+        firstSeatsPrice = 1.15 * emptySeatPrice;
+        firstSeatsLeft = firstSeatsLeft - 1;
+        display("Your ticket is purchased at $" + firstSeatsPrice + " only " + firstSeatsLeft + " first seats left");
+    }
+    else if (currentInput === "bf" && firstSeatsLeft === 1) {
+        firstSeatsPrice = 191000;
+        firstSeatsLeft = firstSeatsLeft - 1;
+        display("Your ticket is purchased at $" + firstSeatsPrice + " no seats left ");
+    }
+    else if (currentInput === "bf" && firstSeatsLeft < 1) {
+        firstSeatsLeft = firstSeatsLeft - 1;
+        display("All first class tickets are sold out");
+    }
+
+
+    //Common if function
+    else if (currentInput !== "") {
         display("Invalid Input!");
     }
-
     else {
         display("Your purchase is cancelled");
     }
 
-console.log("seats left: " + seatsLeft);
-};
-/*
-
-if ( currentInput === "b" && seatsLeft === 10 ) {
-    soldSeatPrice = 1.03 * emptySeatPrice;
-    lastTicketPrice = soldSeatPrice;
-    seatsLeft = seatsLeft - 1;
-    console.log(seatsLeft);
-    display("Your ticket is purchased at $" + soldSeatPrice + " seats left " + seatsLeft + " before price surge additional 2%");
+console.log("Eseats: " + economySeatsLeft + "/10  Bseats: " + businessSeatsLeft + "/6  Fseats: " + firstSeatsLeft + "/4");
 };
 
-    else if ( currentInput === "b" && seatsLeft > 5 && seatsLeft < 10) {
-        newTicketPrice = lastTicketPrice * priceSurge1;
-        seatsLeft = seatsLeft - 1;
-        console.log(seatsLeft);
-        display("Your ticket is purchased at $" + newTicketPrice + " seats left " + seatsLeft + " before price surge additional 2%");
-    };
 
-    else if (currentInput === "b" && seatsLeft <= 5 && seatsLeft > 1) {
-        newTicketPrice = lastTicketPrice * priceSurge2;
-        seatsLeft = seatsLeft - 1;
-        console.log(seatsLeft);
-        display("Your ticket is purchased at $" + newTicketPrice + " seats left " + seatsLeft + " before price really surge exponentally");
-    }
-    else if (currentInput === "b" && seatsLeft === 1) {
-        // currentInput(Buy) && seatLeft(10) => soldSeatPrice(Show 91k price)
-        soldSeatPrice = 91000;
+/* Could have done better 1
+var eSeatsLeft = function(economySeatsLeft) {
+    return economySeatsLeft - 1;
+};
 
-        seatsLeft = seatsLeft - 1;
-        display("Your ticket is purchased at $" + soldSeatPrice + " no seats left ");
-    }
-    else if (currentInput === "b" && seatsLeft < 1) {
-        display("tickets all sold out");
-    }
-    else {
-        // currentInput(!Buy) => soldSeatPrice(Show cancelled)
-        display("Your purchase is cancelled");
-    }
-    console.log("seats left: " + seatsLeft);
+var banana = eSeatsLeft(economySeatsLeft);
+        console.log("banana: " + banana);
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+var priceSurge1 = function(economySeatsPrice) {
+    return economySeatsPrice * 1.03;
+};
+
+var banana = eSeatsLeft(economySeatsPrice);
+        console.log("bababa:" + banana);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 */
 
 
-/* Price of sold seat (number) - part 2
-if (seatsLeft <= 5) {
-    soldSeatPrice = 1.03 * emptySeatPrice;
-}
-    else if (seatsLeft > 5 && seatsLeft < 10) {
-    soldSeatPrice = 1.05 * emptySeatPrice;
-}
-    else {
-
-}
-console.log(soldSeatPrice + " " + typeof soldSeatPrice);
-*/
 
 
-
-
-
-
-
-
-// Function Signature
-
-// Function Header
 
 
 /*
