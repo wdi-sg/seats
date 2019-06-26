@@ -114,6 +114,7 @@ var inputHappened = function(userInput){
     }
 */
 
+
 //the price of the tickets will increase by 3% and 5%
 
 var planeSeats = 10;
