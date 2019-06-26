@@ -6,7 +6,7 @@ const lastSeatPrice= 91000;
 var seatsLeft = 10;
 var seatsSold = totalSeats - seatsLeft;
 var totalSales = 0;
-
+var salesPrice;
 
 // Main Function to coordinate the sequence of processes
 var inputHappened = function(currentInput){
@@ -16,8 +16,8 @@ var inputHappened = function(currentInput){
   if (seatsLeft > 0) {
     seatPurchased(noOfSeatsSold);
     //var currentPrice = calculatePriceOfSeat(seatsSold);
-    var currentPrice = calculatePriceOfSeat2(seatsSold);
-    totalSales = +totalSales + currentPrice;
+    var currentPrice = Math.round(calculatePriceOfSeat2(seatsSold) * 100 ) / 100;
+    totalSales = Math.round( (totalSales + currentPrice) * 100) / 100;
     display(`The price is ${currentPrice}. ${seatsLeft} seats left. Airline total sales: ${totalSales}`);
   }
 
@@ -41,16 +41,20 @@ var calculatePriceOfSeat = function(seatsSold) {
 }; */
 
 var calculatePriceOfSeat2 = function(seatsSold) {
-  console.log("inside calculatePriceOfSeat2" + seatsSold);
-  var salesPrice;
+  console.log("inside calculatePriceOfSeat2 : " + seatsSold);
   var interest1 = 0.03;
   var interest2 = 0.05;
   if (seatsSold === 1) {
     salesPrice = originalPrice;
   } else if (seatsSold > 1 && seatsSold < 6) {
-    salesPrice = 50 * ((seatsSold - 1) * interest1) + 50;
+    console.log(`sales:${salesPrice} / int:${salesPrice*interest1}`);
+    salesPrice = Math.round( (salesPrice + ( salesPrice * interest1 ))* 100)  / 100;
+    console.log("SP:"+salesPrice);
+
   } else if (seatsSold > 5 && seatsSold < 10){
-    salesPrice = (50 * ((5 - 1) * interest1) + 50) + (50 * ((seatsSold - 5) * interest2));
+    console.log(`sales:${salesPrice} / int:${salesPrice*interest1}`);
+    salesPrice = Math.round( (salesPrice + ( salesPrice * interest2 ))* 100)  / 100;
+    console.log("SP:"+salesPrice);
   } else {
     salesPrice = lastSeatPrice;
   }
