@@ -1,8 +1,8 @@
 .bg-image {
 	background-image: linear-gradient(to bottom, rgba(145, 234, 228, 0.52), rgba(134, 168, 231, 0.73), rgba(127, 127, 213, 0.84)), url("images/main.jpg");
 	background-color: #cccccc;
-	height: 800px;
-	background-position: 50% 70%;
+	height: 350px;
+	background-position: 10% 82%;
 	background-repeat: no-repeat;
 	background-size: cover;
 	position: relative;
@@ -15,7 +15,7 @@
 	font-size: 50px;
 	text-align: center;
 	position: absolute;
-	top: 20%;
+	top: 55%;
 	left: 30%;
 	transform: translate(-20%, -70%);
 	color: black;
@@ -34,20 +34,19 @@
 
 .starter {
 	font-family: "Roboto", sans serif;
-	font-size: 30px;
+	font-size: 25px;
 	padding: 8px;
 }
 
 #input {
-	display: inline-block;
-	position: absolute;
-	right: 41%;
-	top: 45%;
+	display: block;
+	margin: 10 auto;
+	text-align: center;
+	border: 2px solid rgb(145, 206, 251);
 }
 
 #output {
-	display: inline-block;
-	position: absolute;
-	right: 41%;
-	top: 50%;
+	display: block;
+	background: aliceblue;
+	text-align: center;
 }
