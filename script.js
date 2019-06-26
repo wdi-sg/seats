@@ -20,6 +20,7 @@ function buySeat(){
 
      //display feedback
      document.getElementById("feedback").textContent = "seat bought at" + " $" + ticketPrice;
+     console.log ("seat " + totalSeats + " bought at" + " $" + ticketPrice);
      setTimeout(function(){
         document.getElementById("feedback").textContent = "";
       }, 1000);
@@ -30,13 +31,15 @@ function buySeat(){
 
     //if yes totalSeats -1
      totalSeats = totalSeats - 1;
-     console.log(totalSeats);
+     console.log(totalSeats + " seats left");
+
    } else if (totalSeats === 1){
+     console.log ("seat " + totalSeats + " bought at" + " $" + ticketPrice);
      totalSeats = totalSeats - 1;
+     console.log(totalSeats + " seats left");
      document.getElementById("buy").style.display = "none";
      document.getElementById("price").textContent = "Sold out";
    }
-
 }
 // var buySeat = function(){
 //   console.log("test");
