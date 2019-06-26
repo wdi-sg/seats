@@ -17,7 +17,8 @@ var inputHappened = function(currentInput){
         display(seatPrice);
         //return seatPrice;
     } else if (boughtSeats > 1 && boughtSeats < 10) {
-        seatPrice = seatPrice * 1.05; //cumulative
+        //seatPrice = seatPrice * 1.05; //cumulative 5% on previous ticket price
+        seatPrice = seatPrice + (50*0.05); //cumulative price which adds 5% of $50 on to previous ticket price
         console.log(seatPrice);
         display(seatPrice);
     }
