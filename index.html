@@ -1,11 +1,17 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
+    <title>Welcome to Singapore Airlines</title>
+    <header>Welcome to Singapore Airlines</header>
+    <img src="https://s3-ap-southeast-1.amazonaws.com/wobb-app/resized/uploads/jobs-malaysia/company_images/5298/jobs-malaysia-singapore-airlines-limited-1539882792_cp_banner.jpg" alt="SQ" width="600" height="200" class="center">
   </head>
   <body>
+    <h2> How many seats do you need?</h2>
     <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+    <h2>Number of seats left:</h2>
     <p class="starter" id="output"></p>
+    <h2>Total cost of tickets selected:</h2>
+    <p class="starter" id="output2"></p>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -16,7 +22,12 @@
         var output = document.querySelector('#output');
         output.innerText = data;
       }
+      var display2 = function( data ){
+        var output2 = document.querySelector('#output2');
+        output2.innerText = data;
+      }
     </script>
+    <script src="script.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
