@@ -156,7 +156,7 @@ var inputHappened = function(userInput){
 */
 
 //part 5
-
+/*
 var planeSeats = 10;
 var seatPrice = 50;
 
@@ -192,5 +192,116 @@ var inputHappened = function(userInput){
     else{
         display2("Please enter 'buy' or leave");
         console.log("Please enter 'buy' or leave");
+    }
+}
+*/
+
+//3 cabins (economy business first class)
+//economy seats = 15
+    //priceseat 15 -8 is 3% and 7 -1 is 5%
+
+//business = 6
+    //priceseat 6-4 is 6% and 3-1 10%
+
+//firstclass = 4
+    //allseats is 15%
+
+var seatPrice = 50;
+var economy = 15;
+var business = 6;
+var first = 4;
+var economyPrice = 0;
+var businessPrice = 0;
+var firstPrice = 0;
+
+var seatPriceEconomy = function(seatPrice){
+    if(economy === 15){
+        economy = economy - 1;
+        display("You have purchase at: $" + seatPrice);
+        display2("Seat available in Economy Class: " + economy);
+    }
+    else if(economy <= 14 && economy > 7){
+        economyPrice = (seatPrice * 0.03) + seatPrice;
+        economy = economy - 1;
+        display("You have purchase at: $" + economyPrice);
+        display2("Seat available in Economy Class: " + economy);
+    }
+    else if(economy <= 7 && economy > 1){
+        economyPrice = (seatPrice * 0.05) + seatPrice;
+        economy = economy - 1;
+        display("You have purchase at: $" + economyPrice);
+        display2("Seat available in Economy Class: " + economy);
+    }
+    else if(economy === 1){
+        economy = economy - 1
+        display("You have purchase the last seat at: $91,000");
+    }
+    else if(economy <= 0){
+        display2("No available seat");
+    }
+}
+
+var seatPriceBusiness = function(seatPrice){
+    if(business === 6){
+        business = business - 1;
+        display("You have purchase at: $" + seatPrice);
+        display2("Seat available in Business Class: " + business);
+    }
+    else if(business < 6 && business >= 4){
+        businessPrice = (seatPrice * 0.06) + seatPrice;
+        business = business - 1;
+        display("You have purchase at: $" + businessPrice);
+        display2("Seat available in Business Class: " + business);
+    }
+    else if(business < 4 && business > 1){
+        businessPrice = (seatPrice * 0.1) + seatPrice;
+        business = business - 1;
+        display("You have purchase at: $" + businessPrice);
+        display2("Seat available in Business Class: " + business);
+    }
+    else if(business === 1){
+        business = business - 1
+        display("You have purchase the last seat at: $91,000");
+    }
+    else if(business <= 0){
+         display2("No available seat");
+    }
+}
+
+
+var seatPriceFirst = function(seatPrice){
+    if(first === 4){
+        first = first - 1;
+        display("You have purchase at: $" + seatPrice);
+        display2("Seat available in First Class: " + first);
+    }
+    else if(first>1){
+        firstPrice = (seatPrice * 0.15) + seatPrice;
+        first = first - 1;
+        display("You have purchase at: $" + firstPrice);
+        display2("Seat available in Business Class: " + first);
+    }
+    else if(first === 1){
+        first = first - 1
+        display("You have purchase the last seat at: $191,000");
+    }
+    else if(first <= 0){
+        display2("No available seat")
+    }
+}
+
+console.log("Please Enter 'first', 'business' or 'economy' to puchase your seat");
+var inputHappened = function(userInput){
+    if (userInput == "first"){
+        seatPriceFirst(seatPrice);
+    }
+    else if (userInput == "business"){
+        seatPriceBusiness(seatPrice);
+    }
+    else if (userInput == "economy"){
+        seatPriceEconomy(seatPrice);
+    }
+    else{
+        display2("You have entered an INVALID entry")
     }
 }
