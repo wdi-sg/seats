@@ -20,6 +20,11 @@ var originalFirstPrice = 50;
 //Initialize Log Count
 var logCount=1;
 
+// Clear Name Field
+var clearField= function() {
+    document.getElementById('name').value = "";
+}
+
 ////////////////////////////////////////////////////////////
 // 2. The following portion are functions for Economy Class
 ///////////////////////////////////////////////////////////
@@ -62,7 +67,7 @@ var priceChangeEconomy = function () {
 }
 
 //Economy Sales function
-function sellSeatsEconomy() {
+var sellSeatsEconomy = function() {
 
     //Condition where no seats are left
     if (noOfEconomySeatsLeft === 1) {
@@ -121,7 +126,7 @@ var priceChangeBusiness = function () {
 }
 
 //Business Sales function
-function sellSeatsBusiness() {
+var sellSeatsBusiness = function() {
 
     //Condition where no seats are left
     if (noOfBusinessSeatsLeft === 1) {
@@ -176,7 +181,7 @@ var priceChangeFirst = function () {
 }
 
 //First Class Sales function
-function sellSeatsFirst() {
+var sellSeatsFirst = function() {
 
     //Condition where no seats are left
     if (noOfFirstSeatsLeft === 1) {
