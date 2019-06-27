@@ -3,9 +3,21 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+
+    <h2>Remaining Seats: <span id="#seatRemain"></span></h2>
+    <input class="starter" id="input" placeholder=""/>
+
+    <h2>Normal Pricing:</h2>
     <p class="starter" id="output"></p>
+
+    <h2>Refined Pricing:</h2>
+    <p class="starter" id="output2"></p>
+
+    <h2>Refined Pricing version 2:</h2>
+    <p class="starter" id="output3"></p>
+
+
+
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -16,7 +28,20 @@
         var output = document.querySelector('#output');
         output.innerText = data;
       }
+
+      var display2 = function( data ){
+        var output2 = document.querySelector('#output2');
+        output2.innerText = data;
+      }
+
+      var display3 = function( data ){
+        var output3 = document.querySelector('#output3');
+        output3.innerText = data;
+      }
     </script>
     <script src="script.js"></script>
+
+
+
   </body>
 </html>
