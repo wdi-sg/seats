@@ -55,7 +55,7 @@ function checkInputValue(){
   var input = document.getElementById("useraction").value;
   var inputConvert = input.toLowerCase();
 //switch case to determine which type of action user is taking.
-  switch (input){
+  switch (inputConvert){
     case "buy first class":
       console.log("First class bought!")
       clearInput(); //clears input field upon verification of input.
