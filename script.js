@@ -31,6 +31,7 @@ function buyETicket() {
         console.log(econNumberSeats);
         console.log(econSeatPrice);
         display(`Sorry Economy Class tickets sold out!`);
+        document.getElementById("economy").disabled = true;
     } else if (econNumberSeats <8) {
         console.log(econNumberSeats);
         econSeatPrice = econSeatPrice + (50*0.05);
@@ -63,6 +64,7 @@ function buyBTicket() {
         console.log(busNumberSeats);
         console.log(busSeatPrice);
         display2(`Sorry Business Class tickets sold out!`);
+        document.getElementById("business").disabled = true;
     } else if (busNumberSeats <3) {
         console.log(busNumberSeats);
         busSeatPrice = busSeatPrice + (300*0.1);
@@ -77,7 +79,7 @@ function buyBTicket() {
 }
 
 //button function to buy first class tickets
-//price increase is $150 when more than half
+//price increase is $150 after every ticket bought
 function buyFTicket() {
     alert(`Ticket Bought at ${firstSeatPrice}!`);
     firstNumberSeats = firstNumberSeats-1;
@@ -97,32 +99,37 @@ function buyFTicket() {
 
 
 
-// //If UX wants input instead of button
-// var inputHappened = function(currentInput){
-//      if (currentInput === "buyETicket") {
-//         alert(`Ticket Bought at ${econSeatPrice}!`);
-//         econNumberSeats = econNumberSeats-1;
-//         display(`There are ${econNumberSeats} seat left and ticket price is \$${econSeatPrice}`)
-//     } else if (econNumberSeats === 1) {
-//         console.log(econNumberSeats);
-//         econSeatPrice = 91000;
-//         console.log(econSeatPrice);
-//         display(`There are ${econNumberSeats} seat left and ticket price is \$${econSeatPrice}`);
-//     } else if (econNumberSeats === 0) {
-//         console.log(econNumberSeats);
-//         console.log(econSeatPrice);
-//         display(`Sorry Economy Class tickets sold out!`);
-//     } else if (econNumberSeats <8) {
-//         console.log(econNumberSeats);
-//         econSeatPrice = econSeatPrice + (50*0.05);
-//         console.log(econSeatPrice);
-//         console.log(econNumberSeats);
-//         display(`There are ${econNumberSeats} seats left and ticket price is \$${econSeatPrice}`);
-//     } else {
-//          console.log(econNumberSeats);
-//         console.log(econSeatPrice);
-//         econSeatPrice = econSeatPrice + (50*0.03);
-//         console.log(econSeatPrice);
-//         display(`There are ${econNumberSeats} seats left and ticket price is \$${econSeatPrice}`);
-//     }
-// }
+//If UX wants input instead of button
+var inputHappened = function(currentInput){
+     if (currentInput === "buy e ticket") {
+        alert(`Ticket Bought at ${econSeatPrice}!`);
+        econNumberSeats = econNumberSeats-1;
+        display(`There are ${econNumberSeats} seat left and ticket price is \$${econSeatPrice}`);
+        if (econNumberSeats === 1) {
+            console.log(econNumberSeats);
+            econSeatPrice = 91000;
+            console.log(econSeatPrice);
+            display(`There are ${econNumberSeats} seat left and ticket price is \$${econSeatPrice}`);
+        } else if (econNumberSeats === 0) {
+            console.log(econNumberSeats);
+            console.log(econSeatPrice);
+            display(`Sorry Economy Class tickets sold out!`);
+        } else if (econNumberSeats <8) {
+            console.log(econNumberSeats);
+            econSeatPrice = econSeatPrice + (50*0.05);
+            console.log(econSeatPrice);
+            console.log(econNumberSeats);
+            display(`There are ${econNumberSeats} seats left and ticket price is \$${econSeatPrice}`);
+        } else {
+            console.log(econNumberSeats);
+            console.log(econSeatPrice);
+            econSeatPrice = econSeatPrice + (50*0.03);
+            console.log(econSeatPrice);
+            display(`There are ${econNumberSeats} seats left and ticket price is \$${econSeatPrice}`);
+        }
+    } else if (currentInput === "buy b ticket") {
+        alert(`Ticket Bought at ${busSeatPrice}!`);
+        busNumberSeats = busNumberSeats-1;
+        display(`There are ${busNumberSeats} seat left and ticket price is \$${busSeatPrice}`);
+    }
+}
