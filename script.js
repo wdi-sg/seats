@@ -1,5 +1,13 @@
-//set starting variables
+//set starting variables - prices
 var ticketPrice = 50;
+
+var tierOnePriceE = 50;
+var tierTwoPriceE = null;
+
+var tierOnePriceB = 50;
+var tierTwoPriceB = null;
+
+var tierOnePriceF = 50;
 
 //number of taken seats - starts at 0, increases by 1
 var numberOfTakenSeatsEconomy = 0;
@@ -21,12 +29,13 @@ var buyEconomy = function() {
     if (numberOfTakenSeatsEconomy >= 15) {
         display(`Sorry, Economy Class seats are sold out! But we have ${(6-numberOfTakenSeatsBusiness)} seat(s) left in Business and ${4-numberOfTakenSeatsFirst} seat(s) left in First.`)
     } else if (numberOfTakenSeatsEconomy >= 0 && numberOfTakenSeatsEconomy < 7) {
-        var tierOnePriceE = ticketPrice * 1.03;
+        tierOnePriceE = tierOnePriceE * 1.03;
         var data = `Your ticket costs $${tierOnePriceE}. There are ${seatsinTierOneE} seat(s) left in this price bracket for Economy Class.`;
         display(data);
         seatsinTierOneE -= 1;
+        tierTwoPriceE = tierOnePriceE;
     } else if (numberOfTakenSeatsEconomy > 6 && numberOfTakenSeatsEconomy < 14) {
-        var tierTwoPriceE = ticketPrice * 1.05;
+        tierTwoPriceE = tierTwoPriceE * 1.05;
         var data = `Your ticket costs $${tierTwoPriceE}. There are ${seatsinTierTwoE} seat(s) left in this price bracket for Economy Class.`;
         display(data);
         seatsinTierTwoE -= 1;
@@ -45,13 +54,14 @@ var buyBusiness = function() {
     if (numberOfTakenSeatsBusiness >= 6) {
         display(`Sorry, Business Class seats are sold out! But we have ${(15-numberOfTakenSeatsEconomy)} seat(s) left in Economy and ${4-numberOfTakenSeatsFirst} seat(s) left in First.`)
     } else if (numberOfTakenSeatsBusiness >= 0 && numberOfTakenSeatsBusiness < 3) {
-        var tierOnePriceB = ticketPrice * 1.06;
+        tierOnePriceB = tierOnePriceB * 1.06;
         var data = `Your ticket costs $${tierOnePriceB}.There are ${seatsinTierOneB} seat(s) left in this price bracket for Business Class.`;
         display(data);
         seatsinTierOneB -= 1;
         console.log(seatsinTierOneB);
+        tierTwoPriceB = tierOnePriceB;
     } else if (numberOfTakenSeatsBusiness > 2 && numberOfTakenSeatsBusiness < 5) {
-        var tierTwoPriceB = Math.floor(ticketPrice * 1.10);
+        tierTwoPriceB = Math.floor(tierTwoPriceB * 1.10);
         var data = `Your ticket costs $${tierTwoPriceB}. There are ${seatsinTierTwoB} seat(s) left in this price bracket for Business Class.`;
         display(data);
         seatsinTierTwoB -= 1;
@@ -70,7 +80,7 @@ var buyFirst = function() {
     if (numberOfTakenSeatsFirst >= 4) {
         display(`Sorry, First Class seats are sold out! But we have ${(15-numberOfTakenSeatsEconomy)} seats left in Economy and ${6-numberOfTakenSeatsBusiness} seats left in Business.`)
     } else if (numberOfTakenSeatsFirst >= 0 && numberOfTakenSeatsFirst < 3) {
-        var tierOnePriceF = Math.floor(ticketPrice * 1.15);
+        tierOnePriceF = Math.floor(ticketPrice * 1.15);
         var data = `Your ticket costs $${tierOnePriceF}. There are ${seatsinTierOneF} seat(s) left in this price bracket for First Class.`;
         display(data);
         seatsinTierOneF -= 1;
