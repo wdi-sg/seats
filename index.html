@@ -3,20 +3,41 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <p class="starter" id="output"></p>
-    <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        inputHappened(currentInput)
-      });
+    <h1>Airline Seats for Sale</h1>
+    <h2> ↓↓Please purchase your seats below.↓↓ </h2>
 
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
-    </script>
+    <form>
+        Enter Passenger Name:<input type="text" id='name'>
+    </form>
+
+    <main>
+        <div class="economy">
+            <h3 class="seats"> Economy Seats </h3><br>
+            <p class="eOutput" id="eSeats"> No. of Economy Seats left: 15 </p><br>
+            <p class="eOutput" id="ePrice"> Current Price of Economy Seats: $50 </p><br>
+            <button class="economyButton" id="eButton" onclick="sellSeatsEconomy(); clearField()">Buy Seat!</button>
+        </div>
+
+        <div class="business">
+            <h3 class="seats"> Business Seats </h3><br>
+            <p class="bOutput" id="bSeats"> No. of Business Seats left: 6 </p><br>
+            <p class="bOutput" id="bPrice"> Current Price of Business Seats: $50 </p><br>
+            <button class="businessButton" id="bButton" onclick="sellSeatsBusiness(); clearField()">Buy Seat!</button>
+        </div>
+
+        <div class="first">
+            <h3 class="seats"> First Class Seats </h3><br>
+            <p class="fOutput" id="fSeats"> No. of First Class Seats left: 4 </p><br>
+            <p class="fOutput" id="fPrice"> Current Price of First Class Seats: $50</p><br>
+            <button class="firstButton" id="fButton" onclick="sellSeatsFirst(); clearField()">Buy Seat!</button>
+        </div>
+    </main>
+
+        <div class="log">
+            <h4 class="log"> The following is the purchase log for the seats:</h4>
+            <ol class = "log" id="logList"></ol>
+        </div>
+
     <script src="script.js"></script>
   </body>
 </html>
