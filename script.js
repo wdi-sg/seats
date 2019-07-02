@@ -1,6 +1,11 @@
 console.log("hello script js");
+console.log("Script is running");
 
 var inputHappened = function(currentInput){
-  console.log( currentInput );
-  display( "WOW SOMETHING HAPPENED" );
+if (currentInput==="buy") {
+    var boughtSeat = "Seat bought for 50";
+} else {
+    var boughtSeat = "Type in buy to purchase a seat"
+}
+  display(boughtSeat);
 };
