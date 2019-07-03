@@ -214,6 +214,7 @@ var economyPrice = 0;
 var businessPrice = 0;
 var firstPrice = 0;
 
+display("Welcome to JY airline. Please enter first, business or economy to purchase your seats. Thank You");
 var seatPriceEconomy = function(seatPrice){
     if(economy === 15){
         economy = economy - 1;
