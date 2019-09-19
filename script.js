@@ -14,7 +14,7 @@ const inputHappened = function(currentInput) {
     return `${currentInput} not allowed. Key in y or n.`;
   }
   if (currentInput.toLowerCase() === "y") {
-    if (plane.seats > 0) {
+    if (numOfTicketsSold < plane.seats) {
       seatPrice =
         numOfTicketsSold === 0
           ? 50
@@ -23,7 +23,6 @@ const inputHappened = function(currentInput) {
   } else {
     return "Ok...";
   }
-  plane.seats -= 1;
   numOfTicketsSold += 1;
   input.value = "";
   return `You paid for $${seatPrice} for an Airplane seat.`;
