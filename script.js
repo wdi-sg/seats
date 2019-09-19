@@ -136,10 +136,12 @@ var LASTSEATPRICE = 91000;
 // tracking variables to keep track of the overall status of seats sold
 var totalSeatsSold = 0;
 console.log("*******************************************************");
-var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
+// var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
 console.log("ORIGINALPRICE: ", ORIGINALPRICE);
-console.log("PERCENTAGE: ", PERCENTAGE);
-console.log("priceIncrementPerSeatSold: ", priceIncrementPerSeatSold);
+// console.log("PERCENTAGE: ", PERCENTAGE);
+console.log("PERCENTAGE1: ", PERCENTAGE1);
+console.log("PERCENTAGE2: ", PERCENTAGE2);
+// console.log("priceIncrementPerSeatSold: ", priceIncrementPerSeatSold);
 console.log("*******************************************************");
 
 var inputHappened = function(currentInput){
@@ -150,8 +152,8 @@ var inputHappened = function(currentInput){
   console.log("calculating latest price...")
 
   // calculate the price mark up
-  var priceMarkUp = calculatePriceMarkUp(priceIncrementPerSeatSold, totalSeatsSold);
-  console.log("priceMarkUp: ", priceMarkUp);
+  // var priceMarkUp = calculatePriceMarkUp(priceIncrementPerSeatSold, totalSeatsSold);
+  // console.log("priceMarkUp: ", priceMarkUp);
 
   // calculate dynamic price mark up
   // get the price band /
@@ -166,12 +168,13 @@ var inputHappened = function(currentInput){
   var dynamicPriceMarkUp = calculateDynamicPriceMarkUp(dynamicPriceIncrementPerSeatSold, totalSeatsSold, priceBand, LASTSEATPRICE, ORIGINALPRICE);
   console.log("dynamicPriceMarkUp: ", dynamicPriceMarkUp);
   // calculate the latest price
-  var latestPrice = calculateLatestPrice(ORIGINALPRICE, priceMarkUp);
+  // var latestPrice = calculateLatestPrice(ORIGINALPRICE, priceMarkUp);
+  var latestPrice = calculateLatestPrice(ORIGINALPRICE, dynamicPriceMarkUp);
   console.log("latestPrice: ", latestPrice);
   // when inputHappened function is called, a seat is considered to be sold
   // increase totalSeatsSold by 1
   totalSeatsSold += 1;
-  console.log("at the end");
+  console.log("at the end:");
   console.log("totalSeatsSold: ", totalSeatsSold);
   console.log("---------------------------------");
 
@@ -179,9 +182,9 @@ var inputHappened = function(currentInput){
   var displayMessage = "";
 
   if (totalSeatsLeft <= 0) {
-    displayMessage = "No more seats left";
+    displayMessage = "The last seat was sold at $" + latestPrice + "!";
   } else {
-    displayMessage = "A seat has been sold! Grab your ticket now at $" + latestPrice + "! Only " + totalSeatsLeft + " seats left!";
+    displayMessage = "A seat was sold at " + latestPrice + "! Grab your ticket now at $" + "_____" + "! Only " + totalSeatsLeft + " seats left!";
   }
 
   return displayMessage;
