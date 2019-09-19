@@ -3,7 +3,7 @@ console.log("hello script js");
 var startingPrice = 50;
 var numberOfSeats = 10;
 var increasingPrice = 50;
-var warning ="";
+var warning ="Price will increase 5%!";
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
@@ -14,10 +14,10 @@ var inputHappened = function(currentInput){
  	increaseCalculation();
 	decreaseTickets()
 	if(numberOfSeats<0) {
-  return "No More Tickes Available";
+  return "No More Tickes Available\n";
 }
 	if(numberOfSeats===1) {
-warning ="Only 1 seat available!";
+warning ="Only 1 seat available! \n Price will increase 5%!";
 }
 	if(numberOfSeats===0) {
 warning ="All Tickets Sold!"}
