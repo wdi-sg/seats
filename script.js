@@ -23,21 +23,42 @@ var calTicketPrice = function(percentageIncrease) {
 
 var inputHappened = function(currentInput){
 
+    // Converted input from string to integer
+    var convertCurrentInput = null;
+
     // Amount payable by user for ticket price
     var amtPayable = null;
+
+    // Result to show to user
+    var result = "";
+
+    // Check if the input is a number
+    if(isNaN(currentInput) || currentInput < 0 || currentInput > 10){
+
+        // If input is not number, shows error
+        result = "Please input a valid number from 1 to 10.";
+
+        return result;
+
+    } else {
+
+        // Else (if input is a number), convert to integer
+        convertCurrentInput = parseInt(currentInput);
+
+    }
 
     // If seatsAvailable = 10,
     if(seatsAvailable === 10) {
 
         // seatsAvailable - 1
-        seatsAvailable = calSeatsAvailable(1);
+        seatsAvailable = calSeatsAvailable(convertCurrentInput);
         console.log(seatsAvailable + " seats available");
 
         // set price is 50
         amtPayable = originalTicketPrice.toFixed(2);
 
         // show result to user
-        var result = "Your seat has been reserved. Please pay $ " + amtPayable + "\n" + "Number of Seats Available: " + seatsAvailable ;
+        result = "Your seat has been reserved. Please pay $ " + amtPayable + "\n" + "Number of Seats Available: " + seatsAvailable ;
 
         return result;
 
@@ -46,7 +67,7 @@ var inputHappened = function(currentInput){
         // Else if seatsAvailable more than or equal to 1 & less than 10,
 
             // seatsAvailable - 1
-        seatsAvailable = calSeatsAvailable(1);
+        seatsAvailable = calSeatsAvailable(convertCurrentInput);
         console.log(seatsAvailable + " seats available");
 
             // show price = $50 + 5%
