@@ -3,29 +3,42 @@ var seatsAvailable = 10;
 
 var inputHappened = function(currentInput){
 
-    // If currentInput is not empty,
-    if(currentInput !== null) {
+    // If seatsAvailable = 10,
+    if(seatsAvailable === 10) {
 
-        // minus 1 seat from seatsAvailable
-        // store the new value back to seatsAvailable
+        // seatsAvailable - 1
         seatsAvailable = seatsAvailable - 1;
 
-        // set price = $50 + 5%;
-        var price = 50 + (50 * 0.05);
+        // set price is 50
+        var price = 50;
 
-        // return price to user
+        // show result to user
         var result = "Your seat has been reserved. Please pay $ " + price + "\n" + "Number of Seats Available: " + seatsAvailable ;
 
-        display(result);
+        return result;
+
+    } else if(seatsAvailable >= 1 && seatsAvailable < 10) {
+
+        // Else if seatsAvailable more than or equal to 1 & less than 10,
+
+        // seatsAvailable - 1
+        seatsAvailable = seatsAvailable - 1;
+
+            // show price = $50 + 5%
+        price = 50 + (50 * 0.05);
+
+        // show result to user
+        result = "Your seat has been reserved. Please pay $ " + price + "\n" + "Number of Seats Available: " + seatsAvailable ;
+
+        return result;
 
     } else {
 
-        // If current Input is empty,
-            // set price is $50
+        // Else (e.g. seatsAvailable = 0)
+            // show no seats available
+        // show result to user
+        result = "Sorry, there are " + seatsAvailable + " seats available." ;
 
-        var price = 50;
-        var result = "Current price " + price;
-
-        display(result);
+        return result;
     }
 };
