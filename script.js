@@ -13,6 +13,29 @@ var calculatePriceIncrementPerSeatSold = function(originalPrice, percentage){
     return originalPrice * percentage;
 };
 
+// calculateDynamicPriceIncrementPerSeatSold
+// purpose:
+// calculate the price increment for every seat sold, depending on the price band
+// business logic:
+// depending on the price band, the price increment is different
+// price band 1: priceIncrementPerSeatSold = originalPrice * 3%
+// price band 2: priceIncrementPerSeatSold = originalPrice * 5%
+// price band 3: priceIncrementPerSeatSold = 0
+// function signature:
+// originalPrice(number),percentage(number),priceBand(string)--->priceIncrementPerSeatSold(number)
+var calculateDynamicPriceIncrementPerSeatSold = function(originalPrice,percentage1,percentage2,priceBand){
+    switch(priceBand) {
+        case "priceBand1":
+            return originalPrice * percentage1;
+        case "priceBand2":
+            return originalPrice * percentage2;
+        case "priceBand3":
+            return 0;
+        default:
+            console.log("error - invalid price band");
+            break;
+    }
+};
 
 // calculatePriceMarkUp
 // purpose:
@@ -48,6 +71,7 @@ var calculatePriceMarkUp = function(priceIncrementPerSeatSold, totalSeatsSold) {
 // priceBand(string)--->priceMarkUp(number)
 // example:
 // var priceMarkUp = calculateDynamicPriceMarkUp("priceBand1");
+
 
 // getPriceBand
 // purpose:
@@ -105,8 +129,8 @@ var TOTALSEATS = 10;
 
 // tracking variables to keep track of the overall status of seats sold
 var totalSeatsSold = 0;
-var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
 console.log("*******************************************************");
+var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
 console.log("ORIGINALPRICE: ", ORIGINALPRICE);
 console.log("PERCENTAGE: ", PERCENTAGE);
 console.log("priceIncrementPerSeatSold: ", priceIncrementPerSeatSold);
@@ -127,6 +151,9 @@ var inputHappened = function(currentInput){
   // get the price band /
   var priceBand = getPriceBand(totalSeatsSold, TOTALSEATS);
   console.log("priceBand: ", priceBand);
+
+  var dynamicPriceIncrementPerSeatSold = calculateDynamicPriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE1, PERCENTAGE2, priceBand);
+  console.log("dynamicPriceIncrementPerSeatSold: ", dynamicPriceIncrementPerSeatSold);
   // calculate the latest price
   var latestPrice = calculateLatestPrice(ORIGINALPRICE, priceMarkUp);
   console.log("latestPrice: ", latestPrice);
