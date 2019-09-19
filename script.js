@@ -5,6 +5,14 @@ console.log(seatsAvailable + " seats available");
 // Global variable for originalTicketPrice = 50
 var originalTicketPrice = 50;
 
+var calSeatsAvailable = function(seatsBought) {
+
+    // Calculate seats available
+    seatsAvailable = seatsAvailable - seatsBought;
+
+    return seatsAvailable;
+};
+
 var calTicketPrice = function(percentageIncrease) {
 
     // Calculate price ticket with percentage increase
