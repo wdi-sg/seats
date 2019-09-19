@@ -32,6 +32,7 @@ warning ="All Tickets Sold!"}
 
 var increaseCalculation = function (){
 increasingPrice = increasingPrice * 1.05; 
+increasingPrice = increasingPrice.toFixed(2);
 } 
 
 var decreaseTickets = function (){
