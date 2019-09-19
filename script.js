@@ -67,9 +67,8 @@ console.log("hello script js");
 // }
 
 //PART 3 OF HOMEWORK
+//PART 4 OF HOMEWORK (modified Part 3)
 var ticketPrice = 50;
-var threeIncrement = 0.03 * 50;
-var fiveIncrement = 0.05 * 50;
 var planeSeats = 1;
 
 
@@ -77,6 +76,12 @@ var inputHappened = function(currentInput){
 
  console.log(ticketPrice);
     console.log(planeSeats);
+
+
+var threeIncrement = 0.03 * ticketPrice;
+var fiveIncrement = 0.05 * ticketPrice;
+
+  console.log(threeIncrement);
       if (planeSeats > 10) {
     alert ("TOO BAD NO MORE SEATS");
     }
@@ -90,7 +95,7 @@ var inputHappened = function(currentInput){
        var remain = 5 - planeSeats;
        planeSeats++;
 
-       return `Your plane ticket costs $${ticketPrice}. There are ${remain} seats left before the prices goes up EVEN MORE!`;
+       return `Your plane ticket costs $${ticketPrice.toFixed(2)}. There are ${remain} seats left before the prices goes up EVEN MORE!`;
     }
     else if (planeSeats <= 9){
         ticketPrice = ticketPrice + fiveIncrement;
@@ -103,7 +108,7 @@ var inputHappened = function(currentInput){
     return `Your plane ticket costs $${ticketPrice}...have you considered walking?`
     };
 
-    return `Your plane ticket costs $${ticketPrice}.`;
+    return `Your plane ticket costs $${ticketPrice.toFixed(2)}.`;
 
     console.log(ticketPrice);
     console.log(planeSeats);
