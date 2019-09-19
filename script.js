@@ -48,9 +48,9 @@ var calculateLatestPrice = function(originalPrice, priceMarkUp) {
 };
 
 // constant variables (given on the first part of the assignment)
-var ORIGINALPRICE = 50
-var PERCENTAGE = 0.05
-// var TOTALSEATS = 10
+var ORIGINALPRICE = 50;
+var PERCENTAGE = 0.05;
+var TOTALSEATS = 10;
 
 // tracking variables to keep track of the overall status of seats sold
 var totalSeatsSold = 0;
@@ -73,13 +73,17 @@ var inputHappened = function(currentInput){
   console.log("priceMarkUp: ", priceMarkUp);
 
   // calculate the latest price
-  var latesPrice = calculateLatestPrice(ORIGINALPRICE, priceMarkUp);
-  console.log("latesPrice: ", latesPrice);
+  var latestPrice = calculateLatestPrice(ORIGINALPRICE, priceMarkUp);
+  console.log("latestPrice: ", latestPrice);
   // when inputHappened function is called, a seat is considered to be sold
   // increase totalSeatsSold by 1
   totalSeatsSold += 1;
   console.log("at the end");
   console.log("totalSeatsSold: ", totalSeatsSold);
-  console.log("---------------------------------")
-  return "a seat is sold";
+  console.log("---------------------------------");
+
+  var totalSeatsLeft = TOTALSEATS - totalSeatsSold;
+
+  var displayMessage = "A seat has been sold! Grab your ticket now at $" + latestPrice + "! Only " + totalSeatsLeft + " seats left!";
+  return displayMessage;
 };
