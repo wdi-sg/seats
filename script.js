@@ -27,6 +27,9 @@ var calculatePriceIncrementPerSeatSold = function(originalPrice, percentage){
 // var priceMarkUp = calculatePriceMarkUp(2.50,0) = 0 // no markup when no seat is sold
 // var priceMarkUp = calculatePriceMarkUp(2.50,1) = 2.50 // mark up of 2.50 when 1 seat is sold
 // var priceMarkUp = calculatePriceMarkUp(2.50,2) = 5.00 // mark up of 5.00 when 2 seats are sold
+var calculatePriceMarkUp = function(priceIncrementPerSeatSold, totalSeatsSold) {
+    return priceIncrementPerSeatSold * totalSeatsSold;
+};
 
 // calculateLatestPrice
 // purpose:
@@ -48,17 +51,28 @@ var PERCENTAGE = 0.05
 // var TOTALSEATS = 10
 
 // tracking variables to keep track of the overall status of seats sold
-// var totalSeatsSold = 0;
-
+var totalSeatsSold = 0;
+var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
+console.log("*******************************************************");
+console.log("priceIncrementPerSeatSold: ", priceIncrementPerSeatSold);
+console.log("*******************************************************");
 
 var inputHappened = function(currentInput){
-  console.log( currentInput );
-  // when inputHappened function is called, a seat is considered to be sold
-  // increase totalSeatsSold by 1
+  // console.log(currentInput);
+  console.log("at the start:");
+  console.log("totalSeatsSold: ", totalSeatsSold);
+
+  console.log("calculating latest price...")
   // call the calculateLatestPrice
 
-  var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
-  console.log("priceIncrementPerSeatSold: ", priceIncrementPerSeatSold);
+  var priceMarkUp = calculatePriceMarkUp(priceIncrementPerSeatSold, totalSeatsSold);
+  console.log("priceMarkUp: ", priceMarkUp);
 
+  // when inputHappened function is called, a seat is considered to be sold
+  // increase totalSeatsSold by 1
+  totalSeatsSold += 1;
+  console.log("at the end");
+  console.log("totalSeatsSold: ", totalSeatsSold);
+  console.log("---------------------------------")
   return "a seat is sold";
 };
