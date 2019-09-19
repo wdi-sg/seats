@@ -9,14 +9,14 @@
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
-        inputHappened(currentInput)
+        var result = inputHappened(currentInput);
       });
-
       var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
+        console.log(typeof data)
+        var output = document.getElementById('output');
+        console.log(output)
+        output.innerHTML = data;
       }
     </script>
     <script src="script.js"></script>
   </body>
-</html>
