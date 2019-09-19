@@ -83,7 +83,13 @@ var inputHappened = function(currentInput){
   console.log("---------------------------------");
 
   var totalSeatsLeft = TOTALSEATS - totalSeatsSold;
+  var displayMessage = "";
 
-  var displayMessage = "A seat has been sold! Grab your ticket now at $" + latestPrice + "! Only " + totalSeatsLeft + " seats left!";
+  if (totalSeatsLeft <= 0) {
+    displayMessage = "No more seats left";
+  } else {
+    displayMessage = "A seat has been sold! Grab your ticket now at $" + latestPrice + "! Only " + totalSeatsLeft + " seats left!";
+  }
+
   return displayMessage;
 };
