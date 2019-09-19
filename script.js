@@ -30,7 +30,7 @@ var inputHappened = function(currentInput){
     if(seatsAvailable === 10) {
 
         // seatsAvailable - 1
-        seatsAvailable = seatsAvailable - 1;
+        seatsAvailable = calSeatsAvailable(1);
         console.log(seatsAvailable + " seats available");
 
         // set price is 50
@@ -46,7 +46,7 @@ var inputHappened = function(currentInput){
         // Else if seatsAvailable more than or equal to 1 & less than 10,
 
             // seatsAvailable - 1
-        seatsAvailable = seatsAvailable - 1;
+        seatsAvailable = calSeatsAvailable(1);
         console.log(seatsAvailable + " seats available");
 
             // show price = $50 + 5%
