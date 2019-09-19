@@ -1,5 +1,11 @@
 console.log("hello script js");
 
+// last seat for economy and business
+let lastSeatYJ = `You bought the last seat for $91,000, congratulations!`
+
+// last seat for first
+let lastSeatF = `You bought the last seat for $191,000, congratulations!`
+
 // economy seats
 let yseats = 15;
 
@@ -39,77 +45,110 @@ let fseatSold = function() {
 
 // function to increase price by 5%
 let priceHike5 = function() {
-    price = price * 1.05;
-    price = parseFloat(price.toFixed(2))
-    console.log(price);
+    yprice = yprice * 1.05;
+    yprice = parseFloat(yprice.toFixed(2))
+    console.log(yprice);
 };
 
 // function to increase price by 3%
-let priceHike3 = function(price) {
-    price = price * 1.03;
-    price = parseFloat(price.toFixed(2))
-    console.log(price);
+let priceHike3 = function() {
+    yprice = yprice * 1.03;
+    yprice = parseFloat(yprice.toFixed(2))
+    console.log(yprice);
 };
 
 // function to increase price by 6%
-let priceHike6 = function(price) {
-    price = price * 1.06;
-    price = parseFloat(price.toFixed(2))
-    console.log(price);
+let priceHike6 = function() {
+    jprice = jprice * 1.06;
+    jprice = parseFloat(jprice.toFixed(2))
+    console.log(jprice);
 };
 
 // function to increase price by 10%
-let priceHike10 = function(price) {
-    price = price * 1.10;
-    price = parseFloat(price.toFixed(2))
-    console.log(price);
+let priceHike10 = function() {
+    jprice = jprice * 1.10;
+    jprice = parseFloat(jprice.toFixed(2))
+    console.log(jprice);
 };
 
 // function to increase price by 15%
-let priceHike15 = function(price) {
-    price = price * 1.15;
-    price = parseFloat(price.toFixed(2))
-    console.log(price);
+let priceHike15 = function() {
+    fprice = fprice * 1.15;
+    fprice = parseFloat(fprice.toFixed(2))
+    console.log(fprice);
 };
 
 // function for economy seats price hike
 let priceYSeats = function() {
     if (yseats > 8) {
-        priceHike3(yprice);
+        priceHike3();
         yseatSold();
     } else if (yseats > 1) {
-
-    } else if (yseats === 1) {
-
+        priceHike5();
+        yseatSold();
     } else {
-
+        return "broken app";
     };
 };
+
 // function for business seats price hike
+let priceJSeats = function() {
+    if (jseats > 3) {
+        priceHike6();
+        jseatSold();
+    } else if (yseats > 1) {
+        priceHike10();
+        jseatSold();
+    } else {
+        return "broken app";
+    };
+};
 
 // function for first seats price hike
-
-
-// last seat for economy and business
-let lastSeatYJ = `You bought the last seat for $91,000, congratulations!`
-
-// last seat for first
-let lastSeatF = `You bought the last seat for $191,000, congratulations!`
+let priceFSeats = function() {
+    if (fseats > 1) {
+        priceHike15();
+        fseatSold();
+    } else {
+        return "broken app";
+    };
+};
 
 // function to check input
 let checkInput = function(input) {
     switch (input) {
         case ("buy first class"):
-            seatSold(fseats);
-            return `You just bought a seat for $${fprice}, congratulations! There are ${fseats} seats left.`
+            if (fseats === 1) {
+                fseatSold();
+                return lastSeatF;
+            } else if (fseats > 1) {
+                priceFSeats();
+                return `You just bought a seat for $${fprice}, congratulations! There are ${fseats} seats left.`
+            } else {
+                return `ALL SOLD OUT!`
+            };
         break;
         case ("buy business class"):
-            seatSold(jseats);
-            return `You just bought a seat for $${jprice}, congratulations! There are ${jseats} seats left.`
+            if (jseats === 1) {
+                jseatSold();
+                return lastSeatYJ;
+            } else if (jseats > 1) {
+                priceJSeats();
+                return `You just bought a seat for $${jprice}, congratulations! There are ${jseats} seats left.`
+            } else {
+                return `ALL SOLD OUT!`
+            };
         break;
         case ("buy economy class"):
-            priceYSeats();
-            return `You just bought a seat for $${yprice}, congratulations! There are ${yseats} seats left.`
+            if (yseats === 1) {
+                yseatSold();
+                return lastSeatYJ;
+            } else if (yseats > 1) {
+                priceYSeats();
+                return `You just bought a seat for $${yprice}, congratulations! There are ${yseats} seats left.`
+            } else {
+                return `ALL SOLD OUT!`
+            };
         break;
         default:
             return `Please select a cabin class.`
@@ -123,7 +162,7 @@ var inputHappened = function(currentInput){
     inputTracker += 1;
     console.log(inputTracker);
 
-    checkInput(currentInput);
+    return checkInput(currentInput);
 // activate purchase, check if seats are still available.
 //     if (seats > 5) {
 //         priceHike3();
