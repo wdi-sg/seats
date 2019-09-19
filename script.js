@@ -29,18 +29,18 @@ var inputHappened = function(currentInput){
 
 // activate purchase, check if seats are still available.
     if (seats > 2) {
-        priceHike()
+        priceHike5();
         seatSold();
         return `You just bought a seat for $${price}, congratulations! There are ${seats} seats left.`;
     } else if (seats === 2) {
-
-
+        priceHike5();
+        seatSold();
+        return `You just bought a seat for $${price}, please take note that there's only 1 seat left! Hurry!`
     } else if (seats === 1) {
-
+        priceHike5();
+        seatSold();
+        return `You bought the last seat for $${price}, congratulations!`
     } else {
-
+        return "Please take another flight."
     };
-
-
-  return "statement";
 };
