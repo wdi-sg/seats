@@ -9,6 +9,10 @@
 // example:
 // calculatePriceIncrementPerSeatSold(originalPrice,percentage);
 // var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(50, 0.05) = 2.50
+var calculatePriceIncrementPerSeatSold = function(originalPrice, percentage){
+    return originalPrice * percentage;
+};
+
 
 // calculatePriceMarkUp
 // purpose:
@@ -38,9 +42,9 @@
 // var latestPrice = calculateLatestPrice(50,5.00)=55.00 // mark up of 5.00
 
 
-// constant variables
-// var ORIGINALPRICE = 50
-// var PERCENTAGE = 0.05
+// constant variables (given on the first part of the assignment)
+var ORIGINALPRICE = 50
+var PERCENTAGE = 0.05
 // var TOTALSEATS = 10
 
 // tracking variables to keep track of the overall status of seats sold
@@ -51,8 +55,10 @@ var inputHappened = function(currentInput){
   console.log( currentInput );
   // when inputHappened function is called, a seat is considered to be sold
   // increase totalSeatsSold by 1
-
   // call the calculateLatestPrice
+
+  var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
+  console.log("priceIncrementPerSeatSold: ", priceIncrementPerSeatSold);
 
   return "a seat is sold";
 };
