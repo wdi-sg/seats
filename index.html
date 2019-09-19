@@ -9,9 +9,9 @@
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
-        inputHappened(currentInput)
+        var result = inputHappened(currentInput);
+        display( result );
       });
-
       var display = function( data ){
         var output = document.querySelector('#output');
         output.innerText = data;
@@ -20,3 +20,4 @@
     <script src="script.js"></script>
   </body>
 </html>
+© 2019 GitHub, In
