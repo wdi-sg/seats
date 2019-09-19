@@ -26,7 +26,7 @@ var inputHappened = function(currentInput){
         console.log(seatsAvailable + " seats available");
 
         // set price is 50
-        amtPayable = originalTicketPrice;
+        amtPayable = originalTicketPrice.toFixed(2);
 
         // show result to user
         var result = "Your seat has been reserved. Please pay $ " + amtPayable + "\n" + "Number of Seats Available: " + seatsAvailable ;
@@ -42,7 +42,7 @@ var inputHappened = function(currentInput){
         console.log(seatsAvailable + " seats available");
 
             // show price = $50 + 5%
-        amtPayable = calTicketPrice(0.05);
+        amtPayable = (calTicketPrice(0.05)).toFixed(2);
 
         // show result to user
         result = "Your seat has been reserved. Please pay $ " + amtPayable + "\n" + "Number of Seats Available: " + seatsAvailable ;
