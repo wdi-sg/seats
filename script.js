@@ -1,19 +1,35 @@
 // Global variable for seatsAvailable = 10
 var seatsAvailable = 10;
+console.log(seatsAvailable + " seats available");
+
+// Global variable for originalTicketPrice = 50
+var originalTicketPrice = 50;
+
+var calTicketPrice = function(percentageIncrease) {
+
+    // Calculate price ticket with percentage increase
+    var inflatedTicketPrice = originalTicketPrice + (originalTicketPrice * percentageIncrease);
+
+    return inflatedTicketPrice;
+};
 
 var inputHappened = function(currentInput){
+
+    // Amount payable by user for ticket price
+    var amtPayable = null;
 
     // If seatsAvailable = 10,
     if(seatsAvailable === 10) {
 
         // seatsAvailable - 1
         seatsAvailable = seatsAvailable - 1;
+        console.log(seatsAvailable + " seats available");
 
         // set price is 50
-        var price = 50;
+        amtPayable = originalTicketPrice;
 
         // show result to user
-        var result = "Your seat has been reserved. Please pay $ " + price + "\n" + "Number of Seats Available: " + seatsAvailable ;
+        var result = "Your seat has been reserved. Please pay $ " + amtPayable + "\n" + "Number of Seats Available: " + seatsAvailable ;
 
         return result;
 
@@ -21,14 +37,15 @@ var inputHappened = function(currentInput){
 
         // Else if seatsAvailable more than or equal to 1 & less than 10,
 
-        // seatsAvailable - 1
+            // seatsAvailable - 1
         seatsAvailable = seatsAvailable - 1;
+        console.log(seatsAvailable + " seats available");
 
             // show price = $50 + 5%
-        price = 50 + (50 * 0.05);
+        amtPayable = calTicketPrice(0.05);
 
         // show result to user
-        result = "Your seat has been reserved. Please pay $ " + price + "\n" + "Number of Seats Available: " + seatsAvailable ;
+        result = "Your seat has been reserved. Please pay $ " + amtPayable + "\n" + "Number of Seats Available: " + seatsAvailable ;
 
         return result;
 
