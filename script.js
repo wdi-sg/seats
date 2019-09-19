@@ -52,7 +52,7 @@ var inputHappened = function(currentInput){
 
 */
 
-//Part 2
+//Part 2 & 3 & 4
 
 //percentage increment
 var increment1 = 0.03;
@@ -61,46 +61,55 @@ var increment2 = 0.05;
 //price of seat
 var currentPrice = 50;
 
+//seats left before price bracket changes
+var seatsLeft;
+
+
+var message = function(price, seats) {
+    return `Congrats! You got a ticket at \$${price}. ${seats} more before price bracket increases!`;
+}
+
+
 var inputHappened = function(currentInput){
 
 //sell first ticket
   if (numberOfSeatsSold === 0) {
     numberOfSeatsSold++;
     console.log(numberOfSeatsSold + " at " + currentPrice);
-    var message = "Congrats! You got a ticket at \$" + currentPrice + ".";
+    seatsLeft = (planeCapacity/2) - numberOfSeatsSold;
     input.value = "";
     input.placeholder = "";
-    return message;
+    return message(currentPrice, seatsLeft);
 
 //sell first half tickets at increment1
   } else if ( numberOfSeatsSold < (planeCapacity/2) ) {
     currentPrice = currentPrice * ( 1 + increment1);
     numberOfSeatsSold++;
     console.log(numberOfSeatsSold + " at " + currentPrice);
-    var message = "Congrats! You got a ticket at \$" + currentPrice.toFixed(2) + ".";
+    seatsLeft -= 1;
     input.value = "";
     input.placeholder = "";
-    return message;
+    return message(currentPrice.toFixed(2), seatsLeft);
 
 //sell remaining at increment2
   } else if ( numberOfSeatsSold < (planeCapacity - 1) ) {
     currentPrice = currentPrice * ( 1 + increment2 );
     numberOfSeatsSold++;
     console.log(numberOfSeatsSold + " at " + currentPrice);
-    var message = "Congrats! You got a ticket at \$" + currentPrice.toFixed(2) + ".";
+    seatsLeft = planeCapacity - numberOfSeatsSold - 1;
     input.value = "";
     input.placeholder = "";
-    return message;
+    return message(currentPrice.toFixed(2), seatsLeft);
 
 //last ticket
   } else {
     currentPrice = 91000;
     numberOfSeatsSold++;
     console.log(numberOfSeatsSold + " at " + currentPrice);
-    var message = "Congrats! You got a the last ticket at \$" + currentPrice.toFixed(2) + "!";
+    var lasttix = "Congrats! You got a the last ticket at \$" + currentPrice.toFixed(2) + "!";
     input.value = "";
     input.placeholder = "SOLD OUT";
-    return message;
+    return lasttix;
 
   }
 }
