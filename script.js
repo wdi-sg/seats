@@ -33,28 +33,35 @@ var planeSeats = 1;
 
 var inputHappened = function(currentInput){
 
+ console.log(ticketPrice);
+    console.log(planeSeats);
+      if (planeSeats > 10) {
+    alert ("TOO BAD NO MORE SEATS");
+    }
+
        if (planeSeats === 1){
         planeSeats++;
-        return `Your plane ticket costs $${ticketPrice}`
+
     }
     else if (planeSeats <= 5){
        ticketPrice = ticketPrice + threeIncrement;
         planeSeats++;
-        return `Your plane ticket costs $${ticketPrice}`
+
     }
     else if (planeSeats <= 9){
         ticketPrice = ticketPrice + fiveIncrement;
         planeSeats++;
-        return `Your plane ticket costs $${ticketPrice}`
+
     }
     else if (planeSeats === 10){
     ticketPrice = 91000;
     planeSeats++
-    return `Your plane ticket costs $${ticketPrice}...have you considered walking?`}
-    else {
-    alert ("TOO BAD NO MORE SEATS");
-    }
+    return `Your plane ticket costs $${ticketPrice}...have you considered walking?`
+    };
+
+    return `Your plane ticket costs $${ticketPrice}`;
 
     console.log(ticketPrice);
+    console.log(planeSeats);
     ;
 }
