@@ -93,3 +93,5 @@ var inputHappened = function(currentInput){
 
   return displayMessage;
 };
+
+// requirements satisfied
