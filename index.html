@@ -9,7 +9,8 @@
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
-        inputHappened(currentInput)
+        var result = inputHappened(currentInput);
+        display( result );
       });
 
       var display = function( data ){
