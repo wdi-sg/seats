@@ -31,6 +31,55 @@ var calculatePriceMarkUp = function(priceIncrementPerSeatSold, totalSeatsSold) {
     return priceIncrementPerSeatSold * totalSeatsSold;
 };
 
+// calculateDynamicPriceMarkUp
+// purpose:
+// calculate the price mark up, depending on the price band at the point of purchase
+// business logic:
+// the dynamic part of the price mark up is due to the price bands
+// for price band 1:
+// priceIncrementPerSeatSoldPriceBand1 = originalPrice * percentagePriceBand1
+// priceMarkUpPriceBand1 = priceIncrementPerSeatSoldPriceBand1 * totalSeatsSold
+// for price band 2:
+// priceIncrementPerSeatSoldPriceBand1 = originalPrice * percentagePriceBand2
+// priceMarkUpPriceBand2 = priceIncrementPerSeatSoldPriceBand2 * totalSeatsSold
+// for price band 3:
+// priceMarkUpPriceBand3 = ridiculousPrice - originalPrice
+// function signature:
+// priceBand(string)--->priceMarkUp(number)
+// example:
+// var priceMarkUp = calculateDynamicPriceMarkUp("priceBand1");
+
+// getPriceBand
+// purpose:
+// check the price band that should be used
+// business logic
+// there are 3 price bands:
+// price band 1 - when the total seats sold is less than half of the total seats available
+// at this price band, the price mark up is lower due to the lower percentage of 3%
+// price band 2 - when the total seats sold is more than half of the total seats available
+// at this price band, the price mark up is higher due to the higher percentage of 5%
+// price band 3 - when there is only 1 seat left, the price mark up is set to a ridiculously high value
+// for the case of 10 seats,
+// to qualify for price band 1 : total no. of seats sold = 0 seat sold to 5 seats sold
+// to qualify for price band 2 : total no. of seats sold = 6 seats sold to 9 seats sold
+// the last seat (10th seat) will be sold at a ridiculous price of 91000
+// function signature
+// totalSeatsSold (number),TOTALSEATS(number)---> priceBand(string)
+// example:
+// getPriceBand(totalSeatsSold, totalSeats);
+// var priceBand = getPriceBand(0, 10); // returns "priceBand1"
+// var priceBand = getPriceBand(6, 10); // returns "priceBand2"
+// var priceBand = getPriceBand(9, 10); // returns "priceBand3"
+var getPriceBand = function(totalSeatsSold, totalSeats) {
+    if (totalSeatsSold >= 0 && totalSeatsSold <= 5 ) {
+        return "priceBand1";
+    } else if (totalSeatsSold > 5 && totalSeatsSold < (totalSeats - 1) ) {
+        return "priceBand2";
+    } else {
+        return "priceBand3";
+    }
+};
+
 // calculateLatestPrice
 // purpose:
 // calculate the latest price of a seat
@@ -50,6 +99,8 @@ var calculateLatestPrice = function(originalPrice, priceMarkUp) {
 // constant variables (given on the first part of the assignment)
 var ORIGINALPRICE = 50;
 var PERCENTAGE = 0.05;
+var PERCENTAGE1 = 0.03;
+var PERCENTAGE2 = 0.05;
 var TOTALSEATS = 10;
 
 // tracking variables to keep track of the overall status of seats sold
@@ -72,6 +123,10 @@ var inputHappened = function(currentInput){
   var priceMarkUp = calculatePriceMarkUp(priceIncrementPerSeatSold, totalSeatsSold);
   console.log("priceMarkUp: ", priceMarkUp);
 
+  // calculate dynamic price mark up
+  // get the price band /
+  var priceBand = getPriceBand(totalSeatsSold, TOTALSEATS);
+  console.log("priceBand: ", priceBand);
   // calculate the latest price
   var latestPrice = calculateLatestPrice(ORIGINALPRICE, priceMarkUp);
   console.log("latestPrice: ", latestPrice);
@@ -95,3 +150,4 @@ var inputHappened = function(currentInput){
 };
 
 // requirements satisfied
+// working on further requirements 1
