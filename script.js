@@ -14,12 +14,13 @@ const inputHappened = function(currentInput) {
     return `${currentInput} not allowed. Key in y or n.`;
   }
   if (currentInput.toLowerCase() === "y") {
-    if (numOfTicketsSold < plane.seats) {
-      seatPrice =
-        numOfTicketsSold === 0
-          ? 50
-          : (seatPrice = (seatPrice * 1.05).toFixed(2));
-    } else return "Sorry, all tickets are sold out!";
+    if (numOfTicketsSold === 0) seatPrice = 50;
+    else if (numOfTicketsSold < plane.seats - 5) {
+      seatPrice = (seatPrice * 1.03).toFixed(2);
+    } else if (numOfTicketsSold < plane.seats - 1) {
+      seatPrice = (seatPrice * 1.05).toFixed(2);
+    } else if (numOfTicketsSold === plane.seats - 1) seatPrice = 91000;
+    else return "Sorry, all tickets are sold out!";
   } else {
     return "Ok...";
   }
