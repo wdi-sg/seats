@@ -43,7 +43,9 @@ var calculatePriceMarkUp = function(priceIncrementPerSeatSold, totalSeatsSold) {
 // var latestPrice = calculateLatestPrice(50,0) = 50 //no mark up
 // var latestPrice = calculateLatestPrice(50,2.50)=52.50 // mark up of 2.50
 // var latestPrice = calculateLatestPrice(50,5.00)=55.00 // mark up of 5.00
-
+var calculateLatestPrice = function(originalPrice, priceMarkUp) {
+    return originalPrice + priceMarkUp;
+};
 
 // constant variables (given on the first part of the assignment)
 var ORIGINALPRICE = 50
@@ -54,6 +56,8 @@ var PERCENTAGE = 0.05
 var totalSeatsSold = 0;
 var priceIncrementPerSeatSold = calculatePriceIncrementPerSeatSold(ORIGINALPRICE, PERCENTAGE);
 console.log("*******************************************************");
+console.log("ORIGINALPRICE: ", ORIGINALPRICE);
+console.log("PERCENTAGE: ", PERCENTAGE);
 console.log("priceIncrementPerSeatSold: ", priceIncrementPerSeatSold);
 console.log("*******************************************************");
 
@@ -63,11 +67,14 @@ var inputHappened = function(currentInput){
   console.log("totalSeatsSold: ", totalSeatsSold);
 
   console.log("calculating latest price...")
-  // call the calculateLatestPrice
 
+  // calculate the price mark up
   var priceMarkUp = calculatePriceMarkUp(priceIncrementPerSeatSold, totalSeatsSold);
   console.log("priceMarkUp: ", priceMarkUp);
 
+  // calculate the latest price
+  var latesPrice = calculateLatestPrice(ORIGINALPRICE, priceMarkUp);
+  console.log("latesPrice: ", latesPrice);
   // when inputHappened function is called, a seat is considered to be sold
   // increase totalSeatsSold by 1
   totalSeatsSold += 1;
