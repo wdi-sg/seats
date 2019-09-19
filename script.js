@@ -8,7 +8,7 @@ var ticketCount = 10;
 //define the calculation function based on your global variables
 
 var calculateTicketPrice = function() {
-    baseCharge = baseCharge + 2.50;
+    baseCharge = baseCharge * 1.05;
     ticketCount --;
 };
 
@@ -20,6 +20,7 @@ var firstBuyerPrice = function() {
 }
 
 
+
 //call your function within the main input function
 
 var inputHappened = function(currentInput){
@@ -27,12 +28,13 @@ var inputHappened = function(currentInput){
     if (ticketCount === 10) {
         console.log(ticketCount);
         firstBuyerPrice();
-        display ("Your ticket price is " + baseCharge);
-    } else if (ticketCount < 10) {
+        display ("Your ticket price is " + baseCharge.toFixed(2));
+    } else if (ticketCount < 10 && ticketCount !== 0) {
         calculateTicketPrice ();
         console.log(ticketCount)
-        display ("Your ticket price is " + baseCharge);
-    } else {
+        display ("Your ticket price is " + baseCharge.toFixed(2));
+    } else if (ticketCount === 0) {
         display ("tickets sold out");
     }
+
 };
