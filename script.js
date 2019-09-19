@@ -33,10 +33,10 @@ var inputHappened = function(currentInput){
     var result = "";
 
     // Check if the input is a number
-    if(isNaN(currentInput) || currentInput < 0 || currentInput > 10){
+    if (isNaN(currentInput)) {
 
         // If input is not number, shows error
-        result = "Please input a valid number from 1 to 10.";
+        result = "Please input a valid number of seats to buy.";
 
         return result;
 
@@ -47,8 +47,23 @@ var inputHappened = function(currentInput){
 
     }
 
+    // Check if number entered is more than seats available
+    if (convertCurrentInput > seatsAvailable) {
+
+        // Show error that number of seats available is not enough
+        result = "Sorry, there are only " + seatsAvailable + " seats available.";
+
+        return result;
+
+    } else if (convertCurrentInput < 0) {
+
+        result = "Please input a valid number of seats to buy.";
+
+        return result;
+    }
+
     // If seatsAvailable = 10,
-    if(seatsAvailable === 10) {
+    if (seatsAvailable === 10) {
 
         // seatsAvailable - 1
         seatsAvailable = calSeatsAvailable(convertCurrentInput);
@@ -62,7 +77,7 @@ var inputHappened = function(currentInput){
 
         return result;
 
-    } else if(seatsAvailable >= 1 && seatsAvailable < 10) {
+    } else if (seatsAvailable >= 1 && seatsAvailable < 10) {
 
         // Else if seatsAvailable more than or equal to 1 & less than 10,
 
@@ -83,7 +98,7 @@ var inputHappened = function(currentInput){
         // Else (e.g. seatsAvailable = 0)
             // show no seats available
         // show result to user
-        result = "Sorry, there are " + seatsAvailable + " seats available." ;
+        result = "Sorry, there are only " + seatsAvailable + " seats available." ;
 
         return result;
     }
