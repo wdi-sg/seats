@@ -21,5 +21,6 @@ const inputHappened = function(currentInput) {
   }
   plane.seats -= 1;
   numOfTicketsSold += 1;
+  input.value = "";
   return `You paid for $${seatPrice} for an Airplane seat.`;
 };
