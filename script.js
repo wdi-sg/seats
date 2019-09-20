@@ -9,10 +9,10 @@ var inputHappened = function(currentInput){
     noOfSeats = noOfSeats - 1;
     //noOfSeats --;
     calculatePrice();
-    display("Price of ticket "+ ticketPrice + "\nNo of seats Left: " + noOfSeats)
+    display("Price of ticket is "+ ticketPrice + "\nNo of seats Left: " + noOfSeats)
 
     }else{
-        display("No more")
+        display("No more")s
     }
 };
 
@@ -21,7 +21,12 @@ var calculatePrice = function(){
 };
 
 
+/*console.log("hello script js");
 
+var inputHappened = function(currentInput){
+  console.log( currentInput );
+  return "WOW SOMETHING HAPPENED";
+};*/
 
 
 
