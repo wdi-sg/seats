@@ -6,6 +6,7 @@ var priceIncrement = 0.05;
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
+<<<<<<< HEAD
   var output = "";
   planeSeats = planeSeats - 1;
   if (planeSeats < 0 ) {
