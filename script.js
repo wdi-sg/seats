@@ -26,8 +26,11 @@ inputCount = inputCount + 1;
 
 var seatsLeft = 10 - inputCount;
 
-return "Ticket price is: $"+ticketPrice +" | Seats remaining: "+seatsLeft;
+return "Ticket price: $"+ticketPrice +" | Seats remaining: "+seatsLeft;
 };
+
+
+// console.log(person[1][0])
 
 /*A plane has 10 seats.
 
