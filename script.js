@@ -20,11 +20,13 @@ var firstBuyerPrice = function() {
 
 var baseCharge = 50;
 var ticketCount = 10;
+var ticketCountRemainder =5;
 
 var firstHalfPrice = function() {
     console.log('in function firstHalfPrice')
     baseCharge = baseCharge * 1.03;
     ticketCount --;
+    ticketCountRemainder --;
 };
 
 var secondHalfPrice = function() {
@@ -33,20 +35,28 @@ var secondHalfPrice = function() {
     ticketCount --;
 };
 
+// var remainingTickets = function () {
+    // ticketCount
+// }
+
 
 //call your function within the main input function
 
 var inputHappened = function(currentInput){
     console.log( currentInput );
-    if (ticketCount >= 5 && ticketCount < 11) {
+    if (ticketCount === 10 && ticketCount > 9) {
+        console.log (ticketCount);
+        display ("Your ticket price is " + "$" + baseCharge.toFixed(2) + ".");
+    }
+    if (ticketCount >= 6 && ticketCount < 11) {
         console.log(ticketCount);
         firstHalfPrice();
-        display ("Your ticket price is " + baseCharge.toFixed(2));
-    } else if (ticketCount > 0 && ticketCount <= 4) {
+        display ("Your ticket price is " + "$" + baseCharge.toFixed(2) + "." + " " + ticketCountRemainder + " ticket(s) remaining until the next bracket.");
+    } else if (ticketCount <= 5 && ticketCount !== 0) {
         secondHalfPrice ();
-        console.log(ticketCount)
-        display ("Your ticket price is " + baseCharge.toFixed(2));
+        console.log(ticketCount);
+        display ("You are in the expensive bracket:" + " ticket price is " + "$" + baseCharge.toFixed(2));
     } else if (ticketCount === 0) {
-        display ("91,000");
+        display ("You have to pay $91,000. Unluckeee");
     }
 };
