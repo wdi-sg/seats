@@ -10,9 +10,8 @@
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput);
-        dsiplay( result );
+        display( result );
       });
-
       var display = function( data ){
         var output = document.querySelector('#output');
         output.innerText = data;
