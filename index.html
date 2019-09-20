@@ -9,9 +9,8 @@
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
-        inputHappened(currentInput)
+        var result = inputHappened(currentInput);
       });
-
       var display = function( data ){
         var output = document.querySelector('#output');
         output.innerText = data;
