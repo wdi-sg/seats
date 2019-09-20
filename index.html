@@ -11,6 +11,9 @@
                 var currentInput = event.target.value;
                 var result = inputHappened(currentInput);
                 display( result );
+// THIS IS THE LINE
+                event.target.value="";
+// THIS IS THE LINE
             });
 
             var display = function( data ) {
