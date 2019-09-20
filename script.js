@@ -2,5 +2,5 @@ console.log("hello script js");
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
-  return "WOW SOMETHING HAPPENED";
+  return "SOMETHING BANANA AND STUFF";
 };
