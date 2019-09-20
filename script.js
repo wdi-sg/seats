@@ -55,8 +55,8 @@ var inputHappened = function(currentInput){
 //Part 2 & 3 & 4
 
 //percentage increment
-var increment1 = 0.03;
-var increment2 = 0.05;
+var increment = [0.03, 0.05]
+//var increment2 = 0.05;
 
 //price of seat
 var currentPrice = 50;
@@ -66,7 +66,10 @@ var seatsLeft;
 
 
 var message = function(price, seats) {
-    return `Congrats! You got a ticket at \$${price}. ${seats} more before price bracket increases!`;
+    if (seats === 0) {
+        seats = "Last";
+    }
+    return `Congrats! You got a ticket at \$${price}. ${seats} ticket before price bracket increases!`;
 }
 
 
@@ -83,7 +86,7 @@ var inputHappened = function(currentInput){
 
 //sell first half tickets at increment1
   } else if ( numberOfSeatsSold < (planeCapacity/2) ) {
-    currentPrice = currentPrice * ( 1 + increment1);
+    currentPrice = currentPrice * ( 1 + increment[0]);
     numberOfSeatsSold++;
     console.log(numberOfSeatsSold + " at " + currentPrice);
     seatsLeft -= 1;
@@ -93,7 +96,7 @@ var inputHappened = function(currentInput){
 
 //sell remaining at increment2
   } else if ( numberOfSeatsSold < (planeCapacity - 1) ) {
-    currentPrice = currentPrice * ( 1 + increment2 );
+    currentPrice = currentPrice * ( 1 + increment[1] );
     numberOfSeatsSold++;
     console.log(numberOfSeatsSold + " at " + currentPrice);
     seatsLeft = planeCapacity - numberOfSeatsSold - 1;
