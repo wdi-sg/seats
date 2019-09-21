@@ -10,5 +10,5 @@ var inputHappened = function(currentInput) {
 	}
 	planeSeats = planeSeats - 1
 	priceOfSeat = priceOfSeat + (priceOfSeat * priceIncrement);
-	return priceOfSeat
+	return `Current price of ticket is ${priceOfSeat.toFixed(2)} and the number of tickets left is ${planeSeats}`
 };
