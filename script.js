@@ -11,8 +11,9 @@ var inputHappened = function(currentInput) {
 	}
 	planeSeats = planeSeats - 1
 	priceOfSeat = calculateTicketPrice(planeSeats, priceOfSeat);
+	var remainingTicketsTillIncrementMessage = calculateTicketsLeftBeforeIncrement(planeSeats)
 	return `Current price of ticket is ${priceOfSeat.toFixed(2)} and 
-	the number of tickets left is ${planeSeats}.`
+	the number of tickets left is ${planeSeats}. ${remainingTicketsTillIncrementMessage}`
 };
 
 var calculateTicketPrice = function(numOfSeats, currentPriceOfSeat) {
@@ -24,4 +25,36 @@ var calculateTicketPrice = function(numOfSeats, currentPriceOfSeat) {
 	} else {
 		return 91000
 	}
+}
+
+var calculateTicketsLeftBeforeIncrement = function(currentTicketCount) {
+	var threePercentIncrementMark = 4;
+	var fullIncrementMark = 0;
+	var result;
+
+	// to execute this if statement if currentTicketCount is more than 4
+	if(currentTicketCount > threePercentIncrementMark) {
+		result = currentTicketCount - 5
+		if (result === 0) {
+			return "Price bracket has now increased to 5%"
+		}
+		else {
+			return `${result} tickets left before price goes up.`
+		}
+	}
+
+	// to execute this if statement if currentTicketCount is more than or equal to 0
+	if (currentTicketCount >= fullIncrementMark) {
+		result = currentTicketCount - 1
+		if (result === 0) {
+			return "the price has gone up and the next ticket will cost $91000.00"
+		} else if(result === -1) {
+			return ""
+		} else {
+			return `${result} tickets left before price goes up.`
+		}
+	}
+
+	// return the initial count passed in if no conditions are satisfied
+	return currentTicketCount
 }
