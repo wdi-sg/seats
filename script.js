@@ -6,6 +6,9 @@ var lowerPriceIncrement = 0.03;
 var higherPriceIncrement = 0.05;
 
 var inputHappened = function(currentInput) {
+	if(!currentInput) {
+		return "Your input is invalid"
+	}
 	if(planeSeats === 0) {
 		return "Sorry, all tickets have been sold out."
 	}
