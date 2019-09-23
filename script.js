@@ -13,7 +13,3 @@ var inputHappened = function(currentInput){
 
         return (seatsleft + priceCharged);
     }
-  return "WOW SOMETHING HAPPENED";
-};
-
-
