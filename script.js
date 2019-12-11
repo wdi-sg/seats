@@ -13,19 +13,24 @@ var sellSeat = function(sellSeat) {
         return "Sorry plane is sold out. :("
     }
     var percentageIncrement = percentageIncrementFirst;
+    var incrementMessage = ""
     // use if-else statements to determine how expensive the seat should be.
     if (planeSeats - seatsSold === 1) {
         console.log("Sold the final seat!");
+        seatsSold++;
         return "Sold you the final seat for $91000";
     } else if ( (planeSeats - seatsSold) <= (planeSeats / 2)) { // less than half the seats left
         percentageIncrement = percentageIncrementSecond;
+        incrementMessage = (planeSeats - seatsSold - 2) + " more seats available until price increase.";
+    } else {
+        incrementMessage = ((Math.floor(planeSeats / 2)) - seatsSold - 1) + " more seats available until price increase.";
     }
 
     var seatAdjustedPrice = seatPrice + (seatPrice * (percentageIncrement / 100) * seatsSold);
     seatsSold++;
 
     console.log((planeSeats - seatsSold) + " seats left.");
-    return "Sold you a seat for $" + seatAdjustedPrice;
+    return "Sold you a seat for $" + seatAdjustedPrice + ". " + incrementMessage;
 }
 
 var inputHappened = function(currentInput){
