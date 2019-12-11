@@ -3,6 +3,7 @@ console.log("hello script js");
 var economySeats = 15;
 var economySeatPrice = 50;
 var seatsBeforePriceIncrease; 
+<<<<<<< HEAD
 var storeEconomyStartingPrice = economySeatPrice;
 var firstEconomyIncrease = storeEconomyStartingPrice * 0.03;
 var secondEconomyIncrease = storeEconomyStartingPrice * 0.05;
@@ -36,6 +37,22 @@ var inputHappened = function(currentInput){
   	} else if (economySeats === 1){
   		economySeatPrice = 91000;
   	}
+=======
+
+
+var inputHappened = function(currentInput){
+  console.log( currentInput );
+  var yourSeatPrice = seatPrice;
+  seats--;
+
+  if(seats > 5){
+  	seatPrice = seatPrice * 1.03;
+  } else if (seats <= 5 && seats > 1){
+  	seatPrice = seatPrice * 1.05;
+  } else if (seats === 1){
+  	seatPrice = 91000;
+  }
+>>>>>>> parent of f3f226a... step4 (increase with base price is here, increase with current price is in step1
 
    
   	if (economySeats > 5) { 
