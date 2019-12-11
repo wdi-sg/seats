@@ -12,7 +12,7 @@ var inputHappened = function(currentInput) {
 
     if (seatsSold === 1) {
         return ("Ticket price is: " + originalSeatPrice);
-    } else if (seatsSold > 1 && seatsSold < 10) {
+    } else if (seatsSold > 1 && seatsSold <= 10) {
         return ("Ticket price is: " + newSeatPrice);
     } else  {
         return ("Sold out");
