@@ -23,6 +23,6 @@ var inputHappened = function(currentInput){
     if (planeSeats > 10) {
        return "Plane has reached it's max capacity!";
     } else {
-     return "The cost of your ticket is $" + price.toFixed(2);
+     return "The cost of your ticket is $" + price.toFixed(2) + " remaining tickets left: " + (10 - planeSeats);
     }
 };
