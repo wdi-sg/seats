@@ -1,7 +1,9 @@
 console.log("hello script js");
 
+
+// Part 1
 // define which variables are needed
-var seatsLeft = 10;
+/*var seatsLeft = 10;
 var actualPrice = 50;
 var latestPrice;
 
@@ -20,4 +22,40 @@ var inputHappened = function(currentInput){
      }
 
     else {console.log("Sorry, tickets are sold out!");}
-}
+}*/
+
+// Part 2
+// define which variables are needed
+var seatsLeft = 10;
+var actualPrice = 50;
+var lastSeatPrice = 91000;
+var latestPrice;
+
+
+// if statement has issue but added "$" in console.log
+var inputHappened = function(currentInput){
+    console.log( currentInput );
+    if (seatsLeft === 10 ) {
+        seatsLeft = seatsLeft - 1;
+        latestPrice = actualPrice * 1.05;
+        console.log("$" + latestPrice);
+    }
+    else if (seatsLeft < 10 && seatsLeft > 5) {
+        seatsLeft = seatsLeft - 1;
+        latestPrice = actualPrice * 1.05;
+        console.log("$" + latestPrice);
+     }
+
+     else if (seatsLeft < 6 && seatsLeft > 2) {
+        seatsLeft = seatsLeft - 1;
+        latestPrice = actualPrice * 1.03;
+        console.log("$" + latestPrice);
+     }
+
+    else if (seatsLeft > 0 && seatsLeft < 2) {
+        seatsLeft = seatsLeft - 1;
+        console.log("$" + lastSeatPrice);}
+
+    else {
+        console.log("Sorry, tickets are sold out!");}
+    }
