@@ -46,23 +46,23 @@ if (currentInput === "buy economy" || currentInput === "buy e" || currentInput =
     console.log("you get economy tickets" + plane.economySeats.totalSeats);
     message = "Economy class has: " + plane.economySeats.totalSeats + " seats left";
     plane.economySeats.seatsSold++;
-        if (plane.economySeats.seatsSold >= 0 && plane.economySeats.seatsSold <= 5) {
+        if (plane.economySeats.seatsSold >= 0 && plane.economySeats.seatsSold <= 7) {
             updatedPrice = basePrice * plane.economySeats.firstIncrement;
             seatsLeft = plane.economySeats.totalSeats - plane.economySeats.seatsSold;
-            message = "SEAT SOLD! Your total price is: $" + updatedPrice + "\n" + "Seats left: " + seatsLeft;
+            message = "you got it, seat is sold!" + "\n" + "your total price is: $" + updatedPrice + "\n" + "Seats left: " + seatsLeft;
             console.log("current price: " + updatedPrice + " & seats sold: " + plane.economySeats.seatsSold);
-        } else if (plane.economySeats.seatsSold >= 6 && plane.economySeats.seatsSold <= 9) {
+        } else if (plane.economySeats.seatsSold >= 8 && plane.economySeats.seatsSold <= 14) {
             updatedPrice = basePrice * plane.economySeats.secondIncrement;
             seatsLeft = plane.economySeats.totalSeats - plane.economySeats.seatsSold;
-            message = "SEAT SOLD! Your total price is: $" + updatedPrice + "\n" + "Seats left: " + seatsLeft;
+            message = "you got it, seat is sold!" + "\n" + "your total price is: $" + updatedPrice + "\n" + "Seats left: " + seatsLeft;
             console.log("current price: " + updatedPrice + " & seats sold: " + plane.economySeats.seatsSold);
-        } else if (plane.economySeats.seatsSold === 10) {
+        } else if (plane.economySeats.seatsSold === 15) {
             updatedPrice = plane.economySeats.lastSeatPrice;
             seatsLeft = plane.economySeats.totalSeats - plane.economySeats.seatsSold;
-            message = "YOU GOT THE LUCKY LAST SEAT! Your total price is: $" + updatedPrice + "\n" + "Seats left: " + seatsLeft;
-            console.log(updatedPrice);
+            message = "wow you got the lucky last seat!" + "\n" + "your total price is: $" + updatedPrice + "\n" + "Seats left: " + seatsLeft;
+            console.log(seatsLeft);
         } else {
-            message = "SORRY SOLD OUT";
+            message = "sorry we're all sold out! better luck next time :(";
         };
 // logic for first class
 } else if (currentInput === "buy first class" || currentInput === "buy f" || currentInput === "f") {
@@ -71,15 +71,15 @@ if (currentInput === "buy economy" || currentInput === "buy e" || currentInput =
         if (plane.firstSeats.seatsSold >= 0 && plane.firstSeats.seatsSold <= 3) {
             updatedPrice = basePrice * plane.firstSeats.firstIncrement;
             seatsLeft = plane.firstSeats.totalSeats - plane.firstSeats.seatsSold;
-            message = "SEAT SOLD! Your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + seatsLeft;
+            message = "you got it, seat is sold!" + "\n" + "your total price is: $" +Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + seatsLeft;
             console.log("current price: " + updatedPrice + " & seats sold: " + plane.firstSeats.seatsSold);
         } else if (plane.firstSeats.seatsSold === 4) {
             updatedPrice = plane.firstSeats.lastSeatPrice;
             seatsLeft = plane.firstSeats.totalSeats - plane.firstSeats.seatsSold;
-            message = "YOU GOT THE LUCKY LAST SEAT! Your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + seatsLeft;
+            message = "wow you got the lucky last seat!" + "\n" + "your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "seats left: " + seatsLeft;
             console.log(updatedPrice);
         } else {
-            message = "SORRY SOLD OUT";
+            message = "sorry we're all sold out! better luck next time :(";
         };
 // logic for business class
 } else if (currentInput === "buy business class" || currentInput === "buy b" || currentInput === "b") {
@@ -88,24 +88,24 @@ if (currentInput === "buy economy" || currentInput === "buy e" || currentInput =
         if (plane.businessSeats.seatsSold >= 0 && plane.businessSeats.seatsSold <= 3) {
             updatedPrice = basePrice * plane.businessSeats.firstIncrement;
             seatsLeft = plane.businessSeats.totalSeats - plane.businessSeats.seatsSold;
-            message = "SEAT SOLD! Your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + seatsLeft;
+            message = "you got it, seat is sold!" + "\n" + "your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "seats left: " + seatsLeft;
             console.log("current price: " + updatedPrice + " & seats sold: " + plane.businessSeats.seatsSold);
         } else if (plane.businessSeats.seatsSold >= 4 && plane.businessSeats.seatsSold <= 5) {
             updatedPrice = basePrice * plane.businessSeats.secondIncrement;
             seatsLeft = plane.businessSeats.totalSeats - plane.businessSeats.seatsSold;
-            message = "SEAT SOLD! Your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + seatsLeft;
+            message = "you got it, seat is sold!" + "\n" + "your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "seats left: " + seatsLeft;
             console.log("current price: " + updatedPrice + " & seats sold: " + plane.businessSeats.seatsSold);
         } else if (plane.businessSeats.seatsSold === 6) {
             updatedPrice = plane.businessSeats.lastSeatPrice;
             seatsLeft = plane.businessSeats.totalSeats - plane.businessSeats.seatsSold;
-            message = "YOU GOT THE LUCKY LAST SEAT! Your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + seatsLeft;
+            message = "wow you got the lucky last seat!" + "\n" + "your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "seats left: " + seatsLeft;
             console.log(updatedPrice);
         } else {
-            message = "SORRY SOLD OUT";
+            message = "sorry we're all sold out! better luck next time :(";
         };
 // check for valid input
 } else {
-    console.log("Please type your answer in the following format: buy economy, buy first class, buy business class");
+    message = "Please type your answer in the following format: buy economy, buy first class, buy business class";
 }
     return message;
 };
@@ -114,7 +114,7 @@ if (currentInput === "buy economy" || currentInput === "buy e" || currentInput =
 //   if (planeSeats === 10) {
 //     updatedPrice = basePrice;
 //     planeSeats--;
-//     console.log(updatedPrice,planeSeats);
+//     planeSeats//     console.log(updatedPrice,planeSeats);
 //     message = "SEAT SOLD! Your total price is: $" + updatedPrice + "\n" + "Seats left: " + planeSeats;
 //   } else if (planeSeats >= 6) {
 //     updatedPrice = updatedPrice * 1.03;
