@@ -6,9 +6,14 @@ var seatPrice = function(){
     if (planeSeats === 0) {
         price = 50;
         planeSeats += 1;
-    } else if (planeSeats > 0 && planeSeats <= 10){
+    } else if (planeSeats >= 1 && planeSeats <= 5) {
+        price = price + (price * 0.03);
+        planeSeats += 1;
+    } else if (planeSeats >= 6 && planeSeats <= 8){
         price = price + (price * 0.05);
         planeSeats += 1;
+    } else if (planeSeats === 9) {
+        price = 91000;
     }
 };
 
