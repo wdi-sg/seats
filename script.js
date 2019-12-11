@@ -3,7 +3,9 @@ console.log("hello script js");
 var seats = 10;
 var seatPrice = 50;
 var seatsBeforePriceIncrease; 
-
+var storeStartingPrice = seatPrice;
+var firstIncrease = seatPrice * 0.03;
+var secondIncrease = seatPrice * 0.05;
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
@@ -11,9 +13,9 @@ var inputHappened = function(currentInput){
   seats--;
 
   if(seats > 5){
-  	seatPrice = seatPrice * 1.03;
+  	seatPrice = seatPrice + firstIncrease;
   } else if (seats <= 5 && seats > 1){
-  	seatPrice = seatPrice * 1.05;
+  	seatPrice = seatPrice + secondIncrease;
   } else if (seats === 1){
   	seatPrice = 91000;
   }
