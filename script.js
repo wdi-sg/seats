@@ -6,10 +6,12 @@ var planeSeats = 10;
 var message;
 var updatedPrice;
 
-var toSecondTier = 4;
+var toSecondTier = 4; // 4 tickets before price increases
+var toFirstTier = 5;
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
+
 
 // calculating prices of plane tickets and counting down from 10
       if (planeSeats === 10) {
@@ -26,8 +28,9 @@ var inputHappened = function(currentInput){
       } else if (planeSeats >= 2) {
         updatedPrice = updatedPrice * 1.05;
         planeSeats--;
+        toFirstTier--;
         console.log(planeSeats, updatedPrice);
-        message = "SEAT SOLD! Your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + planeSeats;
+        message = "SEAT SOLD! Your total price is: $" + Math.round(updatedPrice * 100) / 100 + "\n" + "Seats left: " + planeSeats + "\n" + "Seats before price increase: " + toFirstTier;
       } else if (planeSeats >= 1) {
         updatedPrice = 91000;
         planeSeats--;
@@ -38,4 +41,4 @@ var inputHappened = function(currentInput){
         message = "SOLD OUT! Better luck next time!";
       }
         return message;
-};
+    }; // end if plane seats are 10
