@@ -2,6 +2,21 @@
 var planeSeats = 0;
 var price = 0;
 
+var fleet = {
+    airlineFirstClass: {
+        cabin: "first class",
+        seats: 4
+    },
+    airlineBusiness: {
+        cabin: "business class",
+        seats: 6
+    },
+    airlineEconomy: {
+        cabin: "economy class",
+        seats: 15
+    }
+};
+
 var randomPrice = function(){
     var random = Math.floor(Math.random() * 10);
     if (random >= 0 && random <= 5) {
@@ -9,7 +24,7 @@ var randomPrice = function(){
     } else {
         return 0.05;
     }
-}
+};
 
 var seatPrice = function(){
     randomPrice();
