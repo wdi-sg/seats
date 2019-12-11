@@ -1,6 +1,20 @@
-console.log("hello script js");
+console.log("hello script.js");
 
-var inputHappened = function(currentInput){
-  console.log( currentInput );
-  return "WOW SOMETHING HAPPENED";
+var users = 10; // Number of seats and plane passengers
+var seatsSold = 0
+
+var inputHappened = function(currentInput) {
+// starting value
+    seatsSold = seatsSold + 1;
+    var originalSeatPrice = 50; // Original price of seats
+    var seatsLeft = users - seatsSold;
+    var newSeatPrice = (originalSeatPrice * 0.05) + originalSeatPrice;
+
+    if (seatsSold === 1) {
+        return ("Ticket price is: " + originalSeatPrice);
+    } else if (seatsSold > 1 && seatsSold < 10) {
+        return ("Ticket price is: " + newSeatPrice);
+    } else  {
+        return ("Sold out");
+    }
 };
