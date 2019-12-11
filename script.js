@@ -10,8 +10,13 @@ var priceIncrement2 = 2.5; //Price increase per seat second half
 var filledSeats = 0; //Number of seats filled
 var currentSeatPrice; //Seat price at time of input
 var finalSeatPrice = 91000; //Seat of final seat
+var seatsLeft = 10; // Number of tickets before ticket being sold
 
-
+var calculateSeatsLeft = function() {
+    console.log(seatsLeft);
+    seatsLeft = 10 - filledSeats;
+    return seatsLeft;
+}
 
 var calculateSeatPrice = function() {
     console.log(filledSeats);
@@ -21,21 +26,22 @@ var calculateSeatPrice = function() {
 } else if (filledSeats < 9) {
     currentSeatPrice = halfFullPrice + ((filledSeats - 4) * priceIncrement2);
     console.log(currentSeatPrice);
-    return currentSeatPrice;
+    return "There are " + seatsLeft + " seats left" + "\n" + currentSeatPrice;
 } else {
     currentSeatPrice = finalSeatPrice;
     console.log(currentSeatPrice);
-    return currentSeatPrice;
+    return "There are " + seatsLeft + " seats left" + "\n" + currentSeatPrice;
 }
 };
 
 var inputHappened = function(currentInput){
   console.log( filledSeats );
   calculateSeatPrice();
+  calculateSeatsLeft();
   if (filledSeats > totalPlaneSeats) {
       filledSeats = filledSeats + 1;
     return "Sorry but all seats are sold out."
   } else {
     filledSeats = filledSeats + 1;
-    return currentSeatPrice; };
+    return "There are " + seatsLeft + " seats left" + "\n" + currentSeatPrice; };
 };
