@@ -49,7 +49,7 @@ var sellSeats = function() {
   }
 
   if (enteredClass === "first class") {
-    while (firstClassSeats != 0) {
+    while (firstClassSeats !== 0) {
       firstClassSeats--;
       return displaySeatMessage();
     }
@@ -86,7 +86,7 @@ var displaySeatMessage = function() {
     return `Seat sold for $${businessSeatPrice}! You're a mad lad!`;
   }
 
-  if (enteredClass === "first class" && firstClassSeats != 0) {
+  if (enteredClass === "first class" && firstClassSeats !== 0) {
     return `Seat sold for $${firstClassSeatPrice}! ${firstClassSeats} seats left`;
   } else {
     return `Seat sold for $${firstClassSeatPrice}! You must be the president or something!`;
@@ -118,9 +118,10 @@ var changeTieredPricing = function() {
   }
 
   if (enteredClass === "first class") {
-    while (firstClassSeats != 0) {
+    if (firstClassSeats !== 0) {
+      multiplier = 1.15;
       console.log("happened");
-      return (firstClassSeatPrice = firstClassSeatPrice * 1.15);
+      return (firstClassSeatPrice = firstClassSeatPrice * multiplier);
     }
     return (firstClassSeatPrice = 91000);
   }
