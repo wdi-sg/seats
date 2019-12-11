@@ -44,21 +44,25 @@ var inputHappened = function(currentInput){
   		//choose Plane;
   		plane = currentInput;
   		grandCount = 1;
-  		return plane+" plane chosen. if large plane is chosen, choose economy, business or firstClass. if normal plane is chosen, return any to proceed"
+  		return plane+" plane chosen. type any to proceed"
   	} else if(grandCount == 1){
   		if (plane == 'normal'){
   			grandCount = 2;
-  			return seatPrice+" buy or cancel";
+  			return seatPrice+" is the price of a seat in a normal plane. do you want to buy or cancel";
   		} else if(plane == 'large'){
-  			seatType = currentInput
+  			
   			grandCount = 2;
-  			return "economy: "+economySeatPrice+" business: "+businessSeatPrice+" first: "+firstSeatPrice+" buy or cancel?"
+  			return "economy: "+economySeatPrice+"    business: "+businessSeatPrice+"   firstClass: "+firstSeatPrice+" type in the class you want to proceed or cancel to cancel."
   		}
 
 
 
-  	} 
+  	} else if (grandCount == 2){
   		//grandCount = 1;
+  	if (currentInput == 'cancel'){
+  		grandCount = 0;
+  		return "normal or large?"
+  	} else {
   	
   	if(plane == 'normal'){
 
@@ -81,7 +85,7 @@ var inputHappened = function(currentInput){
   	};
 
 grandCount = 0;
-return "You bought a seat at "+yourSeatPrice+" dollars. There are "+seats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+" normal or large plane next?"
+return "You bought a seat at "+yourSeatPrice+" dollars. There are "+seats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+". normal or large plane next?"
 
 
 
@@ -90,7 +94,7 @@ return "You bought a seat at "+yourSeatPrice+" dollars. There are "+seats+" seat
 
   	} else if (plane = 'large'){
 
-  	if(seatType == 'economy'){
+  	if(currentInput == 'economy'){
 
   	console.log( currentInput );
   	var yourSeatPrice = economySeatPrice;
@@ -113,8 +117,8 @@ return "You bought a seat at "+yourSeatPrice+" dollars. There are "+seats+" seat
 
   	grandCount = 0;
 
-  return "You bought a seat at "+yourSeatPrice+" dollars. There are "+economySeats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+" normal or large plane next"
-	} else if (seatType == 'business') {
+  return "You bought a seat at "+yourSeatPrice+" dollars. There are "+economySeats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+". normal or large plane next"
+	} else if (currentInput == 'business') {
 
 var yourSeatPrice = businessSeatPrice;
   	businessSeats--;
@@ -136,10 +140,10 @@ var yourSeatPrice = businessSeatPrice;
 
   	grandCount = 0;
 
-  return "You bought a seat at "+yourSeatPrice+" dollars. There are "+businessSeats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+" normal or large plane next?"
+  return "You bought a seat at "+yourSeatPrice+" dollars. There are "+businessSeats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+". normal or large plane next?"
 
 
-} else if (seatType == 'firstClass'){
+} else if (currentInput == 'firstClass'){
 
 	var yourSeatPrice = firstSeatPrice;
   	firstSeats--;
@@ -159,10 +163,14 @@ var yourSeatPrice = businessSeatPrice;
 
 grandCount = 0;
 
-  return "You bought a seat at "+yourSeatPrice+" dollars. There are "+firstSeats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+" normal or large plane next?"
+  return "You bought a seat at "+yourSeatPrice+" dollars. There are "+firstSeats+" seats left. Number of seats before price increase: "+seatsBeforePriceIncrease+". normal or large plane next?"
 }
 }
 }
 }
+}
+}
+
+
 
 
