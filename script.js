@@ -1,6 +1,6 @@
 console.log("hello script js");
 
-//basic logic is done
+//added sold out message
 
 var totalPlaneSeats = 10; //total number of seats in the plane
 var startingPrice = 50; //price of a seat when plane is empty
@@ -20,8 +20,8 @@ var inputHappened = function(currentInput){
   console.log( currentInput );
   calculateSeatPrice();
   filledSeats = filledSeats + 1;
-/*  if (filledSeats = 10) {
-    return "Sorry, the plane is full. No more seats available."
-  } else {*/
-  return currentSeatPrice;
+  if (filledSeats > totalPlaneSeats) {
+    return "Sorry but all seats are sold out."
+  } else {
+  return currentSeatPrice; };
 };
