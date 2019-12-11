@@ -19,7 +19,11 @@ let enteredClass;
 
 var inputHappened = function(currentInput) {
   enteredClass = checkClass(currentInput);
+  if (enteredClass !== "business" && enteredClass !== "economy" && enteredClass !== "first class") {
+    return "That's not a valid input! Please enter 1) first class 2) business 3) economy"
+  } else {
   return sellSeats();
+}
 };
 
 var checkClass = function(currentInput) {
