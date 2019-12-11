@@ -1,3 +1,7 @@
+/* PART 1 of ASSIGNMENT
+Calculate the price of a seat when it never changes. ( it is always $50 )
+add on keeping track of how many seats are left on the plane add on the price increase functionality*/
+
 console.log("hello script.js");
 
 var users = 10; // Number of seats and plane passengers
