@@ -19,16 +19,18 @@ var roundDec = function (x,decPlace) {
 var inputHappened = function(currentInput){
 	seats++;
 	if(seats <= maxSeats1) {
-  		priceDec = price * (1+priceIncMult1);
+  		var priceDec = price * (1+priceIncMult1);
   		price = roundDec(priceDec,2);
-  		return "Your seat costs $" + price;
+  		var left = maxSeats1-seats;
+  		return "Your seat costs $" + price + " and there are " + left + " left till the price increases";
   	} else if (seats <= maxSeats2) {
-  		priceDec = price * (1+priceIncMult2);
+  		var priceDec = price * (1+priceIncMult2);
   		price = roundDec(priceDec,2);
-  		return "Your seat costs $" + price;
+  		var left = maxSeats2-seats;
+  		return "Your seat costs $" + price + " and there are " + left + " left till the price increases";
   	} else if (seats <= maxSeats3) {
   		price = price3;
-  		return "Your seat costs $" + price;
+  		return "Your seat costs $" + price + " which is the last seat";
   	} else {
   	return "No seats left";
   }
