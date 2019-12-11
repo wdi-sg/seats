@@ -39,5 +39,11 @@ var sellSeat = function(sellSeat) {
 }
 
 var inputHappened = function(currentInput){
-    return sellSeat();
+
+    if (currentInput.toLowerCase() === "buyseat") {
+        return sellSeat();
+    } else {
+        return "Please type in 'BuySeat' to buy a seat";
+    }
+
 };
