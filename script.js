@@ -1,14 +1,15 @@
 console.log("hello script js");
-let seats = 10;
-let seatPrice = 50;
-let higherTier = seats / 2;
-let seatsBeforeHike = higherTier;
+
+let seatPrice;
+let economySeatPrice = 50;
+let businessSeatPrice = 50;
+let firstClassSeatPrice = 50;
 
 let firstClassSeats = 4;
-let higherTierFirstClass = firstClassSeats / 2;
 
 let businessClassSeats = 6;
 let higherTierBusinessClass = businessClassSeats / 2;
+let businessSeatsBeforeHike = higherTierBusinessClass;
 
 let economyClassSeats = 16;
 let higherTierEconomyClass = economyClassSeats / 2;
@@ -18,14 +19,7 @@ let enteredClass;
 
 var inputHappened = function(currentInput) {
   enteredClass = checkClass(currentInput);
-  if (enteredClass === "economy") {
-    return sellSeats();
-  } else if (enteredClass === "business") {
-    console.log("business");
-  } else if (enteredClass === "first class") {
-    console.log("first class");
-  }
-  // return sellSeats(currentInput);
+  return sellSeats();
 };
 
 var checkClass = function(currentInput) {
@@ -34,36 +28,68 @@ var checkClass = function(currentInput) {
 };
 
 var sellSeats = function() {
-  while (economyClassSeats === 16) {
+  if (enteredClass === "economy") {
+    while (economyClassSeats === 16) {
+      economyClassSeats--;
+      return displaySeatMessage();
+    }
     economyClassSeats--;
-    return displaySeatMessage(seatPrice);
+    seatPrice = changeTieredPricing(seatPrice);
+    return displaySeatMessage();
   }
-  economyClassSeats--;
-  seatPrice = changeTieredPricing().toFixed(2);
-  return displaySeatMessage(seatPrice);
 
-  // while (seats === 10) {
-  //   seats--;
-  //   return displaySeatMessage(seatPrice);
-  // }
-  // seats--;
-  // seatPrice = changeTieredPricing().toFixed(2);
-  // return displaySeatMessage(seatPrice);
+  if (enteredClass === "business") {
+    while (businessClassSeats === 6) {
+      businessClassSeats--;
+      return displaySeatMessage();
+    }
+    businessClassSeats--;
+    seatPrice = changeTieredPricing(seatPrice);
+    return displaySeatMessage();
+  }
+
+  if (enteredClass === "first class") {
+    while (firstClassSeats != 0) {
+      firstClassSeats--;
+      return displaySeatMessage();
+    }
+    seatPrice = changeTieredPricing(seatPrice);
+    return displaySeatMessage();
+  }
 };
 
-var displaySeatMessage = function(seatPrice) {
+var displaySeatMessage = function() {
   const seatsBeforeHike = checkSeatsBeforePriceHike();
   if (enteredClass === "economy") {
     while (
       economyClassSeats >= higherTierEconomyClass &&
       economySeatsBeforeHike != 0
     ) {
-      return `Seat sold for $${seatPrice}! ${economyClassSeats} seats left. ${economySeatsBeforeHike} before price hike!`;
+      return `Seat sold for $${economySeatPrice}! ${economyClassSeats} seats left. ${economySeatsBeforeHike} before price hike!`;
     }
     while (economyClassSeats >= 1 && economySeatsBeforeHike === 0) {
-      return `Seat sold for $${seatPrice}! ${economyClassSeats} seats left.`;
+      return `Seat sold for $${economySeatPrice}! ${economyClassSeats} seats left.`;
     }
-    return `Seat sold for $${seatPrice}! You're a mad lad!`;
+    return `Seat sold for $${economySeatPrice}! You're a mad lad!`;
+  }
+
+  if (enteredClass === "business") {
+    while (
+      businessClassSeats >= higherTierBusinessClass &&
+      businessSeatsBeforeHike != 0
+    ) {
+      return `Seat sold for $${businessSeatPrice}! ${businessClassSeats} seats left. ${businessSeatsBeforeHike} before price hike!`;
+    }
+    while (businessClassSeats >= 1 && businessSeatsBeforeHike === 0) {
+      return `Seat sold for $${businessSeatPrice}! ${businessClassSeats} seats left.`;
+    }
+    return `Seat sold for $${businessSeatPrice}! You're a mad lad!`;
+  }
+
+  if (enteredClass === "first class" && firstClassSeats != 0) {
+    return `Seat sold for $${firstClassSeatPrice}! ${firstClassSeats} seats left`;
+  } else {
+    return `Seat sold for $${firstClassSeatPrice}! You must be the president or something!`;
   }
 };
 
@@ -72,23 +98,32 @@ var changeTieredPricing = function() {
   if (enteredClass === "economy") {
     if (economyClassSeats > higherTierEconomyClass) {
       multiplier = 1.03;
-      return (seatPrice = seatPrice * 1.03);
+      return (economySeatPrice = economySeatPrice * multiplier);
     } else if (economyClassSeats >= 1) {
       multiplier = 1.05;
-      console.log("hike", seats, multiplier);
-      return (seatPrice = seatPrice * multiplier);
-    } else {
-      return (seatPrice = 91000);
+      return (economySeatPrice = economySeatPrice * multiplier);
     }
+    return (economySeatPrice = 91000);
   }
 
-  // let multiplier;
-  // if (seats > higherTier) {
-  //   multiplier = 1.03;
-  //   return (seatPrice = seatPrice * 1.03);
-  // } else if (seats >= 1) {
-  // }
-  // return (seatPrice = 91000);
+  if (enteredClass === "business") {
+    if (businessClassSeats > higherTierBusinessClass) {
+      multiplier = 1.06;
+      return (businessSeatPrice = businessSeatPrice * multiplier);
+    } else if (businessClassSeats >= 1) {
+      multiplier = 1.1;
+      return (businessSeatPrice = businessSeatPrice * multiplier);
+    }
+    return (businessSeatPrice = 91000);
+  }
+
+  if (enteredClass === "first class") {
+    while (firstClassSeats != 0) {
+      console.log("happened");
+      return (firstClassSeatPrice = firstClassSeatPrice * 1.15);
+    }
+    return (firstClassSeatPrice = 91000);
+  }
 };
 
 var checkSeatsBeforePriceHike = function() {
@@ -99,8 +134,10 @@ var checkSeatsBeforePriceHike = function() {
     return economySeatsBeforeHike;
   }
 
-  // if (seatsBeforeHike != 0) {
-  //   seatsBeforeHike--;
-  // }
-  // return seatsBeforeHike;
+  if (enteredClass === "business") {
+    if (businessSeatsBeforeHike != 0) {
+      businessSeatsBeforeHike--;
+    }
+    return businessSeatsBeforeHike;
+  }
 };
