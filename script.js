@@ -1,6 +1,6 @@
-let seatsSoldEconomy = 0;
-let seatsSoldBusiness = 0;
-let seatsSoldFirst = 0;
+let seatsSoldEconomy = 0
+let seatsSoldBusiness = 0
+let seatsSoldFirst = 0
 let seatsSoldTenSeat = 0
 
 let ticketPriceEconomy = 50
@@ -17,6 +17,7 @@ let TenSeatPurchase = function (seatsSoldTenSeat) {
     return "No more seats available"
   }
   return `Your seat cost $${Math.round(ticketPriceTenSeat)} - ${10 - seatsSoldTenSeat} tickets left`
+
 }
 
 let EconomySeatPurchase = function (seatsSoldEconomy) {
@@ -120,6 +121,7 @@ var inputHappened = function (currentInput) {
     document.querySelector('#input').value = ""
     input = 0
     return ticketPrice
+    // cancel
   } else if (currentInput === "cancel" && input >=1) {
     document.querySelector('#input').value = ""
     input = 0
