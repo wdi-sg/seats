@@ -1,35 +1,28 @@
-//A plane has 10 seats.
+//plane has 10 seats, base price is 50 and increases by 5% for each ticket sold.
 var planeSeats = 10;
-var seatsSold = 1;
+var seatsSold = 0;
 
-var newPrice = 50;
-
-//starting value
-var inputEntry = false;
-console.log("Has input: "+inputEntry);
-var data = null;
+var basePrice = 50;
+var newPrice;
+console.log("Plane tickets sold: "+seatsSold);
+//once input happened, consider ticket sold and display sale price
 
 var inputHappened = function(userInput) {
-
-    if ( userInput === false )
-    {
- data = inputEntry;
-    userInput = true;
-    console.log(userInput);
-
-        return "The seat is $"+newPrice;
-        seatsSold ++;
+    if (seatsSold===0){
+        seatsSold++;
+        newPrice=basePrice
         console.log(seatsSold);
-    }
-    while ((seatsSold <= 10) && (userInput = true))
-    {
-        if (seatsSold != 1) {
-        var newPrice = newPrice*1.05;
-        }
-        return "The seat is $"+newPrice;
         console.log(newPrice);
-        seatsSold ++;
+        return "Your ticket is: $"+ newPrice;
+    }
+    else if (seatsSold<10){
+        newPrice = basePrice*1.05;
+        seatsSold++;
         console.log(seatsSold);
-        userInput=false;
+        console.log(newPrice);
+        return "Your ticket is: $"+ newPrice;
+    }
+    else{
+        return "Sorry, seats are sold out.";
     }
 }
