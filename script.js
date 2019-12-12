@@ -1,6 +1,6 @@
 console.log("hello script js");
 
-//finished compound increment
+//added a rounding off to nearest cent.
 
 var totalPlaneSeats = 10; //total number of seats in the plane
 var startingPrice = 50; //price of a seat when plane is empty
@@ -47,6 +47,7 @@ var inputHappened = function(currentInput){
   console.log( filledSeats );
   calculateSeatPrice();
   calculateSeatsLeft();
+  currentSeatPrice = (Math.floor(currentSeatPrice*100))/100;
   if (filledSeats > totalPlaneSeats) {
       filledSeats = filledSeats + 1;
     return "Sorry but all seats are sold out."
