@@ -80,10 +80,12 @@ var inputHappened = function (currentInput) {
   if (currentInput === "KL" && input === 0) {
     input++
     firstInput = currentInput
+    document.querySelector('#input').value = ""
     return `Your ticket costs $${Math.round(ticketPriceTenSeat)} - buy or cancel?`
   } else if (currentInput === "Bali" && input === 0) {
     input++
     firstInput = currentInput
+    document.querySelector('#input').value = ""
     return `economy class $${Math.round(ticketPriceEconomy)}, business class $${Math.round(ticketPriceBusiness)}, first class $${Math.round(ticketPriceFirst)} - buy or cancel?`
   }
   // KL and buy
@@ -118,5 +120,9 @@ var inputHappened = function (currentInput) {
     document.querySelector('#input').value = ""
     input = 0
     return ticketPrice
+  } else if (currentInput === "cancel" && input >=1) {
+    document.querySelector('#input').value = ""
+    input = 0
+    return `Please choose your Destination - KL / Bali`
   }
 }
