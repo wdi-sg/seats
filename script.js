@@ -32,9 +32,14 @@ var seatSold = function(){
 var inputHappened = function(currentInput){
   //console.log( currentInput );
   var output;
+
   seatSold();
-  output = `Your seat is $${seatPrice}`;
-  console.log(`There are ${seatsLeft} seats left`);
+  console.log(seatsLeft);
+  if (seatsLeft === 9 || seatsLeft === 5 || seatsLeft === 1){
+    output =  `Your seat was purchased for $${seatPrice}. There are ${seatsLeft} seats left. The next seat will be more expensive`;
+  } else {
+    output =  `Your seat was purchased for $${seatPrice}`;
+  }
 
   return output;
 };
