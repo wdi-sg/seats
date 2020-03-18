@@ -8,14 +8,32 @@ var seatsRemain = 10;
 var price = 50;
 var totalPrice;
 var classSeat = [];
+document.getElementById("input").placeholder = "KL or Bali";
+
 
 var inputHappened = function(currentInput){
+    tickets();
     classSeat.push(currentInput);
     console.log(classSeat[0]);
     console.log(classSeat[1]);
     clear ();
 
     if (classSeat[0]=="KL") {
+        if (currentInput == "Buy") {
+            classSeat.pop();
+            seatsRemain = seatsRemain - parseFloat(classSeat[classSeat.length-1]);
+            clear();
+            tickets();
+            return output = "You have purchased "+parseFloat(classSeat[classSeat.length-1])+
+            " seats tickets, the total cost is: $"+totalPrice.toFixed(2)+
+            "\nTickets Remaining: "+seatsRemain;
+        }
+        if (currentInput == "Cancel") {
+            classSeat.pop();
+            clear();
+            tickets();
+            return output = "Cancel successful!\nTickets Remaining: "+seatsRemain;
+        }
 
         if (isNaN(parseFloat(currentInput))==true)  {
             console.log("test2");
@@ -48,17 +66,29 @@ var inputHappened = function(currentInput){
                 clear();
                 return output = "Not enough seats! Please try again!\nSeats Remaining: "+seatsRemain;
             }
-            seatsRemain = seatsRemain - parseFloat(currentInput);
             clear();
-            return output = "You have purchased "+parseFloat(currentInput)+
-            " seats tickets, the total cost is: $"+totalPrice.toFixed(2)+
-            "\nTickets Remaining: "+seatsRemain;
+            buyleh();
+            return output = currentInput+" ticket(s) total cost: $"+totalPrice.toFixed(2)+"\nEnter \"Buy\" or \"Cancel\"";
         }
     }
     if (classSeat[0]=="Bali") {
 
         if (classSeat[1]=="economy") {
-
+            if (currentInput == "Buy") {
+                classSeat.pop();
+                seatsRemainEconomy = seatsRemainEconomy - parseFloat(classSeat[classSeat.length-1]);
+                clear();
+                tickets();
+                return output = "You have purchased "+parseFloat(classSeat[classSeat.length-1])+
+                " economy tickets, the total cost is: $"+totalPrice.toFixed(2)+
+                "\nTickets Remaining: "+seatsRemainEconomy;
+            }
+            if (currentInput == "Cancel") {
+                classSeat.pop();
+                clear();
+                tickets();
+                return output = "Cancel successful!\nTickets Remaining: "+seatsRemain;
+            }
             if (isNaN(parseFloat(currentInput))==true)  {
                 console.log("test2");
                 clear();
@@ -90,15 +120,27 @@ var inputHappened = function(currentInput){
                     clear();
                     return output = "Not enough seats! Please try again!\nSeats Remaining: "+seatsRemainEconomy;
                 }
-                seatsRemainEconomy = seatsRemainEconomy - parseFloat(currentInput);
                 clear();
-                return output = "You have purchased "+parseFloat(currentInput)+
-                " economy tickets, the total cost is: $"+totalPrice.toFixed(2)+"\nTickets Remaining: "+
-                seatsRemainEconomy;
+                buyleh();
+                return output = currentInput+" ticket(s) total cost: $"+totalPrice.toFixed(2)+"\nEnter \"Buy\" or \"Cancel\"";
             }
         }
         if (classSeat[1]=="business") {
-
+            if (currentInput == "Buy") {
+                classSeat.pop();
+                seatsRemainBusiness = seatsRemainBusiness - parseFloat(classSeat[classSeat.length-1]);
+                clear();
+                tickets();
+                return output = "You have purchased "+parseFloat(classSeat[classSeat.length-1])+
+                " seats tickets, the total cost is: $"+totalPrice.toFixed(2)+
+                "\nTickets Remaining: "+seatsRemainBusiness;
+            }
+            if (currentInput == "Cancel") {
+                classSeat.pop();
+                clear();
+                tickets();
+                return output = "Cancel successful!\nTickets Remaining: "+seatsRemainBusiness;
+            }
             if (isNaN(parseFloat(currentInput))==true)  {
                 console.log("test2");
                 clear();
@@ -130,15 +172,27 @@ var inputHappened = function(currentInput){
                     clear();
                     return output = "Not enough seats! Please try again!\nSeats Remaining: "+seatsRemainBusiness;
                 }
-                seatsRemainBusiness = seatsRemainBusiness - parseFloat(currentInput);
                 clear();
-                return output = "You have purchased "+parseFloat(currentInput)+
-                " business class tickets, the total cost is: $"+totalPrice.toFixed(2)+"\nSeats Remaining: "+
-                seatsRemainBusiness;
+                buyleh();
+                return output = currentInput+" ticket(s) total cost: $"+totalPrice.toFixed(2)+"\nEnter \"Buy\" or \"Cancel\"";
             }
         }
         if (classSeat[1]=="first") {
-
+            if (currentInput == "Buy") {
+                classSeat.pop();
+                seatsRemainFirst = seatsRemainFirst - parseFloat(classSeat[classSeat.length-1]);
+                clear();
+                tickets();
+                return output = "You have purchased "+parseFloat(classSeat[classSeat.length-1])+
+                " seats tickets, the total cost is: $"+totalPrice.toFixed(2)+
+                "\nTickets Remaining: "+seatsRemainFirst;
+            }
+            if (currentInput == "Cancel") {
+                classSeat.pop();
+                clear();
+                tickets();
+                return output = "Cancel successful!\nTickets Remaining: "+seatsRemainFirst;
+            }
             if (isNaN(parseFloat(currentInput))==true)  {
                 console.log("test2");
                 clear();
@@ -163,11 +217,9 @@ var inputHappened = function(currentInput){
                     return output = "Not enough seats! Please try again!\nSeats Remaining: "
                     +seatsRemainFirst;
                 }
-                seatsRemainFirst = seatsRemainFirst - parseFloat(currentInput);
                 clear();
-                return output = "You have purchased "+parseFloat(currentInput)+
-                " business class tickets, the total cost is: $"+totalPrice.toFixed(2)
-                +"\nSeats Remaining: "+seatsRemainFirst;
+                buyleh();
+                return output = currentInput+" ticket(s) total cost: $"+totalPrice.toFixed(2)+"\nEnter \"Buy\" or \"Cancel\"";
             }
         }
         if (isNaN(parseFloat(classSeat[1]))==false) {
@@ -191,4 +243,12 @@ var inputHappened = function(currentInput){
 
 var clear = function () {
     document.getElementById("input").value = "";
+}
+
+var tickets = function () {
+    document.getElementById("input").placeholder = "No. of tickets";
+}
+
+var buyleh = function () {
+        document.getElementById("input").placeholder = "Buy or Cancel";
 }
