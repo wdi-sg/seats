@@ -15,12 +15,23 @@
 let seatsSold = 0
 const PRICE_INCRE_RATE_PER_SEAT = 5
 
+class Plane {
+  constructor (destination, cabins) {
+    this.destination = destination
+    this.cabins = cabins
+  }
+}
+
 class Cabin {
-  constructor (cabinClass, capacity, pricingModel) {
-    this.cabinClass = cabinClass
+  constructor (cabinClassName, capacity, pricingModel) {
+    this.cabinClassName = cabinClassName
     this.capacity = capacity
     this.pricingModel = pricingModel
     this.availableSeats = capacity
+  }
+
+  get seatsSold () {
+    return this.capacity - this.seatsSold
   }
 }
 
@@ -31,8 +42,6 @@ const getPrice = (seatsSold, basePrice, increaseRate) => {
   return price
 }
 
-const EconomyPricingModel = new PricingModel(3, 5, 50, 91000)
-
 class PricingModel {
   constructor (firstHalfRate, secondHalfRate, basePrice, lastSeatPrice) {
     this.firstHalfRate = firstHalfRate
@@ -42,11 +51,33 @@ class PricingModel {
   }
 }
 
-firsthalf = getPrice(seatsSold, basePrice, PRICE_INCRE_RATE_PER_SEAT) + additional 3% of <=
+const EconomyPricingModel = new PricingModel(3, 5, 50, 91000)
+const BusinessPricingModel = new PricingModel(6, 10, 50, 9100)
+// for first class all seats go up by 15% over original price, not current price
+const FirstPricingModel = new PricingModel(15, 15, 50, 191000)
 
+const economyCabin = new Cabin('economy', 15, EconomyPricingModel)
+const businessCabin = new Cabin('business', 6, BusinessPricingModel)
+const firstCabin = new Cabin('first', 4, FirstPricingModel)
 
-const getEnhancedPrice = (seatsSold, basePrice, increaseRate) => {
+const isHalfOf = (number) => number > calPercentageOf(number, 50)
+const isLast = (total, current) => total === current
+// user wants to buy 1 economy ticket, current ticket sold = 2
+//    if ( isLast(cabin.seatsSold, cabin.capacity) ) rate = pricingModel.lastSeatPrice
+//    else if (isHalfOf(cabin.seatsSold)) rate = pricingModel.firstHalfRate
+//    else rate = pricingModel.secondHalfRate
+// ...priceHePay = getEnhancedPrice(cabin.seatsSold, 50, )
 
+// user wants to buy 1 business ticket,
+// .... same
+
+// user wants to buy 1 first class ticket |first half, second half, last seat
+//     first half and second half rate based on basePrice
+
+const getEnhancedPrice = (seatsSold, basePrice, baseIncreRate, additionalRate) => {
+  const basicPrice = getPrice(seatsSold, basePrice, baseIncreRate)
+  const enhancedPrice = basePrice + calPercentageOf(basicPrice, additionalRate)
+  return enhancedPrice
 }
 
 const processInput = function (currentInput) {
