@@ -30,8 +30,14 @@ var inputHappened = function(intput){
   }
 
   if (seatsSold > 0) {
-    price = 50 * 1.05;
-  };
+    if (seatsSold < 5) {
+      price = 50 * 1.03;
+    } else if (seatsSold === 9) {
+      price = 91000;
+    } else {
+      price = 50 * 1.05;
+    }
+  }
 
   seatsSold++;
 
