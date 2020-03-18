@@ -9,15 +9,14 @@ var inputHappened = function(currentInput){
   seatCounter = seatCounter + 1;
     if (seatCounter < 6){
         price = normalPrice + (normalPrice / 100 * (3 * seatCounter));
-        console.log(price);
-        return price;
+
+        return `Price: ${price}, ${seat - seatCounter} seats left.`;
     }else if(seatCounter > 5 && seatCounter < 10){
         price = price + 2.5;
-        console.log(price);
-        return price;
+        return `Price: ${price}, ${seat - seatCounter} seats left.`;
     }else if(seatCounter === 10){
         price = 91000;
-        return price;
+        return `Price: ${price}, ${seat - seatCounter} seat left.`;
     }else {
       return `Seat sold out.`;
     }
