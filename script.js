@@ -23,13 +23,11 @@ var inputHappened = function(currentInput){
   } else if (currentInput && (seats > 0)){
   	seats -= 1;
   	console.log('seats remaining: ' + seats);
-  	for (i = 10; i > seats; i--){
   		price = addFivePercent(price);
-  	};
   } else if (seats === 0){
-  	return 'We have sold out';
+  	return 'We have sold out!';
   } else {
   	return 'I don\'t understand you';
   };
-  return 'Seat sold at ' + price;
+  return 'No. ' + (10-seats) + ' Seat sold at ' + '$' + price;
 };
