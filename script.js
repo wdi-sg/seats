@@ -82,7 +82,7 @@ var sellSeat = function (seatClass) {
     console.log(bigPlane[seatClass].currentPrice);
     return `Sold! Your seat cost $${bigPlane[seatClass].currentPrice.toFixed(2)}. The next seat will be sold at the ${rateLevel} rate.`;
   }
-  return "Sold out. Try the next flight.";
+  return "Sold out in ${seatClass}. Try another class, or the next flight.";
 }
 
 var getNextPrice = function (seatsSold, currentPrice, seatClass) {
