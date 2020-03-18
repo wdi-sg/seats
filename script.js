@@ -9,9 +9,10 @@ var price = 50;
 document.querySelector("#output").innerText =
 `Welcome to General Airways!
 Would you like to buy a seat?
+Y / N
 
 --- Seats Left : ${10 - seatsSold} ---
---- Early Bird Price ($${price}) ---`
+--- Current Price ($${price}) ---`
 
 
 
@@ -24,17 +25,29 @@ function twoDP(num) {
 function seatsBracket(seatsSold) {
   switch (true) {
     case (seatsSold === 1):
-      return `--- ${1 - seatsSold} seats left for this price ---`;
+      return `--- ${1 - seatsSold} seats left for this price bracket ---`;
 
     case (seatsSold < 6):
-      return `--- ${5 - seatsSold} seats left for this price ---`;
+      return `--- ${5 - seatsSold} seats left for this price bracket ---`;
 
     case (seatsSold < 10):
-      return  `--- ${9 - seatsSold} seats left for this price ---`;
+      return  `--- ${9 - seatsSold} seats left for this price bracket ---`;
 
     case  (seatsSold === 10):
-      return  `--- ${10 - seatsSold} seats left for this price ---`;
+      return  `--- ${10 - seatsSold} seats left for this price bracket ---`;
 
+  }
+}
+
+function pricing(seatsSold) {
+  if (seatsSold > 0) {
+    if (seatsSold < 5) {
+      price *= 1.03;
+    } else if (seatsSold === 9) {
+      price = 91000;
+    } else {
+      price *= 1.05;
+    }
   }
 }
 
@@ -42,27 +55,34 @@ function seatsBracket(seatsSold) {
 
 // Function
 
-var inputHappened = function(intput){
-  if (seatsSold === 10) {
-    return "Sorry! Seats are all sold out!";
-  }
+var inputHappened = function(input){
+  if (input.toLowerCase() === "y") {
+    document.querySelector("#input").value = "";
 
-  if (seatsSold > 0) {
-    if (seatsSold < 5) {
-      price = 50 * 1.03;
-    } else if (seatsSold === 9) {
-      price = 91000;
-    } else {
-      price = 50 * 1.05;
+    if (seatsSold === 10) {
+      return "Sorry! Seats are all sold out!";
     }
+
+    pricing(seatsSold);
+    seatsSold++;
+
+    return `Thank you for your purchase!
+    You bought a seat for $${twoDP(price)}.
+    Would you like to buy another seat?
+    Y / N
+
+    --- Seats Left : ${10 - seatsSold} ---
+    ${seatsBracket(seatsSold)}`;
+  } else {
+    alert("Please enter a valid input.");
+    pricing(seatsSold);
+
+
+    return `Welcome to General Airways!
+    Would you like to buy a seat?
+    Y / N
+
+    --- Seats Left : ${10 - seatsSold} ---
+    --- Current Price ($${price}) ---`;
   }
-
-  seatsSold++;
-
-  return `Thank you for your purchase!
-  You bought a seat for $${twoDP(price)}.
-  Would you like to buy another seat?
-
-  --- Seats Left : ${10 - seatsSold} ---
-  ${seatsBracket(seatsSold)}`
 };
