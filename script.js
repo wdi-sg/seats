@@ -75,7 +75,7 @@ var inputHappened = function(currentInput){
 }
 newPrice = increase
 */
-
+/*PART1
 var userInput =[];
 var price = 50;
 var seats = 10;
@@ -101,4 +101,46 @@ var inputHappened = function(currentInput){
      }
   }
   return output;
+}*/
+var userInput =[];
+var price = 50;
+var price1;
+var seats = 10;
+var seatsLeft;
+var output1;
+var inputHappened = function(currentInput){
+  console.log( currentInput );
+  userInput.push(currentInput);
+  var newPrice;
+  //if(userInput.length === 0){}
+  if(seats === 10){
+    output = "price is:" + price;
+
+   }
+
+ if(userInput.length > 0){
+    seatsLeft = seats --;
+
+     if(seats <= 10 && seats > 5){
+        //output = "seats left: " + seatsLeft;
+        newPrice = price + (0.03 * price);
+        output = "tickets left: " + seatsLeft + " price is:" + price;
+        price = newPrice;
+     }
+     else if(seats <= 5 && seats > 0){
+       // output1 = "seats left: " + seatsLeft;
+        newPrice = price + (0.05 * price);
+        output = "tickets left: " + seatsLeft + " price is:" + price;
+        price = newPrice;
+     }
+     else if(seats === 0){
+        //output1 = "seats left: " + seatsLeft;
+        output = "tickets left: " + seatsLeft + " price is:" + 91000;
+     }
+     else{
+        output = "seats full";
+     }
+  }
+  return output;
+  return output1;
 }
