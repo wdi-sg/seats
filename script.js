@@ -5,6 +5,10 @@ var normalPrice = 50;
 
 var inputHappened = function(currentInput){
   seatCounter = seatCounter + 1;
-  var price = normalPrice + (normalPrice / 100 * (5 * seatCounter));
-  return price;
+  if (seatCounter <= 10){
+    var price = normalPrice + (normalPrice / 100 * (5 * seatCounter));
+    return price;
+    }else {
+        return `Seat sold out.`;
+    }
 };
