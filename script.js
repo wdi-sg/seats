@@ -12,12 +12,12 @@ var seatSold = function(){
 
   //first half functionality
   if (seatsLeft < 10 && seatsLeft > 5){
-    seatPrice = 50 * 1.03;
+    seatPrice = seatPrice * 1.03;
   }
 
   //second half functionality
   if (seatsLeft > 1 && seatsLeft <=5){
-    seatPrice = 50 * 1.05;
+    seatPrice = seatPrice * 1.05;
   }
 
   //last seat functionality
