@@ -6,6 +6,14 @@ var ticketPrice = 50
 var inputHappened = function(currentInput){
   console.log( currentInput );
 
+  //Check user input
+  if (currentInput != "buy"){
+    //initialize input box
+    document.getElementById("input").value = "";
+
+    return "Please type in 'buy' in the white box to buy ticket"
+  }
+
   //when user input, deduct one seat
   seatsLeft--;
   console.log(seatsLeft);
