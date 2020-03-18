@@ -23,6 +23,6 @@ var inputHappened = function(currentInput){
   //initialize input box
   document.getElementById("input").value = "";
 
-  return `The price of your ticket is $${ticketPrice}`;
+  return `There are ${seatsLeft} seats left, the price of your ticket is $${ticketPrice}`;
 
 };
