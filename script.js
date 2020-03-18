@@ -16,7 +16,7 @@ var inputHappened = function(currentInput){
         console.log("Here");
         output=`Thank you for flying with ABC airline. Your seat number is ${seatsNumber[i]} and it cost ${planePrice}.`;
         seatsNumber[i]="";
-        planePrice=planePrice*increase;
+        calculatePriceIncrease();
         planeSeats--;
     }
     /*
@@ -34,4 +34,7 @@ var inputHappened = function(currentInput){
   return output;
 
 };
+var calculatePriceIncrease=function(){
+        planePrice=planePrice*increase;
+}
 alert(`Good morning. The current seat avaliable is ${seatsNumber}.`);
