@@ -4,26 +4,42 @@ var originalPrice = 50;
 var nextPrice = originalPrice;
 var currentPrice;
 
+document.getElementById("output").innerText = "Enter 'buy' to buy a ticket.";
+
 var inputHappened = function(currentInput){
-  if (seatsSold < seatCount) {
-    clearInput();
-    return sellSeat();
-  }
   clearInput();
-  return "Sold out. Try the next flight.";
+
+  try {
+    validInput(currentInput);
+  } catch (error) {
+    return error;
+  }
+
+  return sellSeat();
 };
 
-var sellSeat = function () {
-  console.log("before", seatsSold, currentPrice, nextPrice);
-  seatsSold++;
-  currentPrice = nextPrice;
-  nextPrice = getNextPrice(seatsSold, currentPrice);
-  cheapSeatsLeft = getCheapSeats(seatsSold);
-  console.log("after", seatsSold, currentPrice, nextPrice);
-  if (seatsSold === seatCount) {
-    return `Sold! Your seat cost $${currentPrice}, as the last seat.`;
+var validInput = function (input) {
+  if (input === "buy") {
+    return true;
   }
-  return `Sold! Your seat cost $${currentPrice.toFixed(2)}. ${cheapSeatsLeft} more seats before rates increase.`;
+  throw new Error("Invalid input. Enter 'buy' to buy a ticket.");
+}
+
+var sellSeat = function () {
+  if (seatsSold < seatCount) {
+
+    console.log("before", seatsSold, currentPrice, nextPrice);
+    seatsSold++;
+    currentPrice = nextPrice;
+    nextPrice = getNextPrice(seatsSold, currentPrice);
+    cheapSeatsLeft = getCheapSeats(seatsSold);
+    console.log("after", seatsSold, currentPrice, nextPrice);
+    if (seatsSold === seatCount) {
+      return `Sold! Your seat cost $${currentPrice}, as the last seat.`;
+    }
+    return `Sold! Your seat cost $${currentPrice.toFixed(2)}. ${cheapSeatsLeft} more seats before rates increase.`;
+  }
+  return "Sold out. Try the next flight.";
 }
 
 var getNextPrice = function (seatsSold, currentPrice) {
