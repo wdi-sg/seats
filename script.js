@@ -50,7 +50,7 @@ var inputHappened = function(currentInput){
   clearInput();
 
   try {
-    validInput(input);
+    validateInput(input);
   } catch (error) {
     return error;
   }
@@ -59,7 +59,7 @@ var inputHappened = function(currentInput){
   return sellSeat(seatClass);
 };
 
-var validInput = function (input) {
+var validateInput = function (input) {
   if (optMenu.indexOf(input) !== -1) {
     return true;
   }
@@ -82,7 +82,7 @@ var sellSeat = function (seatClass) {
     console.log(bigPlane[seatClass].currentPrice);
     return `Sold! Your seat cost $${bigPlane[seatClass].currentPrice.toFixed(2)}. The next seat will be sold at the ${rateLevel} rate.`;
   }
-  return "Sold out in ${seatClass}. Try another class, or the next flight.";
+  return `Sold out in ${seatClass} class. Try another class, or the next flight.`;
 }
 
 var getNextPrice = function (seatsSold, currentPrice, seatClass) {
