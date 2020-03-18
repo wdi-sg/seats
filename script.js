@@ -5,6 +5,7 @@
     var partOnePriceIncrease = 1.5;
     var partTwoPriceIncrease = 2.5;
     var currentPrice = 50;
+    var ticketsLeft = 10;
 //actual functions runnin
     var inputHappened = function(currentInput){
         while (seatSold<11){
@@ -16,7 +17,8 @@
     console.log ("next seat price: " + nextSeatPrice);
     currentPrice = nextSeatPrice
     seatSold = (seatSold + 1);
-    var output = "Sold!";
+    ticketsLeft = (ticketsLeft -1);
+    var output = "We are left with: " + ticketsLeft + "tickets!";
   return output;
 } else if (seatSold>=5 && seatSold<9){
     console.log("Number of seats sold: "+seatSold);
@@ -26,7 +28,8 @@
     console.log ("next seat price: " + nextSeatPrice1);
     currentPrice = nextSeatPrice1
     seatSold = (seatSold + 1);
-    var output = "Sold!";
+        ticketsLeft = (ticketsLeft -1);
+    var output = "We are left with: " + ticketsLeft + "tickets!";
   return output;
 }else if (seatSold===9){
     console.log("Number of seats sold: "+seatSold);
@@ -36,7 +39,8 @@
     console.log ("next seat price: " + nextSeatPrice2);
     currentPrice = nextSeatPrice2
     seatSold = (seatSold + 1);
-    var output = "Sold!";
+        ticketsLeft = (ticketsLeft -1);
+    var output = "We are left with: " + ticketsLeft + "tickets!";
   return output;
 }else if (seatSold===10){
     console.log("Number of seats sold: "+seatSold);
@@ -44,7 +48,7 @@
     console.log ("current seat sold at: " + currentPrice);
     console.log ("next seat price: We are sold out for today!");
     seatSold = (seatSold + 1);
-    var output = "Sold out!!";
+    var output = "Sorry there are no tickets left. Please try again tomorrow!";
       return output;
 }
 }
