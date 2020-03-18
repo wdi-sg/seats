@@ -8,9 +8,9 @@ var inputHappened = function(currentInput){
 var currentInput = Math.random()* 10 +1
 
 if (currentInput < 5 && currentInput > 0) {
-   return "Seat number  " + Math.round(currentInput) + " booked. Ticked price is $51.50 "
+   return "Seat number  " + Math.round(currentInput) + " booked. Ticket price is $51.50 "
 } else if (currentInput < 9 && currentInput > 6) {
- return "Seat number  " + Math.round(currentInput) + " booked. Ticked price is $52.50 "
+ return "Seat number  " + Math.round(currentInput) + " booked. Ticket price is $52.50 "
  } else {
     return "Only last ticket available at $91000"
 }
