@@ -10,7 +10,8 @@ document.querySelector("#output").innerText =
 `Welcome to General Airways!
 Would you like to buy a seat?
 
---- Seats Left : ${10 - seatsSold} ---`
+--- Seats Left : ${10 - seatsSold} ---
+--- Early Bird Price ($${price}) ---`
 
 
 
@@ -18,6 +19,23 @@ Would you like to buy a seat?
 
 function twoDP(num) {
   return  (Math.floor(num * 100) / 100).toFixed(2);
+}
+
+function seatsBracket(seatsSold) {
+  switch (true) {
+    case (seatsSold === 1):
+      return `--- ${1 - seatsSold} seats left for this price ---`;
+
+    case (seatsSold < 6):
+      return `--- ${5 - seatsSold} seats left for this price ---`;
+
+    case (seatsSold < 10):
+      return  `--- ${9 - seatsSold} seats left for this price ---`;
+
+    case  (seatsSold === 10):
+      return  `--- ${10 - seatsSold} seats left for this price ---`;
+
+  }
 }
 
 
@@ -45,5 +63,6 @@ var inputHappened = function(intput){
   You bought a seat for $${twoDP(price)}.
   Would you like to buy another seat?
 
-  --- Seats Left : ${10 - seatsSold} ---`
+  --- Seats Left : ${10 - seatsSold} ---
+  ${seatsBracket(seatsSold)}`
 };
