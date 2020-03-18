@@ -11,13 +11,13 @@ var tixRemaining2 = 4
 
 function tixStringMaker (tix){
     if (tix>1){
-        return (tix + " tickets remaining before price goes up.")
+        return (tix + " tickets remaining before price bracket goes up.")
     }
     else if(tix==1){
-        return (tix + " ticket remaining before price goes up.")
+        return (tix + " ticket remaining before price bracket goes up.")
     }
     else if (tix == 0){
-        return ("Price goes up for the next ticket.")
+        return ("Price bracket goes up for the next ticket.")
     }
 }
 var inputHappened = function(currentInput){
