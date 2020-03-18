@@ -31,4 +31,4 @@ return "The price of the ticket is $" + 50*1.05 + " and "+  seatsLeft + " seats 
 } else if (currentInput == 10) {
 return "The price of the last ticket is $" + 91000
 }
-}; *?
+}; */
