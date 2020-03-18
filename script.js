@@ -4,7 +4,8 @@ var freeSeats = 10;
 var bookedSeats = 0;
 var price = 50;
 var cost;
-var x = 0;
+var y = 0;
+var priceIncreased = 1;
 document.querySelector('#output').innerText = 'Hi! There are ' + freeSeats + ' tickets left for sale!';
 var inputHappened = function(currentInput){
   console.log( currentInput );
@@ -17,9 +18,10 @@ var inputHappened = function(currentInput){
   }
   else if(freeSeats > 5 && freeSeats <= 10 && bookedSeats < 5 && bookedSeats >= 0){
     //3% increment per booked seat
+    increase3();
     freeSeats--;
     bookedSeats++;
-    cost = price * 1.03;
+    cost = price * priceIncreased;
     console.log(cost + ' cost');
     console.log(price + ' price');
     console.log(bookedSeats + ' bookedSeats');
@@ -29,9 +31,10 @@ var inputHappened = function(currentInput){
   }
   else if(freeSeats > 1 && freeSeats <= 5 && bookedSeats < 9 && bookedSeats >= 5 ){
     //5% increment per booked seat
+    increase5();
     freeSeats--;
     bookedSeats++;
-    cost = price * 1.05;
+    cost = price * priceIncreased;
     console.log(cost + ' cost');
     console.log(price + ' price');
     console.log(bookedSeats + ' bookedSeats');
@@ -49,3 +52,18 @@ var inputHappened = function(currentInput){
     return output = 'Sorry we are fully booked.';
   }
 };
+
+var increase5 = function(){
+    while ( y < bookedSeats){
+        priceIncreased = priceIncreased * 1.05;
+        y++;
+        console.log(priceIncreased + ' priceIncreased');
+    }
+}
+var increase3 = function(){
+    while ( y < bookedSeats){
+        priceIncreased = priceIncreased * 1.03;
+        y++;
+        console.log(priceIncreased + ' priceIncreased');
+    }
+}
