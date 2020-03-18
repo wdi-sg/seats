@@ -1,13 +1,45 @@
-let seats = {
-  economy: 15,
-  business: 6,
-  firstClass: 4
+
+let klFlight = {
+  seats: 10,
+  cost:50
+}
+
+let baliFlight = {
+  seats: {
+    economy: 15,
+    business: 6,
+    firstClass: 4
+  },
+  cost: 50
 };
-let seatCost = 50;
+
 let currentInput;
 document.getElementById("output").innerHTML =
-  "Please choose the cabin: buy economy, buy business or buy first class";
+  "Please choose the destination: kl or bali";
 function inputHappened(currentInput) {
+
+  if (currentInput === "kl") {
+
+    if (klFlight.seats !== 0) {
+      if (5 < klFlight.seats  < 10) {
+        klFlight.cost = klFlight.cost * 1.05;
+      } else if (1 < klFlight.seats  <= 5) {
+        klFlight.cost = klFlight.cost * 1.03;
+      } else if (klFlight.seats === 1) {
+        klFlight.cost = 91000;
+      }
+    } else {
+      return "sorry no more seats for KL."
+    }
+
+
+
+  }
+
+
+
+
+
   if (currentInput == "buy economy") {
     if (seats.economy === 1) {
       return "the price of the last ticket is $ 91";
@@ -25,7 +57,8 @@ function inputHappened(currentInput) {
           "seats availables. The cost of the ticket is: " +
           seatCost +
           " " +
-          "dollars." + "Please choose the cabin: buy economy, buy business or buy first class"
+          "dollars." +
+          "Please choose the cabin: buy economy, buy business or buy first class"
         );
       } else {
         seats.economy = seats.economy - 1;
@@ -38,7 +71,8 @@ function inputHappened(currentInput) {
           "seats availables. The cost of the ticket is: " +
           seatCost +
           " " +
-          "dollars." + "Please choose the cabin: buy economy, buy business or buy first class"
+          "dollars." +
+          "Please choose the cabin: buy economy, buy business or buy first class"
         );
       }
     } else {
@@ -48,35 +82,37 @@ function inputHappened(currentInput) {
     if (seats.business === 1) {
       return "the price of the last ticket is $ 91";
     }
-    if (seats.business  !== 0) {
+    if (seats.business !== 0) {
       document.getElementById("input").value = "";
 
-      if (3 < seats.business  <= 6) {
-        seats.business  = seats.business  - 1;
+      if (3 < seats.business <= 6) {
+        seats.business = seats.business - 1;
         seatCost = seatCost * 0.06 + seatCost;
         console.log(seatCost);
         return (
           "there are " +
           " " +
-          seats.business  +
+          seats.business +
           " " +
           "seats availables. The cost of the ticket is: " +
           seatCost +
           " " +
-          "dollars." + "Please choose the cabin: buy economy, buy business or buy first class"
+          "dollars." +
+          "Please choose the cabin: buy economy, buy business or buy first class"
         );
       } else {
-        seats.business  = seats.business  - 1;
+        seats.business = seats.business - 1;
         seatCost = seatCost * 0.1 + seatCost;
         return (
           "there are " +
           " " +
-          seats.business  +
+          seats.business +
           " " +
           "seats availables. The cost of the ticket is: " +
           seatCost +
           " " +
-          "dollars." + "Please choose the cabin: buy economy, buy business or buy first class"
+          "dollars." +
+          "Please choose the cabin: buy economy, buy business or buy first class"
         );
       }
     } else {
@@ -101,7 +137,8 @@ function inputHappened(currentInput) {
           "seats availables. The cost of the ticket is: " +
           seatCost +
           " " +
-          "dollars." + "Please choose the cabin: buy economy, buy business or buy first class"
+          "dollars." +
+          "Please choose the cabin: buy economy, buy business or buy first class"
         );
       }
     }
