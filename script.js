@@ -1,5 +1,7 @@
 console.log("hello script js");
 
+document.querySelector('#output').innerText = "Please type: buy ticket";
+
 var seatsLeft = 10;
 var seatPrice;
 
@@ -29,8 +31,17 @@ var seatSold = function(){
 
 }
 
+var clearInput = function(){
+    document.getElementById('input').value = "";
+  }
+
+
 var inputHappened = function(currentInput){
   //console.log( currentInput );
+  if (!currentInput.toLowerCase().includes("buy ticket")){
+    return "Wrong input. Please type: buy ticket";
+  }
+
   var output;
 
   seatSold();
@@ -40,6 +51,6 @@ var inputHappened = function(currentInput){
   } else {
     output =  `Your seat was purchased for $${seatPrice}`;
   }
-
+  clearInput();
   return output;
 };
