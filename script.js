@@ -9,6 +9,7 @@ var flights = {
   kl: {
     seats: 10,
     price: 50,
+    halfway: 4,
     charge: function(){
       if (this.seats===10) {
         this.price = 50;
@@ -21,13 +22,12 @@ var flights = {
       }
       return this.price;
     },
-    halfway: 5
   },
   bali: {
     economy: {
       seats: 10,
       price: 50,
-      halfway: 5,
+      halfway: 4,
       charge: function(){
         if (this.seats===10) {
           this.price = 50;
@@ -44,7 +44,7 @@ var flights = {
     biz: {
       seats: 6,
       price: 50,
-      halfway: 3,
+      halfway: 2,
       charge: function(){
         if (this.seats===6) {
           this.price = 50;
@@ -76,16 +76,6 @@ var flights = {
 }
 
 var inputs = [];
-
-//Defining the seats.
-var klSeats = flights.kl.seats;
-var econSeats = flights.bali.economy.seats;
-var bizSeats = flights.bali.biz.seats;
-var firstSeats = flights.bali.first.seats;
-var klPrice = (flights.kl.charge()).toFixed(2)
-var econPrice = (flights.bali.economy.charge()).toFixed(2);
-var bizPrice = (flights.bali.biz.charge()).toFixed(2);
-var firstPrice = (flights.bali.first.charge()).toFixed(2);
 
 //Function that runs every time a new input is detected.
 var inputHappened = function(currentInput) {
