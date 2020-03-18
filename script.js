@@ -32,9 +32,9 @@ var seatSold = function(){
 var inputHappened = function(currentInput){
   //console.log( currentInput );
   var output;
-  console.log(seatsLeft);
   seatSold();
   output = `Your seat is $${seatPrice}`;
+  console.log(`There are ${seatsLeft} seats left`);
 
   return output;
 };
