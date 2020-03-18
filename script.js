@@ -4,9 +4,7 @@ var freeSeats = 10;
 var bookedSeats = 0;
 var price = 50;
 var cost;
-var priceIncreased = 1;
-var increment = 1;
-var x , y = 0;
+var x = 0;
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
@@ -19,14 +17,11 @@ var inputHappened = function(currentInput){
   }
   else if(0 < freeSeats < 10 && 10 > bookedSeats > 0){
     //5% increment per booked seat
-    increase();
     freeSeats--;
     bookedSeats++;
-    cost = price * priceIncreased;
+    cost = price * 1.05;
     console.log(cost + ' cost');
     console.log(price + ' price');
-    console.log(priceIncreased + ' priceIncreased');
-
     console.log(bookedSeats + ' bookedSeats');
     console.log(freeSeats + ' freeSeats');
     return output = 'Your plane ticket costs $' + cost;
@@ -35,11 +30,3 @@ var inputHappened = function(currentInput){
     return output = 'Sorry we are fully booked.';
   }
 };
-
-var increase = function(){
-    while ( y < bookedSeats){
-        priceIncreased = priceIncreased * 1.05;
-        y++;
-        console.log(priceIncreased + ' priceIncreased');
-    }
-}
