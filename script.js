@@ -1,5 +1,5 @@
 console.log("hello script js");
-//Part 4
+//Part 5
 var seatsRemaining = 10;
 var seatsSold = 0;
 var standardPrice = 50;
