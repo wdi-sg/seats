@@ -1,10 +1,10 @@
 console.log("hello script js");
-//Part 3
+//Part 4
 var seatsRemaining = 10;
 var seatsSold = 0;
 var standardPrice = 50;
-var priceIncrement1 = 50 *(3/100);
-var priceIncrement2 = 50 *(5/100);
+var priceIncrement1 = 1.03;
+var priceIncrement2 = 1.05;
 var currentPrice;
 var tixRemaining1 = 4
 var tixRemaining2 = 4
@@ -32,8 +32,8 @@ var inputHappened = function(currentInput){
   }
   else if(seatsRemaining <10 && seatsRemaining>=6){
     console.log(seatsRemaining);
-    console.log(priceIncrement1);
-    currentPrice = currentPrice + priceIncrement1;
+    currentPrice = currentPrice*priceIncrement1;
+    currentPrice = currentPrice.toFixed(2);
     seatsRemaining = seatsRemaining - 1;
     seatsSold = seatsSold + 1;
     tixRemaining1 = tixRemaining1 - 1;
@@ -42,8 +42,8 @@ var inputHappened = function(currentInput){
   }
   else if (seatsRemaining < 6 && seatsRemaining>1){
     console.log(seatsRemaining);
-    console.log(priceIncrement2);
-    currentPrice = currentPrice + priceIncrement2;
+    currentPrice = currentPrice*priceIncrement2;
+    currentPrice = currentPrice.toFixed(2);
     seatsRemaining = seatsRemaining - 1;
     seatsSold = seatsSold + 1;
     tixRemaining2 = tixRemaining2 - 1;
