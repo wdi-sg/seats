@@ -4,14 +4,11 @@ var originalPrice = 50;
 var nextPrice = originalPrice;
 var currentPrice;
 
-var surchargeRate = 0.05;
-var surcharge = originalPrice * surchargeRate;
-
 var inputHappened = function(currentInput){
   if (seatsSold < seatCount) {
     seatsSold++;
     currentPrice = nextPrice;
-    nextPrice += surcharge;
+    nextPrice = getNextPrice(seatsSold, currentPrice);
     console.log(seatsSold, currentPrice, nextPrice);
 
     clearInput();
@@ -21,6 +18,21 @@ var inputHappened = function(currentInput){
   clearInput();
   return "Sold out. Try the next flight.";
 };
+
+var getNextPrice = function (seatsSold, currentPrice) {
+  var lowRate = 0.03;
+  var highRate = 0.05;
+  var surcharge;
+
+  if (seatsSold < seatCount / 2) {
+    surcharge = originalPrice * lowRate;
+    return currentPrice + surcharge;
+  } else if (seatsSold < seatCount - 1) {
+    surcharge = originalPrice * highRate;
+    return currentPrice + surcharge;
+  }
+  return 91000;
+}
 
 var clearInput = function () {
   document.getElementById("input").value = "";
