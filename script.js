@@ -5,10 +5,11 @@ console.log("hello script js");
 var emptySeats = 10;
 var ticketPrice = 50.00;
 
+//PART 1
+
 var inputHappened = function(anyInput){
 //Seat 1 sold. emptySeats is 10.
   emptySeats -= 1;
-
   if(emptySeats === 9){
     //emptySeats is 9 after click. Price is $50.
     console.log("Seat left: " + emptySeats);
