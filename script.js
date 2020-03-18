@@ -1,52 +1,87 @@
 console.log("hello script js");
-var planeSeats =10;
-var planePrice=50;
-const increaseFirstHalf=1.03;
-const increaseSecondHalf=1.05;
-var seatsNumber=["A1","A2","A3","A4","A5","B1","B2","B3","B4","B5"];
+var questionCount=0;
+
+
+
+var tenSeater = {
+    maxSeat: 10,
+    planeSeats:10,
+    planePrice:50,
+    increaseFirstHalf:1.03,
+    increaseSecondHalf:1.05,
+    seatsNumber: ["A1","A2","A3","A4","A5","B1","B2","B3","B4","B5"]
+
+};
 
 
 var inputHappened = function(currentInput){
   var output="";
   console.log(currentInput);
-  for(var i = 0; i<seatsNumber.length;i++)
+  switch(questionCount){
+    case 0:
+    break;
+    case 1:
+    break;
+    case 2:
+    break;
+    default:
+    break;
+  }
+  checkSeats(tenSeater);
+  for(var i = 0; i<tenSeater.seatsNumber.length;i++)
   {
-    console.log(seatsNumber[i]);
-    if(currentInput===seatsNumber[i])
+    console.log(tenSeater.seatsNumber[i]);
+    if(currentInput===tenSeater.seatsNumber[i])
     {
-        console.log("Here");
-        output=`Thank you for flying with ABC airline. Your seat number is ${seatsNumber[i]} and it cost $${planePrice}.`;
-        seatsNumber[i]="";
-        calculatePriceIncrease();
-        planeSeats--;
+        tenSeater.planeSeats--;
+        tenSeater.seatsNumber[i]="";
+        if(tenSeater.planeSeats>5){
+            output=`Thank you for flying with ABC airline. Your seat number is ${tenSeater.seatsNumber[i]} and it cost $${tenSeater.planePrice}. The number of seats left before the price increase is ${tenSeater.planeSeats-5}. Seats avaliable are ${tenSeater.seatsNumber}.`;
+
+        }
+
+        else
+        {
+            output=`Thank you for flying with ABC airline. Your seat number is ${tenSeater.seatsNumber[i]} and it cost $${tenSeater.planePrice}.Seats avaliable are ${tenSeater.seatsNumber}.`;
+        }
+
+
+        tenSeater.planePrice=calculatePriceIncrease(tenSeater);
+
     }
-    /*
-    else
-    {
-        output=`The seat number is invalid. Try again later.`;
-    }*/
+
   }
 
   if(output===""){
-    output=`The seat number is invalid. Try again later.`;
+    output=`The seat number is invalid. Try again later.Seats avaliable are ${tenSeater.seatsNumber}.`;
   }
-    console.log("out of the loop");
-    alert(`Good morning. The current seat avaliable is ${seatsNumber}.`);
+
+    alert(`Good morning. The current seat avaliable is ${tenSeater.seatsNumber}.`);
   return output;
 
 };
-var calculatePriceIncrease=function(){
-        if(planeSeats>5)
-        {planePrice=planePrice*increaseFirstHalf;
+var checkSeats=function(plane){
+
+};
+
+
+
+var calculatePriceIncrease=function(plane){
+        if(plane.planeSeats>(plane.maxSeat/2))
+
+        {
+
+            plane.planePrice=plane.planePrice*plane.increaseFirstHalf;
         }
-        else if (planeSeats>2){
+        else if (plane.planeSeats>2){
             console.log("2nd half");
-            planePrice=planePrice*increaseSecondHalf;
+            plane.planePrice=plane.planePrice*plane.increaseSecondHalf;
 
         } else
         {
-            planePrice=91000;
+            plane.planePrice=91000;
         }
+        return plane.planePrice;
 
-}
-alert(`Good morning. The current seat avaliable is ${seatsNumber}.`);
+};
+alert(`Good morning. The current seat avaliable is ${tenSeater.seatsNumber}.`);
