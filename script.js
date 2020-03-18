@@ -22,6 +22,7 @@ if (availSeats === 10) {
 */
 
 //Part 2
+/*
 var inputHappened = function(currentInput) {
   console.log( currentInput );
   if (availSeats === 10) {
@@ -37,5 +38,25 @@ var inputHappened = function(currentInput) {
     return "$" + seatPrice + " ----" + " " + availSeats + " seats left.";
   } else {
     return "You're our lucky final passenger! Your seat ticket is $91,000.";
+  }
+}
+*/
+
+//Part 3
+var inputHappened = function(currentInput) {
+  console.log( currentInput );
+if (availSeats === 10) {
+    availSeats--;
+    return "$" + seatPrice + " ----" + " " + availSeats + " seats left.";
+  } else if (availSeats >=6) {
+    seatPrice = seatPrice + (seatPrice * 0.03);
+    availSeats--;
+    return "$" + seatPrice + " ----" + " " + availSeats + " seats left.";
+  } else if (availSeats > 1) {
+    availSeats--;
+    seatPrice = seatPrice + (seatPrice * 0.05);
+    return "$" + seatPrice + " ----" + " " + availSeats + " seats left.";
+  } else {
+    return "You're our lucky final passenger! Your seat ticket is $91,000."
   }
 }
