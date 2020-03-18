@@ -23,20 +23,17 @@ var sellSeat = function () {
   if (seatsSold === seatCount) {
     return `Sold! Your seat cost $${currentPrice}, as the last seat.`;
   }
-  return `Sold! Your seat cost $${currentPrice}. ${cheapSeatsLeft} more seats before rates increase.`;
+  return `Sold! Your seat cost $${currentPrice.toFixed(2)}. ${cheapSeatsLeft} more seats before rates increase.`;
 }
 
 var getNextPrice = function (seatsSold, currentPrice) {
-  var lowRate = 0.03;
-  var highRate = 0.05;
-  var surcharge;
+  var lowRate = 1.03;
+  var highRate = 1.05;
 
   if (seatsSold < seatCount / 2) {
-    surcharge = originalPrice * lowRate;
-    return currentPrice + surcharge;
+    return currentPrice * lowRate;
   } else if (seatsSold < seatCount - 1) {
-    surcharge = originalPrice * highRate;
-    return currentPrice + surcharge;
+    return currentPrice * highRate;
   }
   return 91000;
 }
