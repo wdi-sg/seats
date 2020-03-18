@@ -43,14 +43,29 @@ const getPrice = (seatsSold, basePrice, increaseRate) => {
 }
 
 class PricingModel {
-  constructor (firstHalfRate, secondHalfRate, basePrice, lastSeatPrice) {
+  constructor (firstHalfRate, secondHalfRate, basePrice, lastSeatPrice, formula) {
     this.firstHalfRate = firstHalfRate
     this.secondHalfRate = secondHalfRate
     this.basePrice = basePrice
     this.lastSeatPrice = lastSeatPrice
+    this.formula = formula
   }
 }
 
+const econPriceFormula = function (firstHalfRate, secondHalfRate, basePrice, lastSeatPrice) {
+//    if ( isLast(cabin.seatsSold, cabin.capacity) ) rate = pricingModel.lastSeatPrice
+//    else if (isHalfOf(cabin.seatsSold)) rate = pricingModel.firstHalfRate
+//    else rate = pricingModel.secondHalfRate
+// ...priceHePay = getEnhancedPrice(cabin.seatsSold, 50, )
+}
+
+const bizPriceFormula = econPriceFormula
+const firstPriceFormula = function (firstHalfRate, secondHalfRate, basePrice, lastSeatPrice) {
+  // if last seat => price = lastSeatPrice
+  // else price = basicPrice + 15% of 50
+  //
+  //
+}
 const EconomyPricingModel = new PricingModel(3, 5, 50, 91000)
 const BusinessPricingModel = new PricingModel(6, 10, 50, 9100)
 // for first class all seats go up by 15% over original price, not current price
@@ -62,11 +77,6 @@ const firstCabin = new Cabin('first', 4, FirstPricingModel)
 
 const isHalfOf = (number) => number > calPercentageOf(number, 50)
 const isLast = (total, current) => total === current
-// user wants to buy 1 economy ticket, current ticket sold = 2
-//    if ( isLast(cabin.seatsSold, cabin.capacity) ) rate = pricingModel.lastSeatPrice
-//    else if (isHalfOf(cabin.seatsSold)) rate = pricingModel.firstHalfRate
-//    else rate = pricingModel.secondHalfRate
-// ...priceHePay = getEnhancedPrice(cabin.seatsSold, 50, )
 
 // user wants to buy 1 business ticket,
 // .... same
