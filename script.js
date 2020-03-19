@@ -141,17 +141,20 @@ var inputHappened = function(currentInput){
         if(cabinType==="1"){
         outputMessage="";
         chosenSeat=currentInput;
-        checkSeats(cabinEconomy);
+        unconfirmedPlane=cabinEconomy;
+        checkSeats(unconfirmedPlane);
         }else
         if(cabinType==="2"){
         outputMessage="";
         chosenSeat=currentInput;
-        checkSeats(cabinEconomy);
+        unconfirmedPlane=cabinBusiness;
+        checkSeats(unconfirmedPlane);
         } else
         if (cabinType==="3"){
         outputMessage="";
         chosenSeat=currentInput;
-        checkSeats(cabinFirstClass);
+        unconfirmedPlane=cabinFirstClass;
+        checkSeats(unconfirmedPlane);
         }
 
 
