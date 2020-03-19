@@ -112,7 +112,12 @@ var inputHappened = function(currentInput){
   console.log( currentInput );
   userInput.push(currentInput);
   var newPrice;
+  if(isNaN(currentInput)){
+    output = "invalid input. Try Again";
+  }
+  else{
   //if(userInput.length === 0){}
+
   if(seats === 10){
     output = "price is:" + price;
 
@@ -141,6 +146,7 @@ var inputHappened = function(currentInput){
         output = "seats full";
      }
   }
+}
   return output;
   return output1;
 }
