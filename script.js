@@ -56,7 +56,7 @@ var inputHappened = function(currentInput){
   }
   var seatClass = input.split(" ")[1];
   console.log(seatClass);
-  return sellSeat(seatClass);
+  return sellSeat(seatClass, bigPlane[seatClass]);
 };
 
 var validateInput = function (input) {
@@ -66,53 +66,64 @@ var validateInput = function (input) {
   throw new Error("Invalid input.\n" + instMenu.join("\n"));
 }
 
-var sellSeat = function (seatClass) {
+var updateSeats = function (seatClass, seatsSold, currentPrice, nextPrice) {
+  bigPlane[seatClass].seatsSold = seatsSold;
+  bigPlane[seatClass].currentPrice = currentPrice;
+  bigPlane[seatClass].nextPrice = nextPrice;
+  console.log(bigPlane);
 
-  if (bigPlane[seatClass].seatsSold < bigPlane[seatClass].seatCount) {
-
-    console.log("before",
-                bigPlane[seatClass].seatsSold,
-                bigPlane[seatClass].currentPrice,
-                bigPlane[seatClass].nextPrice);
-    bigPlane[seatClass].seatsSold++;
-    bigPlane[seatClass].currentPrice = bigPlane[seatClass].nextPrice[0];
-    bigPlane[seatClass].nextPrice = getNextPrice(bigPlane[seatClass].seatsSold,
-                                                 bigPlane[seatClass].currentPrice,
-                                                 seatClass);
-
-    var rateLevel = bigPlane[seatClass].nextPrice[1];
-    console.log("after",
-                bigPlane[seatClass].seatsSold,
-                bigPlane[seatClass].currentPrice,
-                bigPlane[seatClass].nextPrice);
-    if (bigPlane[seatClass].seatsSold === bigPlane[seatClass].seatCount) {
-      return `Sold! Your seat cost $${bigPlane[seatClass].currentPrice.toFixed(2)}, as the last seat.`;
-    }
-    console.log(bigPlane[seatClass].currentPrice);
-    return `Sold! Your seat cost $${bigPlane[seatClass].currentPrice.toFixed(2)}. The next seat will be sold at the ${rateLevel} rate.`;
-  }
-  return `Sold out in ${seatClass} class. Try another class, or the next flight.`;
+  return true;
 }
 
-var getNextPrice = function (seatsSold, currentPrice, seatClass) {
-  var lowRate = bigPlane[seatClass].lowRate;
-  var highRate = bigPlane[seatClass].highRate;
+var sellSeat = function (seatClass, seatsObj) {
+  seatsSold = seatsObj.seatsSold;
+  seatCount = seatsObj.seatCount;
+  currentPrice = seatsObj.currentPrice;
+  nextPrice = seatsObj.nextPrice;
+  lastSeat = seatsObj.lastSeat;
 
-  if (seatClass === "first") {
-    if (seatsSold === bigPlane.first.seatCount - 1) {
-      return [bigPlane.first.lastSeat, "last seat"];
+  if (seatsSold < seatCount) {
+
+    seatsSold++;
+    currentPrice = nextPrice[0];
+    nextPrice = getNextPrice(seatClass,
+                             seatsSold,
+                             seatCount,
+                             currentPrice,
+                             seatsObj.lowRate,
+                             seatsObj.highRate,
+                             lastSeat);
+    console.log(nextPrice);
+    var rateLevel = nextPrice[1];
+    if (seatsSold === seatCount) {
+      updateSeats(seatClass, seatsSold, currentPrice, nextPrice);
+      return `Sold! Your seat cost $${currentPrice.toFixed(2)}, as the last seat.`;
     }
-    return [bigPlane[seatClass].currentPrice * highRate, "standard"];
+    console.log(currentPrice);
+    updateSeats(seatClass, seatsSold, currentPrice, nextPrice);
+    return `Sold! Your seat cost $${currentPrice.toFixed(2)}. The next seat will be sold at the ${rateLevel} rate.`;
+  }
+  return `Sold out in ${seatClass} class. Try another class, or the next flight.`;
+  updateSeats(seatClass, seatsSold, currentPrice, nextPrice);
+}
+
+var getNextPrice = function (seatClass, seatsSold, seatCount, currentPrice, lowRate, highRate, lastSeat) {
+  console.log("got " + seatClass);
+  if (seatClass === "first") {
+    if (seatsSold === seatCount - 1) {
+      return [lastSeat, "last seat"];
+    }
+    return [currentPrice * highRate, "standard"];
   }
 
-  if (bigPlane[seatClass].seatsSold < Math.floor(bigPlane[seatClass].seatCount / 2)) {
+  if (seatsSold < Math.floor(seatCount / 2)) {
     console.log("low");
-    return [bigPlane[seatClass].currentPrice * lowRate, "low"];
-  } else if (bigPlane[seatClass].seatsSold < bigPlane[seatClass].seatCount - 1) {
+    return [currentPrice * lowRate, "low"];
+  } else if (seatsSold < seatCount - 1) {
     console.log("high");
-    return [bigPlane[seatClass].currentPrice * highRate, "high"];
+    return [currentPrice * highRate, "high"];
   }
-  return [bigPlane[seatClass].lastSeat, "last seat"];
+  return [lastSeat, "last seat"];
 }
 
 /* TODO - report remaining seats at the same rate
