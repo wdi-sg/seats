@@ -125,7 +125,8 @@ var inputHappened = function(currentInput){
             else if(reply==="n"){
 
                 unconfirmedPlane="";
-                tenSeater.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
+                tenSeater.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat);
+                tenSeater.planeSeats++;
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
@@ -175,7 +176,7 @@ var inputHappened = function(currentInput){
             else if(reply==="n"){
                 unconfirmedPlane="";
                 cabinEconomy.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
-
+                cabinEconomy.planeSeats++;
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
@@ -199,7 +200,7 @@ var inputHappened = function(currentInput){
 
                 unconfirmedPlane="";
                 cabinBusiness.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
-
+                cabinBusiness.planeSeats++;
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
@@ -215,6 +216,7 @@ var inputHappened = function(currentInput){
                 cabinFirstClass=unconfirmedPlane;
                 unconfirmedPlane="";
                 questionCount=0;
+                cabinFirstClass.planeSeats++;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
             else if(reply==="n"){
@@ -262,7 +264,7 @@ for(var i = 0; i<unconfirmedPlane.seatsNumber.length;i++)
         //unconfirmedPlane.seatsNumber.splice(i,1);
          console.log(tenSeater.seatsNumber);
         if(unconfirmedPlane.planeSeats>(unconfirmedPlane.maxSeat/2)){
-            outputMessage=`Thank you for flying with ABC airline. Your seat number is ${chosenSeat} and it cost $${unconfirmedPlane.planePrice}. The number of seats left before the price increase is ${unconfirmedPlane.planeSeats-5}. Seats avaliable are ${unconfirmedPlane.seatsNumber}. Is this your choice? (Y/N)`;
+            outputMessage=`Thank you for flying with ABC airline. Your seat number is ${chosenSeat} and it cost $${unconfirmedPlane.planePrice}. The number of seats left before the price increase is ${unconfirmedPlane.planeSeats-unconfirmedPlane.maxSeat/2}. Seats avaliable are ${unconfirmedPlane.seatsNumber}. Is this your choice? (Y/N)`;
 
             if(Destination===1)
             {
