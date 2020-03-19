@@ -51,6 +51,8 @@ var cabinType;
 var unconfirmedPlane;
 var outputMessage;
 var reply;
+var unconfirmedSeat;
+var indexOfUnconfirmedSeat;
 var inputHappened = function(currentInput){
   var output="";
   console.log(currentInput);
@@ -78,7 +80,8 @@ var inputHappened = function(currentInput){
     if(Destination===1){
         outputMessage="";
         chosenSeat=currentInput;
-  checkSeats(tenSeater);
+        unconfirmedPlane=tenSeater;
+  checkSeats(unconfirmedPlane);
     } else
     if(currentInput==="1" || currentInput==="2" || currentInput==="3"){
         cabinType=currentInput;
@@ -113,13 +116,16 @@ var inputHappened = function(currentInput){
     if(Destination===1){
             reply=currentInput.toLowerCase();
             if(reply==="y"){
+
                 tenSeater=unconfirmedPlane;
                 unconfirmedPlane="";
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
             else if(reply==="n"){
+
                 unconfirmedPlane="";
+                tenSeater.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
@@ -165,6 +171,8 @@ var inputHappened = function(currentInput){
             }
             else if(reply==="n"){
                 unconfirmedPlane="";
+                cabinEconomy.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
+
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
@@ -178,13 +186,17 @@ var inputHappened = function(currentInput){
         if(cabinType==="2"){
             reply=currentInput.toLowerCase();
             if(reply==="y"){
-                tenSeater=unconfirmedPlane;
+
+                cabinBusiness=unconfirmedPlane;
                 unconfirmedPlane="";
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
-            else if(reply==="y"){
+            else if(reply==="n"){
+
                 unconfirmedPlane="";
+                cabinBusiness.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
+
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
@@ -197,13 +209,14 @@ var inputHappened = function(currentInput){
         if (cabinType==="3"){
             reply=currentInput.toLowerCase();
             if(reply==="y"){
-                tenSeater=unconfirmedPlane;
+                cabinFirstClass=unconfirmedPlane;
                 unconfirmedPlane="";
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
-            else if(reply==="y"){
+            else if(reply==="n"){
                 unconfirmedPlane="";
+                                cabinBusiness.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
@@ -215,6 +228,7 @@ var inputHappened = function(currentInput){
         }
 
     break;
+
     default:
     break;
   }
@@ -228,16 +242,25 @@ var inputHappened = function(currentInput){
 
 //function to check seats
 var checkSeats=function(plane){
-for(var i = 0; i<plane.seatsNumber.length;i++)
+    unconfirmedPlane=plane;
+    console.log(tenSeater.seatsNumber);
+    console.log(unconfirmedPlane.seatsNumber);
+for(var i = 0; i<unconfirmedPlane.seatsNumber.length;i++)
   {
+            console.log(tenSeater.seatsNumber);
+    console.log(unconfirmedPlane.seatsNumber);
 
-    console.log(plane.seatsNumber[i]);
-    if(chosenSeat===plane.seatsNumber[i])
+    if(chosenSeat===unconfirmedPlane.seatsNumber[i])
     {
-        plane.planeSeats--;
-        plane.seatsNumber[i]="";
-        if(plane.planeSeats>5){
-            outputMessage=`Thank you for flying with ABC airline. Your seat number is ${chosenSeat} and it cost $${plane.planePrice}. The number of seats left before the price increase is ${plane.planeSeats-5}. Seats avaliable are ${plane.seatsNumber}. Is this your choice? (Y/N)`;
+         //console.log(tenSeater.seatsNumber);
+        unconfirmedPlane.planeSeats--;
+        unconfirmedSeat=unconfirmedPlane.seatsNumber.splice(i,1);
+        indexOfUnconfirmedSeat=i;
+        //unconfirmedPlane.seatsNumber.splice(i,1);
+         console.log(tenSeater.seatsNumber);
+        if(unconfirmedPlane.planeSeats>(unconfirmedPlane.maxSeat/2)){
+            outputMessage=`Thank you for flying with ABC airline. Your seat number is ${chosenSeat} and it cost $${unconfirmedPlane.planePrice}. The number of seats left before the price increase is ${unconfirmedPlane.planeSeats-5}. Seats avaliable are ${unconfirmedPlane.seatsNumber}. Is this your choice? (Y/N)`;
+
             if(Destination===1)
             {
 
@@ -252,7 +275,7 @@ for(var i = 0; i<plane.seatsNumber.length;i++)
 
         else
         {
-            outputMessage=`Thank you for flying with ABC airline. Your seat number is ${chosenSeat} and it cost $${plane.planePrice}.Seats avaliable are ${plane.seatsNumber}.Is this your choice? (Y/N)`;
+            outputMessage=`Thank you for flying with ABC airline. Your seat number is ${chosenSeat} and it cost $${unconfirmedPlane.planePrice}.Seats avaliable are ${unconfirmedPlane.seatsNumber}.Is this your choice? (Y/N)`;
             if(Destination===1)
             {
                 questionCount=2;
@@ -264,24 +287,24 @@ for(var i = 0; i<plane.seatsNumber.length;i++)
         }
 
 
-        plane.planePrice=calculatePriceIncrease(plane);
+        unconfirmedPlane.planePrice=calculatePriceIncrease(unconfirmedPlane);
 
     }
 
   }
 
   if(outputMessage===""){
-    if(plane.seatsNumber===0){
+    if(unconfirmedPlane.seatsNumber===0){
         outputMessage='We are currently sold out. Please contact hot desk. Please choose your destination. 1 for KL, 2 for Bali'
         questionCount=0;
     }
     else{
-        outputMessage=`The seat number is invalid. Try again later.Seats avaliable are ${plane.seatsNumber}.Please choose your destination. 1 for KL, 2 for Bali`;}
+        outputMessage=`The seat number is invalid. Try again later.Seats avaliable are ${unconfirmedPlane.seatsNumber}.Please choose your destination. 1 for KL, 2 for Bali`;}
         questionCount=0
   }
 
 
-    unconfirmedPlane=plane;
+
 };
 
 
