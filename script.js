@@ -62,6 +62,7 @@ var inputHappened = function(anyInput){
 //--------
 var inputHappened = function(anyInput){
 //Seat 1 sold. emptySeats is 10.
+
   emptySeats -= 1;
   if(emptySeats === 9) {
     //emptySeats is 9 after click. Price is $50. Seat 1
