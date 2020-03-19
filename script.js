@@ -221,7 +221,7 @@ var inputHappened = function(currentInput){
             }
             else if(reply==="n"){
                 unconfirmedPlane="";
-                                cabinBusiness.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
+                                cabinFirstClass.seatsNumber.splice(indexOfUnconfirmedSeat,0,unconfirmedSeat)
                 questionCount=0;
                 outputMessage=`Thank you. Please choose your destination. 1 for KL, 2 for Bali`;
             }
