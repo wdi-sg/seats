@@ -11,6 +11,7 @@
         var currentInput = event.target.value;
         var result = inputHappened(currentInput);
         display( result );
+        document.getElementById("input").value = "";
       });
 
       var display = function( data ){
