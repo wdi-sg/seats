@@ -1,4 +1,4 @@
-# seats
+ # seats
 
 ![https://media.giphy.com/media/WKJpCXfvBHyla/giphy.gif](https://media.giphy.com/media/WKJpCXfvBHyla/giphy.gif)
 
@@ -35,7 +35,7 @@ The airline boss requests finer-grained pricing:
 For the first half of the seats, the price goes up 3% over the original price of $50.
 
 For the second half it goes up by 5% over the original price of $50.
-
+ok
 The last seat is $91,000.
 
 ### further
