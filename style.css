@@ -1,3 +1,12 @@
+#output{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  margin:40px;
+  border:3px solid blue;
+  background-color:pink;
+}
+
 .starter{
   font-size:30px;
   padding:10px;
@@ -6,6 +15,3 @@
   border:3px solid blue;
 }
 
-#output{
-  background-color:pink;
-}
