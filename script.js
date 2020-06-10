@@ -6,6 +6,13 @@ var regPlane = {
   soldSeats: 0,
 };
 
+var KLPlane = {
+  totalSeats: 10,
+  currPrice: 50.0,
+  availSeats: 10,
+  soldSeats: 0,
+};
+
 // Object: A cabin plane
 var cabinPlane = {
   economy: {
@@ -31,27 +38,51 @@ var cabinPlane = {
   }
 };
 
-function getCabinTicket(prop) {
-  if (cabinPlane[prop].availSeats == 1) { // This is the last seat
-    return cabinPlane[prop].lastSeat;
+var baliPlane = {
+  economy: {
+    totalSeats: 15,
+    availSeats: 15,
+    currPrice: 50,
+    pricePercentage: [1.03, 1.05],
+    lastSeat: 91000,
+  },
+  business: {
+    totalSeats: 6,
+    availSeats: 6,
+    currPrice: 50,
+    pricePercentage: [1.06, 1.10],
+    lastSeat: 91000,
+  },
+  first: {
+    totalSeats: 4,
+    availSeats: 4,
+    currPrice: 50,
+    pricePercentage: [1.15, 1.50],
+    lastSeat: 191000,
   }
-  else if (cabinPlane[prop].availSeats > cabinPlane[prop].totalSeats) {
-    return cabinPlane[prop].currPrice * cabinPlane[prop].pricePercentage[0];
+};
+
+function getCabinTicket(plane, prop) {
+  if (plane[prop].availSeats == 1) { // This is the last seat
+    return plane[prop].lastSeat;
   }
-  return cabinPlane[prop].currPrice * cabinPlane[prop].pricePercentage[1];
+  else if (plane[prop].availSeats > plane[prop].totalSeats) {
+    return plane[prop].currPrice * plane[prop].pricePercentage[0];
+  }
+  return plane[prop].currPrice * plane[prop].pricePercentage[1];
 }
 
 // Purpose: for regularPlanes, returns the price of the next seat W/O compound interest
-function getNextSeatPrice() {
-  if (regPlane.availSeats === regPlane.totalSeats) {
-    return regPlane.currPrice;
+function getNextSeatPrice(plane) {
+  if (plane.availSeats === plane.totalSeats) {
+    return plane.currPrice;
   }
   // If this is the last seat
-  else if (regPlane.availSeats == 1) {
+  else if (plane.availSeats == 1) {
     return 91000;
   }
   // If it is the first half seats
-  else if (regPlane.availSeats > regPlane.totalSeats/2) {
+  else if (plane.availSeats > plane.totalSeats/2) {
     return 50 * 1.03;
   }
   // If it is the last half seats
@@ -59,16 +90,16 @@ function getNextSeatPrice() {
 }
 
 // Purpose: updates seats and current price when seats are sold
-function update_regPlaneSeatSold() {
-  regPlane.currPrice = getNextSeatPrice();
-  regPlane.seatsSold++;
-  regPlane.availSeats--;
+function updateRegPlane(plane) {
+  plane.currPrice = getNextSeatPrice(plane);
+  plane.seatsSold++;
+  plane.availSeats--;
 }
 
-function updateCabinSeats(prop) {
-  cabinPlane[prop].currPrice = getCabinTicket(prop);
-  cabinPlane[prop].soldSeats++;
-  cabinPlane[prop].availSeats--;
+function updateCabinSeats(plane, prop) {
+  plane[prop].currPrice = getCabinTicket(plane, prop);
+  plane[prop].soldSeats++;
+  plane[prop].availSeats--;
 }
 
 function isCabinPurchase(currentInput) {
@@ -89,47 +120,111 @@ function getCabinProp(currentInput) {
 }
 
 // When button is clicked
-document.querySelector('#input').addEventListener('change', function(event){
-    var currentInput = event.target.value;
-    var displayMessage = "";
-    var availSeats = 0;
+document.querySelector('#input').addEventListener('change', function(event) {
+  var currentInput = event.target.value;
+  var displayMessage = "";
+  var availSeats = 0;
+  var price = 0;
 
-    if (isValid(currentInput)) { // Only valid if it's strings and not empty
-      if (isCabinPurchase(currentInput)) { // If it is a cabin purchase
-        const prop = getCabinProp(currentInput);
-        updateCabinSeats(prop);
-        price = cabinPlane[prop].currPrice;
-        availSeats = cabinPlane[prop].availSeats;
-      }
-      else if (isDestination(currentInput)) {
-        if (getFleet(currentInput) == "cabin") {
-          console.log(getFleet(currentInput));
-          price = "Economy: " + cabinPlane.economy.currPrice +
-          " No. of seats left: " + cabinPlane.economy.availSeats +
-          " Business: " + cabinPlane.business.currPrice +
-          " No. of seats left: " + cabinPlane.business.availSeats +
-          " First class " + cabinPlane.first.currPrice;
-          availSeats = cabinPlane.first.availSeats;
-        }
-        else {
-          price = regPlane.currPrice;
-          availSeats = regPlane.availSeats;
-        }
+  if (!isValid(currentInput)) { // Return if input is invalid
+    return;
+  }
 
-      // Change the price = new price
-      // add another event listener
-      // if the input == 'buy', update the cabin
-      // otherwise input == 'cancel', don't sell the ticket
+  if (cookieExists()) {
+    console.log("Cookie exists!");
+    if (getCookie("place") == "KL") {
+      if (currentInput == "buy") {
+        updateRegPlane(KLPlane);
+        price = KLPlane.currPrice;
+        availSeats = KLPlane.availSeats;
       }
       else {
-        update_regPlaneSeatSold();
-        price = regPlane.currPrice;
-        availSeats = regPlane.availSeats;
+        deleteCookie("place");
       }
-      overwrite(price);
-      append("No. of seats left: " + availSeats);
     }
+    else if (getCookie("place") == "bali") {
+      if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
+        const prop = getCabinProp(currentInput);
+        console.log(prop);
+        updateCabinSeats(baliPlane, prop);
+        console.log(baliPlane);
+        price = destinationMessage();
+        console.log("My price " + price);
+        availSeats = baliPlane.first.availSeats;
+      }
+      else {
+        deleteCookie("place");
+      }
+    }
+  }
+
+  else { // Cookie does not exists
+  console.log("Cookie does not exists!");
+    if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
+      const prop = getCabinProp(currentInput);
+      updateCabinSeats(cabinPlane, prop);
+      price = cabinPlane[prop].currPrice;
+      availSeats = cabinPlane[prop].availSeats;
+    }
+
+    else if (isDestination(currentInput)) {
+      if (getFleet(currentInput) == "cabin") { // input = "bali"
+        price = destinationMessage();
+        availSeats = baliPlane.first.availSeats;
+      }
+      else { // input = "KL"
+        price = KLPlane.currPrice;
+        availSeats = KLPlane.availSeats;
+        console.log(price);
+      }
+      setCookie("place", currentInput);
+    }
+
+    else { // input = anything else
+      updateRegPlane(regPlane);
+      price = regPlane.currPrice;
+      availSeats = regPlane.availSeats;
+    }
+  }
+  overwrite(price);
+  append("No. of seats left: " + availSeats);
 });
+
+function destinationMessage() {
+  return "Economy: " + baliPlane.economy.currPrice +
+          " No. of seats left: " + baliPlane.economy.availSeats +
+          " Business: " + baliPlane.business.currPrice +
+          " No. of seats left: " + baliPlane.business.availSeats +
+          " First class " + baliPlane.first.currPrice;
+}
+
+function cookieExists() {
+  return getCookie("place") != "";
+}
+
+function deleteCookie(cname) {
+  document.cookie = cname + "=; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
+function setCookie(cname, cvalue) {
+  document.cookie = cname + "=" + cvalue;
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 
 function getFleet(currentInput) {
   if (currentInput == "bali") {
