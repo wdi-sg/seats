@@ -4,12 +4,15 @@
   </head>
   <body>
     <div id="inputs">
-    <input class="starter" id="input" placeholder="input"/>
+    <select id="destination" onchange="updateTicket();">
+      <option value="kl">KL</option>
+      <option value="bali">Bali</option>
+    </select>
     <input id="buy" type="button" value="Buy!"/>
     </div>
     <h2>Output:</h2>
     <p class="panel" id="output"></p>
-    <p class="panel" id="message"></p>
+    <p class="panel" id="message"><span id="totalTicket"></span></p>
     <p class="panel" id="error"></p>
     <script>
       document.querySelector('#buy').addEventListener('click',function(event){
