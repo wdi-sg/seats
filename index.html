@@ -3,7 +3,12 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Type "buy first/business/economy class" to buy the tickets.</h1>
+    <select id="unitInput">
+      <option value="destination" selected="selected">Select Destination</option>
+      <option value="KL">KL</option>
+      <option value="bali">Bali</option>
+  </select>
+    <h1 class="toggle">Type "buy first/business/economy class" to buy the tickets.</h1>
     <input class="starter" id="input" placeholder="Enter input"/>
     <h2>Output:</h2>
     <p class="starter" id="output"></p>
