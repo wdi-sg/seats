@@ -8,6 +8,8 @@ var availableClassTickets = {
     business: 6,
     first: 4,
 }
+var economyPrice = 50;
+
 
 //to store user information in cookie
 function setCookie(cname, cvalue, exdays) {
@@ -32,27 +34,79 @@ function getCookie(cname) {
   return "";
 }
 
+//to hide certain options in second dropdown when user selects an item from first dropdown
+    var destinationOptions = document.querySelector("#options");
+    var kualaLumpur = document.querySelector("#kl");
+    var baliIndo = document.querySelector("#bali");
+    var economyClass = document.querySelector("#economy");
+    var businessClass = document.querySelector("#business");
+    var firstClass = document.querySelector("#first");
+
+function userSelection(e) {
+    if (kualaLumpur.selected) {
+        businessClass.disabled = true;
+        firstClass.disabled = true;
+    } else {
+        businessClass.disabled = false;
+        firstClass.disabled = false;
+    }
+}
+
+destinationOptions.addEventListener('change', userSelection);
+
+
+//to compute ticket price and available seats
 function buyTicket() {
     if (availableTickets >= 6) {
     for(var i = 0; i < 6; i++) {
         basicPrice += (basicPrice*0.03);
-        return(basicPrice.toFixed(2));
+        return (basicPrice);
     }
     } else if (availableTickets >= 2) {
         for(var i = 6; i < 10; i++) {
         basicPrice += (basicPrice*0.05);
-        return(basicPrice.toFixed(2));
+        return (basicPrice);
     }
     } else if (availableTickets === 1) {
         basicPrice = 91000;
-        return(basicPrice);
+        return (basicPrice);
     }
 }
 
-function classPriceCalculation(price) {
-  var firstEconomyPrice = (price*1.03).toFixed(2);
-  var secondEconomyPrice = (price*1.05).toFixed(2);
-  var firstBusinessPrice = (price*1.06).toFixed(2);
-  var secondBusinessPrice = (price*1.10).toFixed(2);
-  var firstClassPrice = (price*1.15).toFixed(2);
+function buyBaliEconomy() {
+    if (availableClassTickets.economy >= 8) {
+    for(var i = 0; i < 8; i++) {
+        economyPrice += (economyPrice*0.03);
+        return (economyPrice);
+    }
+    } else if (availableClassTickets.economy >= 2) {
+        for(var i = 6; i < 10; i++) {
+        economyPrice += (economyPrice*0.05);
+        return (economyPrice);
+    }
+    } else if (availableClassTickets.economy === 1) {
+        economyPrice = 91000;
+        return (economyPrice);
+    }
 }
+
+function displayResult() {
+ if (kualaLumpur.selected && economyClass.selected) {
+    buyTicket();
+    document.querySelector("#outputCost").innerText = "*Ticket price from $" + basicPrice.toFixed(2);
+    document.querySelector("#outputSeats").innerText = "**Only " + availableTickets + " seats left!"
+ } else if (baliIndo.selected && economyClass.selected) {
+    buyBaliEconomy();
+    document.querySelector("#outputCost").innerText = "*Ticket price from $" + economyPrice.toFixed(2);
+    document.querySelector("#outputSeats").innerText = "**Only " + availableClassTickets.economy + " seats left!"
+ } else if (baliIndo.selected && businessClass.selected) {
+
+ }
+}
+
+function emptyOutput(e) {
+    document.querySelector("#outputCost").innerText = "";
+    document.querySelector("#outputSeats").innerText = "";
+}
+
+destinationOptions.addEventListener('change', emptyOutput);
