@@ -4,11 +4,12 @@
   </head>
   <body>
     <h1>Airline Ticket Kiosk</h1>
-    <input class="starter" id="input" placeholder="Type anything here" in/>
+    <input class="starter" id="input" placeholder="Type anything here" type="text"/>
+    <button type="button" id="button" value="buy">Buy</button>
     <h2>Output:</h2>
     <p class="starter" id="output"></p>
     <script>
-      document.querySelector('#input').addEventListener('change', function(event){
+      document.querySelector('#button').addEventListener('click', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput);
         display( result );
