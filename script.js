@@ -97,7 +97,7 @@ function getNextSeatPrice(plane) {
 // Returns true if seats are sufficient
 // else, returns false
 function updateRegPlane(plane) {
-  plane.currPrice = getNextSeatPrice(plane);
+  plane.currPrice = getNextSeatPrice(plane).toFixed(2);
   plane.seatsSold++;
   plane.availSeats--;
 }
@@ -108,7 +108,7 @@ function updateCabinSeats(plane, prop) {
   }
   else {
     plane[prop].availSeats--;
-    plane[prop].currPrice = getCabinTicket(plane, prop);
+    plane[prop].currPrice = getCabinTicket(plane, prop).toFixed(2);
     plane[prop].soldSeats++;
   }
 }
@@ -171,7 +171,7 @@ function purchaseTicket() {
     if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
       const prop = getCabinProp(currentInput);
       updateCabinSeats(cabinPlane, prop);
-      planeType = "cabinPlane";
+      planeType = cabinPlane;
     }
 
     else if (isDestination(currentInput)) {
@@ -199,7 +199,8 @@ function displayMessage(planeType) {
           " No. of seats left: " + planeType.economy.availSeats +
           " Business: $" + planeType.business.currPrice +
           " No. of seats left: " + planeType.business.availSeats +
-          " First class $" + planeType.first.currPrice);
+          " First class $" + planeType.first.currPrice +
+          " No. of seats left: " + planeType.first.availSeats);
   }
   else {
     if (planeType.availSeats <= 0) {
