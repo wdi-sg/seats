@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h2>buy ticket</h2>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <p class="starter" id="output"></p>
@@ -12,7 +13,6 @@
         var result = inputHappened(currentInput);
         display( result );
       });
-
       var display = function( data ){
         var output = document.querySelector('#output');
         output.innerText = data;
