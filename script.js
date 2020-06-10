@@ -31,3 +31,5 @@ function customerPrice(currentInput){
     return waiting;
   }
 }
+
+/* new version */
