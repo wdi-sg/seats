@@ -3,6 +3,21 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div class="inputs">
+        <select id="country_selector">
+            <option value="0" selected="selected">Select Destination</option>
+            <option value="1">KL</option>
+            <option value="2">Bali</option>
+        </select>
+    </div>
+
+    <div class="price_display">
+        <h2 id="price_title"></h2>
+        <p id="output1"></p><p class="seats" id="seatsleft1"></p>
+        <p id="output2"></p><p class="seats" id="seatsleft2"></p>
+        <p id="output3"></p><p class="seats" id="seatsleft3"></p>
+    </div>
+
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <p class="starter" id="output"></p>

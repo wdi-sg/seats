@@ -44,7 +44,7 @@ var bigPlane = {
 }
 //initialize dependent variables
 bigPlane.firstClass.seatsLeft = bigPlane.firstClass.seatCapacity;
-bigPlane.firstClass.seatsLeftTillNextBracket = bigPlane.firstClass.seatCapacity*0.5;
+bigPlane.firstClass.seatsLeftTillNextBracket = bigPlane.firstClass.seatCapacity-1;
 bigPlane.businessClass.seatsLeft = bigPlane.businessClass.seatCapacity;
 bigPlane.businessClass.seatsLeftTillNextBracket = Math.floor(bigPlane.businessClass.seatCapacity*0.5);
 bigPlane.economyClass.seatsLeft = bigPlane.economyClass.seatCapacity;
@@ -59,14 +59,27 @@ var seatSale = function(planeType, classType){
     //update seats left
     switch(planeType){
         case "smallPlane":
+            if(smallPlane.seatsLeft>=0){
+                smallPlane.seatsLeft -=1;
+            };
+            console.log("seats left:" + smallPlane.seatsLeft);
+            updateSeatsLeftTillNextBracket(planeType,classType);
+            if(smallPlane.seatsLeft<=0){
+                msgE.innerText = "No seats left for " + classType
+            } else {
+                msgE.innerText = classType+ " Seats left till next bracket: "+smallPlane.seatsLeftTillNextBracket
+            }
+
         break;
         case "bigPlane":
             //update seats left
-            bigPlane[classType].seatsLeft-=1;
+            if(bigPlane[classType].seatsLeft>=0){
+                bigPlane[classType].seatsLeft -=1;
+            };
             console.log("seats left:" + bigPlane[classType].seatsLeft);
             //update seats left till next bracket
             updateSeatsLeftTillNextBracket(planeType,classType);
-            if(bigPlane[classType].seatsLeft==0){
+            if(bigPlane[classType].seatsLeft<=0){
                 msgE.innerText = "No seats left for " + classType
             } else {
                 msgE.innerText = classType+ " Seats left till next bracket: "+bigPlane[classType].seatsLeftTillNextBracket
@@ -103,6 +116,8 @@ var seatSale = function(planeType, classType){
         console.log("planetype", planeType);
         console.log("classType", classType);
 
+        displayPrices();
+
         return sellingPrice;
     // }
 }
@@ -112,6 +127,17 @@ var updatePrice = function(planeType,classType){
 
     switch(planeType){
         case "smallPlane":
+            if(smallPlane.seatsLeft==1){
+                smallPlane.currSeatPrice = smallPlane.lastSeatPrice;
+            }
+            //second half of the plane
+            else if (smallPlane.seatsLeft / smallPlane.seatCapacity <= 0.5){
+                smallPlane.currSeatPrice *= smallPlane.secondMultiplier;
+            }
+            //first half of the plane
+            else{
+                smallPlane.currSeatPrice *= smallPlane.firstMultiplier;
+            }
         break;
         case "bigPlane":
             switch(classType){
@@ -119,6 +145,9 @@ var updatePrice = function(planeType,classType){
                         //last seat
                         if(bigPlane[classType].seatsLeft==1){
                             bigPlane[classType].currSeatPrice = bigPlane[classType].lastSeatPrice;
+                        }
+                        else if(bigPlane[classType].seatsLeft<=0){
+                            bigPlane[classType].currSeatPrice=0;
                         }
                         else {
                             bigPlane[classType].currSeatPrice *= bigPlane[classType].firstMultiplier;
@@ -195,12 +224,95 @@ var isInputValid = function(input){
     'BUY FIRST CLASS'
     ,'BUY BUSINESS CLASS'
     ,'BUY ECONOMY CLASS'
+    ,'BUY KL TICKETS'
     ];
     return allowableInputs.includes(input.toUpperCase());
 }
 
-
 //Event listeners
+document.querySelector('#country_selector').addEventListener('change', function(event){
+    displayPrices();
+});
+
+var getCurrentPrices = function(destination){
+
+    var priceObj = {
+        firstClass:0,
+        businessClass:0,
+        economyClass:0
+    }
+    switch(destination){
+        case "1"://KL small plane
+            priceObj.firstClass = smallPlane.currSeatPrice;
+            priceObj.businessClass = "";
+            priceObj.economyClass = "";
+        break;
+        case "2"://Bali
+            priceObj.firstClass = bigPlane.firstClass.currSeatPrice;
+            priceObj.businessClass = bigPlane.businessClass.currSeatPrice;
+            priceObj.economyClass = bigPlane.economyClass.currSeatPrice;
+        break;
+    }
+    return priceObj;
+}
+
+var displayPrices = function(){
+    clearDisplay()
+    var e = document.getElementById('country_selector');
+    var v = e.options[e.selectedIndex].value;
+    var priceObj = getCurrentPrices(v);
+    var seatsObj = getSeatsLeft(v);
+
+    switch(v){
+        case "1":
+            document.querySelector("#price_title").innerText = "Current prices to KL";
+            document.querySelector("#output1").innerText = "$"+priceObj.firstClass.toFixed(2);
+            document.querySelector("#seatsleft1").innerText = "Only "+seatsObj.firstClass+" seats left at this price!";
+        break;
+        case "2":
+            document.querySelector("#price_title").innerText = "Current prices to Bali";
+            document.querySelector("#output1").innerText = "First Class: $"+priceObj.firstClass.toFixed(2);
+            document.querySelector("#output2").innerText = "Business Class: $"+priceObj.businessClass.toFixed(2);
+            document.querySelector("#output3").innerText = "Economy Class: $"+priceObj.economyClass.toFixed(2);
+            document.querySelector("#seatsleft1").innerText = "Only "+seatsObj.firstClass+" seats left at this price!";
+            document.querySelector("#seatsleft2").innerText = "Only "+seatsObj.businessClass+" seats left at this price!";
+            document.querySelector("#seatsleft3").innerText = "Only "+seatsObj.economyClass+" seats left at this price!";
+        break;
+    }
+    console.log("displaying");
+}
+
+var getSeatsLeft = function(destination){
+    var seatsObj = {
+        firstClass:0,
+        businessClass:0,
+        economyClass:0
+    }
+    switch(destination){
+        case "1"://KL small plane
+            seatsObj.firstClass = smallPlane.seatsLeftTillNextBracket;
+            seatsObj.businessClass = "";
+            seatsObj.economyClass = "";
+        break;
+        case "2"://Bali
+            seatsObj.firstClass = bigPlane.firstClass.seatsLeftTillNextBracket;
+            seatsObj.businessClass = bigPlane.businessClass.seatsLeftTillNextBracket;
+            seatsObj.economyClass = bigPlane.economyClass.seatsLeftTillNextBracket;
+        break;
+    }
+    return seatsObj;
+}
+
+var clearDisplay = function(){
+    document.querySelector("#price_title").innerText = "";
+    document.querySelector("#output1").innerText = "";
+    document.querySelector("#output2").innerText = "";
+    document.querySelector("#output3").innerText = "";
+    document.querySelector("#seatsleft1").innerText = "";
+    document.querySelector("#seatsleft2").innerText = "";
+    document.querySelector("#seatsleft3").innerText = "";
+}
+
 document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput);
@@ -228,6 +340,9 @@ var inputHappened = function(currentInput){
     break;
     case "BUY ECONOMY CLASS":
         res = seatSale("bigPlane","economyClass");
+    break;
+    case "BUY KL TICKETS":
+        res = seatSale("smallPlane","");
     break;
   }
   return res;
