@@ -101,15 +101,50 @@ document.querySelector('#input').addEventListener('change', function(event){
         price = cabinPlane[prop].currPrice;
         availSeats = cabinPlane[prop].availSeats;
       }
+      else if (isDestination(currentInput)) {
+        if (getFleet(currentInput) == "cabin") {
+          console.log(getFleet(currentInput));
+          price = "Economy: " + cabinPlane.economy.currPrice +
+          " No. of seats left: " + cabinPlane.economy.availSeats +
+          " Business: " + cabinPlane.business.currPrice +
+          " No. of seats left: " + cabinPlane.business.availSeats +
+          " First class " + cabinPlane.first.currPrice;
+          availSeats = cabinPlane.first.availSeats;
+        }
+        else {
+          price = regPlane.currPrice;
+          availSeats = regPlane.availSeats;
+        }
+
+      // Change the price = new price
+      // add another event listener
+      // if the input == 'buy', update the cabin
+      // otherwise input == 'cancel', don't sell the ticket
+      }
       else {
         update_regPlaneSeatSold();
-        price = regPlane.currPrice
+        price = regPlane.currPrice;
         availSeats = regPlane.availSeats;
       }
       overwrite(price);
-      append("No. of seats left: " + availSeats)
+      append("No. of seats left: " + availSeats);
     }
 });
+
+function getFleet(currentInput) {
+  if (currentInput == "bali") {
+    return "cabin";
+  }
+  return "regular";
+}
+
+// Purpose: checks if input is a destination
+function isDestination(currentInput) {
+  if (currentInput == "bali" || currentInput == "KL") {
+    return true;
+  }
+  return false;
+}
 
 // This function overwrites current output
 var overwrite = function(data){
