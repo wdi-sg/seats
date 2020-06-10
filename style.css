@@ -1,11 +1,14 @@
 .starter{
-  font-size:30px;
+  text-align: center;
+  font-size:12px;
   padding:10px;
   display:block;
   margin:40px;
-  border:3px solid blue;
+  border:1px solid blue;
 }
-
+#inputs{
+  text-align: center;
+}
 #output{
   background-color:pink;
 }
