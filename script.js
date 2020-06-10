@@ -98,7 +98,7 @@ var inputHappened = function(input){
       Y / N
       --- Seats Available : ${10 - seatsSoldKL} ---
       --- Current Price: $${priceKL} ---`;
-    } else if (input.toLowerCase() === 'bali') {
+    } else if (input.toLowerCase() === "bali") {
       location = input.toLowerCase();
       document.querySelector("#input").value = "";
       return `Preferred cabin class?
