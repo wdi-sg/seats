@@ -11,13 +11,15 @@ var inputHappened = function(currentInput){
   if (currentInput != "") {
 
     if (seat <= 10 && seat > 5) {
+      seatPrice= seatPrice*1.03;
       seat --;
-      output= "Thank you for your purchase! Your ticket was $" + (seatPrice*1.03) + ". We have "+ seat + " seats left.";
+      output= "Thank you for your purchase! Your ticket was $" + seatPrice.toFixed(2) + ". " + seat + " seats left till increase in seat prices!";
     }
 
     else if (seat < 6 && seat > 1) {
-       seat --;
-      output= "Thank you for your purchase! Your ticket was $" + increasedSeatPrice.toFixed(2) + ". We have " + seat + " seats left.";
+      seatPrice= seatPrice*1.05;
+      seat --;
+      output= "Thank you for your purchase! Your ticket was $" + seatPrice.toFixed(2) + ". " + seat + " seats left till crazy jump in seat prices!";
     }
 
     else {
