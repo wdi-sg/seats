@@ -1,5 +1,6 @@
 // Object: A regular plane
 var regPlane = {
+  name: "Regular plane ",
   totalSeats: 10,
   currPrice: 50.0,
   availSeats: 10,
@@ -7,6 +8,7 @@ var regPlane = {
 };
 
 var KLPlane = {
+  name: "KL (regular) plane ",
   totalSeats: 10,
   currPrice: 50.0,
   availSeats: 10,
@@ -15,6 +17,7 @@ var KLPlane = {
 
 // Object: A cabin plane
 var cabinPlane = {
+  name: "Cabin plane",
   economy: {
     totalSeats: 15,
     availSeats: 15,
@@ -39,6 +42,7 @@ var cabinPlane = {
 };
 
 var baliPlane = {
+  name: "Bali (cabin) plane: ",
   economy: {
     totalSeats: 15,
     availSeats: 15,
@@ -94,7 +98,7 @@ function getNextSeatPrice(plane) {
 // else, returns false
 function updateRegPlane(plane) {
   if (plane.availSeats == 0) {
-    overwrite("Flight full!");
+    overwrite("Flight for " + plane.name + " is TOTALLY full!");
     return false;
   }
   plane.currPrice = getNextSeatPrice(plane);
@@ -130,11 +134,10 @@ const submitButton = document.getElementById("submit");
 submitButton.onclick = purchaseTicket;
 
 function purchaseTicket() {
-  var currentInput = document.getElementById("input");
-  var availSeats = 0;
-  var price = 0;
-  var planeType = regPlane;
+  var currentInput = document.getElementById("input").value;
+  var planeType;
 
+  console.log("Click: " + cookieExists());
   if (!isValid(currentInput)) { // Return if input is invalid
     return;
   }
@@ -142,8 +145,6 @@ function purchaseTicket() {
     console.log("Cookie exists!");
     if (getCookie("place") == "KL") {
       if (currentInput == "buy" && updateRegPlane(KLPlane)) {
-        price = KLPlane.currPrice;
-        availSeats = KLPlane.availSeats;
         planeType = KLPlane;
       }
       else {
@@ -155,8 +156,6 @@ function purchaseTicket() {
       if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
         const prop = getCabinProp(currentInput);
         updateCabinSeats(baliPlane, prop);
-        price = destinationMessage();
-        availSeats = baliPlane.first.availSeats;
         planeType = baliPlane;
       }
       else {
@@ -171,44 +170,43 @@ function purchaseTicket() {
     if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
       const prop = getCabinProp(currentInput);
       updateCabinSeats(cabinPlane, prop);
-      price = cabinPlane[prop].currPrice;
-      availSeats = cabinPlane[prop].availSeats;
-      planeType = cabinPlane;
+      planeType = "cabinPlane";
     }
 
     else if (isDestination(currentInput)) {
       if (getFleet(currentInput) == "cabin") { // input = "bali"
-        price = destinationMessage();
-        availSeats = baliPlane.first.availSeats;
         planeType = baliPlane;
       }
       else { // input = "KL"
-        price = KLPlane.currPrice;
-        availSeats = KLPlane.availSeats;
-        planeType = KLplane;
+        planeType = KLPlane;
       }
       setCookie("place", currentInput);
     }
 
     else { // input = anything else
       if (updateRegPlane(regPlane)) {
-        price = regPlane.currPrice;
-        availSeats = regPlane.availSeats;
         planeType = regPlane;
       }
       else { return; }
     }
   }
-  overwrite(price);
-  append("No. of seats left: " + availSeats);
+  displayMessage(planeType);
 }
 
-function destinationMessage() {
-  return "Economy: " + baliPlane.economy.currPrice +
-          " No. of seats left: " + baliPlane.economy.availSeats +
-          " Business: " + baliPlane.business.currPrice +
-          " No. of seats left: " + baliPlane.business.availSeats +
-          " First class " + baliPlane.first.currPrice;
+function displayMessage(planeType) {
+  // if plane type is cabin
+  if (planeType == baliPlane || planeType == cabinPlane) {
+    overwrite("Tickets for " + planeType.name + ". Economy: $" + planeType.economy.currPrice +
+          " No. of seats left: " + planeType.economy.availSeats +
+          " Business: $" + planeType.business.currPrice +
+          " No. of seats left: " + planeType.business.availSeats +
+          " First class $" + planeType.first.currPrice);
+  }
+  else {
+    overwrite("Tickets for " + planeType.name +
+    ". Price: $" + planeType.currPrice +
+    ". No. of seats left: " + planeType.availSeats);
+  }
 }
 
 function cookieExists() {
@@ -275,22 +273,3 @@ function isValid(input) {
   }
   return true;
 }
-
-
-// Purpose: regularPlanes, returns the price of the next seat w/ compound interest
-// function getCumNextSeatPrice() {
-//   // If it is the first seat
-//   if (regPlane.availSeats === regPlane.totalSeats) {
-//     return regPlane.currPrice;
-//   }
-//   // If this is the last seat
-//   else if (regPlane.availSeats == 1) {
-//     return 91000;
-//   }
-//   // If it is the first half seats
-//   else if (regPlane.availSeats > regPlane.totalSeats/2) {
-//     return regPlane.currPrice * 1.03;
-//   }
-//   // If it is the last half seats
-//   return regPlane.currPrice * 1.05;
-// }
