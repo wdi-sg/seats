@@ -5,7 +5,9 @@ let price = 50; //price of each seats
 
 function inputHappened(currentInput){
   console.log(currentInput);
-  if (currentInput != ""){
+  let input = currentInput.toLowerCase(); //convert currentInput to lower case
+  if (input == "yes"){
+  //if input equals to yes then run the if else statement below
     if(seats >= 6 && seats <= 9){
         //seat 2 to 5 is 3% more than previous price
         seats--;
@@ -27,6 +29,11 @@ function inputHappened(currentInput){
         return "No more seat left"
     }
     alert(seats + " more seats to price change");
-    return "You have bought a seat, the price of your seat is $" + price +".";
+    document.getElementById('input').value = "";
+    return "You have bought a seat, the price of your seat is $" + price;
+  } else if (input != "YES"){
+    //if input not equals to yes then ask user to key in yes to buy ticket
+    document.getElementById('input').value = "";
+    return "Please key in YES to buy ticket"
   }
 }
