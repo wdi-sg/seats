@@ -6,7 +6,9 @@
   margin:40px;
   border:1px solid blue;
 }
-
+#inputs{
+  text-align: center;
+}
 #output{
   background-color:pink;
 }
