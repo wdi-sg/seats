@@ -6,21 +6,35 @@
     <div class="container">
       <h2>bee airways</h2>
     
-      <!-- input -->          
-      <select id="selector">
-        <option value="economy">Economy Class</option>
-            <option value="business">Business Class</option>
-            <option value="first" selected="selected">First Class</option>  
-      </select>
-      <button class="user-input" type="text" id="user-input">Buy Ticket</button>
-          
-      <!-- output -->
-      <h4>your seat costs:</h4>
-      <div class="output" id="result"></div>
-      <div class="output" id="second-result"></div>
-      <div class="output" id="message"></div>
-    </div>
+      <!-- input -->    
+      <h4>where do you want to go?</h4>
+      <div class="form">
+        <input type="radio" id="bali" name="location" value="bali" class="location-bali">
+        <label for="bali">Bali</label><br>
+        <input type="radio" id="KL" name="location" value="KL" class="location-KL">
+        <label for="KL">KL</label><br>  
+      </div>
+      
+      <div id="btn-KL">
+        <button class="user-input" type="text" id="user-input btn-KL">Buy Ticket</button>
+      </div>
+
+      <div id="hidden">
+        <select id="selector">
+          <option value="economy">Economy Class</option>
+              <option value="business">Business Class</option>
+              <option value="first" selected="selected">First Class</option>  
+        </select>
+        <button class="user-input" type="text" id="user-input">Buy Ticket</button>
+      </div>        
+        <!-- output -->
+        <h4>your seat costs:</h4>
+        <div class="output" id="result"></div>
+        <div class="output" id="second-result"></div>
+        <div class="output" id="message"></div>
+      </div>
+      
     
-    <script src="script1.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

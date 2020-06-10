@@ -1,4 +1,41 @@
-// create object for each cabin and store data and methods
+// create object for each plane and cabin and store data and methods
+const planeKL = {
+  "seats": 10,
+  "price": 50,
+
+  getPrice() {
+    this.seats -= 1;
+    if (this.seats >= 5) {
+      this.price = this.price + (this.price*0.03);
+      display.displayKL(this.price); 
+  } else if (this.seats > 1 && this.seats < 5) {
+      this.price = this.price + (this.price*0.05);
+      display.displayKL(this.price); 
+  } else if (this.seats === 1) {
+      this.price = 91000
+      display.displayKL(this.price); 
+  } else {
+    this.price = "-";
+    display.displayKL(this.price);
+  };
+  console.log('KL', this.seats)
+  },
+
+  message(){
+    const seatsLeft = document.querySelector('#second-result');
+  
+    if (this.seats >= 7) {
+      seatsLeft.innerText = `${this.seats-6} seat(s) left before the price bracket increases.`;
+    } else if (this.seats > 1 && this.seats < 7) {
+      seatsLeft.innerText = `${this.seats-1} seat(s) left before the price bracket increases`;
+    } else if (this.seats === 1) {
+      seatsLeft.innerText = `only ONE seat left at this price!`;
+    } else {
+      seatsLeft.innerText = `Sorry, there are no seats left.`;
+    } 
+  }
+}
+
 const economyCabin = {
   "seats": 15,
   "price": 50,
@@ -18,7 +55,7 @@ const economyCabin = {
     this.price = "-";
     display.displayEconomy(this.price);
   };
-  console.log(this.seats)
+  console.log('economy', this.seats)
   },
 
   message(){
@@ -55,7 +92,7 @@ const businessCabin = {
     this.price = "-";
     display.displayBusiness(this.price);
   };
-  console.log(this.seats)
+  console.log('business', this.seats)
   },
 
   message(){
@@ -89,7 +126,7 @@ const firstCabin = {
     this.price = "-";
     display.displayFirst(this.price);
   };
-  console.log(this.seats)
+  console.log('first', this.seats)
   },
 
   message(){
@@ -105,16 +142,46 @@ const firstCabin = {
 
 // UI elements
 const input = document.getElementById('user-input');
+const btnKL = document.getElementById('btn-KL');
 const ticketInput = document.getElementById('selector');
+const locationInputKL = document.querySelector('.location-KL');
+const locationInputBali = document.querySelector('.location-bali');
 
-// add event listener to button
+// add event listeners
+document.addEventListener('DOMContentLoaded', hideCabins);
+locationInputKL.addEventListener('click', chooseKL);
+locationInputBali.addEventListener('click', chooseBali);
 input.addEventListener('click', buySeat);
+btnKL.addEventListener('click', buySeat);
+
+
+// hide cabins function
+function hideCabins() {
+  document.getElementById('hidden').style.visibility = "hidden";
+  document.getElementById('btn-KL').style.visibility = "hidden";
+}
+
+// choose location function
+function chooseKL() {
+  document.getElementById('hidden').style.visibility = "hidden";
+  document.getElementById('btn-KL').style.visibility = "visible";
+  input.addEventListener('click', buySeat);
+
+  console.log(locationInputKL.value);
+}
+
+function chooseBali() {
+  document.getElementById('btn-KL').style.visibility = "hidden";
+  document.getElementById('hidden').style.visibility = "visible";
+}
 
 // buy seat function
 function buySeat(e) {
   const ticketClass = ticketInput.value;
   
-  if (ticketClass === "economy") {
+  if (locationInputKL.value === "KL") {
+    planeKL.getPrice();
+  } else if (ticketClass === "economy") {
     economyCabin.getPrice();
   } else if (ticketClass === "first") {
     firstCabin.getPrice();
@@ -126,6 +193,13 @@ function buySeat(e) {
 
 // display results for each cabin
 const display = {
+  displayKL(data) {
+    const price = document.querySelector('#result');
+    price.innerText = "$" + data;
+  
+    planeKL.message();
+    
+  },
   displayEconomy(data) {
     const price = document.querySelector('#result');
     price.innerText = "$" + data;
