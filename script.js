@@ -9,17 +9,22 @@ var display = function( data ){
   output.innerText = data;
 }
 
-let planeseats = 10;
+let planeSeats = 10;
 let seatPrice = 50;
 
 
 var inputHappened = function(currentInput){
-  while (planeseats>=0) {
-    if(planeseats===0){
+  while (planeSeats>=0) {
+    if(planeSeats===1){
       return "Seats sold out"
-    }
+    } else if(planeSeats>5){
     seatPrice = seatPrice*1.05;
-    planeseats--;
-    return "The price is $"+ Math.ceil(seatPrice) + " and there are still " + planeseats + " seats left";
+  } else if(planeSeats>2){
+  seatPrice = seatPrice*1.03;
+  } else if(planeSeats===2){
+    seatPrice = 91000;
+  }
+  planeSeats--;
+    return "The price is $"+ seatPrice + " and there are still " + planeSeats + " seats left";
   }
 };
