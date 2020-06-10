@@ -46,17 +46,31 @@ var updatePrice = function(){
     console.log("currSeatPrice: " + currSeatPrice);
 }
 
+//function updates the global variable seatsleft till next bracket
 var updateSeatsLeftTillNextBracket = function(){
     if (seatsLeft > seatCapacity*0.5){
         seatsLeftTillNextBracket=seatsLeft - seatCapacity*0.5;
     }
     else if (seatsLeft <= seatCapacity*0.5) {
-        if (seatsLeft==0){
-            seatsLeftTillNextBracket=0;
-        }
         seatsLeftTillNextBracket=seatsLeft - 1;
     }
+    if (seatsLeft<=0){
+            seatsLeftTillNextBracket=0;
+    }
     console.log("seatsLeftTillNextBracket:" + seatsLeftTillNextBracket);
+}
+
+//validate inputs
+//allowable inputs
+//only text
+//only buy first class, buy business class, buy economy class
+var isInputValid = function(input){
+    var allowableInputs = [
+    'BUY FIRST CLASS'
+    ,'BUY BUSINESS CLASS'
+    ,'BUY ECONOMY CLASS'
+    ];
+    return allowableInputs.includes(input.toUpperCase());
 }
 
 
@@ -74,5 +88,9 @@ document.querySelector('#input').addEventListener('change', function(event){
 
 var inputHappened = function(currentInput){
   // console.log( currentInput );
+  if (isInputValid(currentInput)==false){
+    console.log("is input valid: " + isInputValid(currentInput));
+    return "";
+  }
   return seatSale();;
 };
