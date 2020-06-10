@@ -1,6 +1,6 @@
 // Object: A regular plane
 var regPlane = {
-  name: "Regular plane ",
+  name: "Regular plane",
   totalSeats: 10,
   currPrice: 50.0,
   availSeats: 10,
@@ -8,7 +8,7 @@ var regPlane = {
 };
 
 var KLPlane = {
-  name: "KL (regular) plane ",
+  name: "KL (regular) plane",
   totalSeats: 10,
   currPrice: 50.0,
   availSeats: 10,
@@ -97,14 +97,9 @@ function getNextSeatPrice(plane) {
 // Returns true if seats are sufficient
 // else, returns false
 function updateRegPlane(plane) {
-  if (plane.availSeats == 0) {
-    overwrite("Flight for " + plane.name + " is TOTALLY full!");
-    return false;
-  }
   plane.currPrice = getNextSeatPrice(plane);
   plane.seatsSold++;
   plane.availSeats--;
-  return true;
 }
 
 function updateCabinSeats(plane, prop) {
@@ -144,7 +139,8 @@ function purchaseTicket() {
   if (cookieExists()) {
     console.log("Cookie exists!");
     if (getCookie("place") == "KL") {
-      if (currentInput == "buy" && updateRegPlane(KLPlane)) {
+      if (currentInput == "buy") {
+        updateRegPlane(KLPlane);
         planeType = KLPlane;
       }
       else {
@@ -184,10 +180,8 @@ function purchaseTicket() {
     }
 
     else { // input = anything else
-      if (updateRegPlane(regPlane)) {
-        planeType = regPlane;
-      }
-      else { return; }
+      updateRegPlane(regPlane);
+      planeType = regPlane;
     }
   }
   displayMessage(planeType);
@@ -203,9 +197,14 @@ function displayMessage(planeType) {
           " First class $" + planeType.first.currPrice);
   }
   else {
-    overwrite("Tickets for " + planeType.name +
-    ". Price: $" + planeType.currPrice +
-    ". No. of seats left: " + planeType.availSeats);
+    if (planeType.availSeats <= 0) {
+      overwrite("Tickets for " + planeType.name + " is TOTALLY full!");
+    }
+    else {
+      overwrite("Tickets for " + planeType.name +
+      ". Price: $" + planeType.currPrice +
+      ". No. of seats left: " + planeType.availSeats);
+    }
   }
 }
 
