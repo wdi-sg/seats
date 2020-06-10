@@ -7,9 +7,17 @@
     <img src="imageSeats.gif" alt="Plane going round" class="logo">
     <h1 class="airline">G.Airlines</h1>
     </header>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+
+    <h4>Tikets left: <span id="ticketsLeft"></span></h4>
+
+    <h4><span id="bracketChange"></span></h4>
+
+    <input class="starter" id="input" placeholder="Enter a random key"/>
+
+    <h2>Purchase confirmation:</h2>
+
     <p class="starter" id="output"></p>
+
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -22,7 +30,9 @@
         output.innerText = data;
       }
     </script>
+
     <script src="script.js"></script>
+
   </body>
 </html>
 <! –– new version ––>
