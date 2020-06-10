@@ -103,9 +103,14 @@ function updateRegPlane(plane) {
 }
 
 function updateCabinSeats(plane, prop) {
-  plane[prop].currPrice = getCabinTicket(plane, prop);
-  plane[prop].soldSeats++;
-  plane[prop].availSeats--;
+  if (plane[prop].availSeats === 0) {
+    plane[prop].availSeats = 0;
+  }
+  else {
+    plane[prop].availSeats--;
+    plane[prop].currPrice = getCabinTicket(plane, prop);
+    plane[prop].soldSeats++;
+  }
 }
 
 function isCabinPurchase(currentInput) {
