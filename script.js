@@ -56,9 +56,15 @@ document.querySelector('#input').addEventListener('change', function(event){
     var currentInput = event.target.value;
     inputHappened(currentInput);
     overwrite(regPlane.currPrice);
+    append("No. of seats left: " + regPlane.availSeats);
 });
 
 var overwrite = function( data ){
     var output = document.querySelector('#output');
     output.innerText = data;
+}
+
+function append(text) {
+    var output = document.querySelector('#output');
+    output.innerText += text;
 }
