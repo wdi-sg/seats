@@ -89,11 +89,18 @@ function getNextSeatPrice(plane) {
   return 50 * 1.05;
 }
 
-// Purpose: updates seats and current price when seats are sold
+// Takes in a regular plane (KLPlane/regPlane),
+// Returns true if seats are sufficient
+// else, returns false
 function updateRegPlane(plane) {
+  if (plane.availSeats == 0) {
+    overwrite("Flight full!");
+    return false;
+  }
   plane.currPrice = getNextSeatPrice(plane);
   plane.seatsSold++;
   plane.availSeats--;
+  return true;
 }
 
 function updateCabinSeats(plane, prop) {
@@ -119,41 +126,42 @@ function getCabinProp(currentInput) {
   }
 }
 
-// When button is clicked
-document.querySelector('#input').addEventListener('change', function(event) {
-  var currentInput = event.target.value;
-  var displayMessage = "";
+const submitButton = document.getElementById("submit");
+submitButton.onclick = purchaseTicket;
+
+function purchaseTicket() {
+  var currentInput = document.getElementById("input");
   var availSeats = 0;
   var price = 0;
+  var planeType = regPlane;
 
   if (!isValid(currentInput)) { // Return if input is invalid
     return;
   }
-
   if (cookieExists()) {
     console.log("Cookie exists!");
     if (getCookie("place") == "KL") {
-      if (currentInput == "buy") {
-        updateRegPlane(KLPlane);
+      if (currentInput == "buy" && updateRegPlane(KLPlane)) {
         price = KLPlane.currPrice;
         availSeats = KLPlane.availSeats;
+        planeType = KLPlane;
       }
       else {
         deleteCookie("place");
+        purchaseTicket();
       }
     }
     else if (getCookie("place") == "bali") {
       if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
         const prop = getCabinProp(currentInput);
-        console.log(prop);
         updateCabinSeats(baliPlane, prop);
-        console.log(baliPlane);
         price = destinationMessage();
-        console.log("My price " + price);
         availSeats = baliPlane.first.availSeats;
+        planeType = baliPlane;
       }
       else {
         deleteCookie("place");
+        purchaseTicket();
       }
     }
   }
@@ -165,30 +173,35 @@ document.querySelector('#input').addEventListener('change', function(event) {
       updateCabinSeats(cabinPlane, prop);
       price = cabinPlane[prop].currPrice;
       availSeats = cabinPlane[prop].availSeats;
+      planeType = cabinPlane;
     }
 
     else if (isDestination(currentInput)) {
       if (getFleet(currentInput) == "cabin") { // input = "bali"
         price = destinationMessage();
         availSeats = baliPlane.first.availSeats;
+        planeType = baliPlane;
       }
       else { // input = "KL"
         price = KLPlane.currPrice;
         availSeats = KLPlane.availSeats;
-        console.log(price);
+        planeType = KLplane;
       }
       setCookie("place", currentInput);
     }
 
     else { // input = anything else
-      updateRegPlane(regPlane);
-      price = regPlane.currPrice;
-      availSeats = regPlane.availSeats;
+      if (updateRegPlane(regPlane)) {
+        price = regPlane.currPrice;
+        availSeats = regPlane.availSeats;
+        planeType = regPlane;
+      }
+      else { return; }
     }
   }
   overwrite(price);
   append("No. of seats left: " + availSeats);
-});
+}
 
 function destinationMessage() {
   return "Economy: " + baliPlane.economy.currPrice +
