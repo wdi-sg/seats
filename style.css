@@ -1,11 +1,25 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
-}
+.destination{
 
-#output{
-  background-color:pink;
+  background-color: beige;
+  padding: 10px;
+   text-align: center;
+   font-size: 24;
+  
+
+}
+#destination{
+
+  margin: 20px;
+}
+.tierContainer{
+  padding: 10px;
+  color: blue;
+}
+.buyCancel{
+  padding: 10px;
+  color: blue;
+}
+.continueShopping{
+  margin: 20px;
+  background-color: pink;
 }
