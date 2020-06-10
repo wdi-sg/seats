@@ -1,11 +1,39 @@
+body {
+  font-family: Arial;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  display: table;
+  text-align: center;
+  background-color: #DCDCDC;
+}
+
 .starter{
-  font-size:30px;
-  padding:10px;
+  font-size:20px;
+  padding:20px;
   display:block;
-  margin:40px;
-  border:3px solid blue;
+  margin:30px;
+  border:3px solid black;
+}
+
+.logo {
+  margin-top: 50px;
+  border-radius: 25px;
+	width: 300px;
+	height: 300px;
+}
+
+.airline{
+	font-size: 50px;
+}
+
+#input{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
 }
 
 #output{
-  background-color:pink;
+  background-color: white;
+  text-align: center;
 }
