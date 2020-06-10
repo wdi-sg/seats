@@ -26,13 +26,20 @@ var calculateCurrentPrice = function(){
   }
 }
 
+var buyTicket = function(){
+  calculateCurrentPrice();
+  currentSeats--;
+  return "Your ticket costs $" + currentPrice;
+}
+
+/*
 var inputHappened = function(currentInput){
   //console.log( currentInput );
-  calculateCurrentPrice();
+  
   console.log(currentPrice);
-  currentSeats--;
+  
   console.log(currentSeats);
-  return "Your ticket costs $" + currentPrice;
+  
 };
 
-
+*/

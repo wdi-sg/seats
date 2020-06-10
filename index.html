@@ -12,14 +12,15 @@
     <p class="panel" id="message"></p>
     <p class="panel" id="error"></p>
     <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput);
-        display( result );
+      document.querySelector('#buy').addEventListener('click',function(event){
+        var result = buyTicket();
+        display(result);
       });
 
       var display = function( data ){
         var output = document.querySelector('#output');
+        var message = document.querySelector('#message');
+        message.innerText = currentSeats;
         output.innerText = data;
       }
     </script>
