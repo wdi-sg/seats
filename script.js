@@ -54,12 +54,14 @@ var inputHappened = function(currentInput){
 
 document.querySelector('#input').addEventListener('change', function(event){
     var currentInput = event.target.value;
-    inputHappened(currentInput);
-    overwrite(regPlane.currPrice);
-    append("No. of seats left: " + regPlane.availSeats);
+    if (isValid(currentInput)) { // Only valid if it's strings and not empty
+      inputHappened(currentInput);
+      overwrite(regPlane.currPrice);
+      append("No. of seats left: " + regPlane.availSeats);
+    }
 });
 
-var overwrite = function( data ){
+var overwrite = function(data){
     var output = document.querySelector('#output');
     output.innerText = data;
 }
@@ -67,4 +69,14 @@ var overwrite = function( data ){
 function append(text) {
     var output = document.querySelector('#output');
     output.innerText += text;
+}
+
+// Purpose: checks the validity of input,
+// Input must be a string and must not be empty
+function isValid(input) {
+  if (!isNaN(input) || input === "") {
+    overwrite("Invalid input!");
+    return false;
+  }
+  return true;
 }
