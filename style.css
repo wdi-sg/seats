@@ -1,11 +1,29 @@
 .starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+  font-size: 20px;
+  padding: 30px;
+  display: inline-block;
+  box-sizing: 60px;
+  margin: 0px 40px;
+  border: 2px solid blue;
 }
 
 #output{
-  background-color:pink;
+  background-color: lightgrey;
+  margin: 0px 40px;
+  display: inline-block;
+}
+
+.h2 {
+	margin: 20px 40px;
+}
+.button {
+  border: 10 auto;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 10px 40px 0px 0px;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
