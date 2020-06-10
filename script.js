@@ -35,7 +35,13 @@ function bookSeats(selectedNo){
   if(pSeats > 0) { //1ST CRITERIA IF-ST IS TO CHECK IF ANY SEATS LEFT
     if(!isNaN(selectedNo) && selectedNo > 0) { //2ND CRITERIA FOR FN IS TO CHECK IF INPUT IS A NUM AND IF ITS NOT A NEGATIVE NUM
         if(selectedNo <= 10 && selectedNo <= pSeats) { //2ND-01 CRITERIA IF SELECTEDNO LESS OR EQUAL TO 10 WHILE SELECTION IS LESS  OR EQUAL TO THAN AVAILABLE SEATS
-            if (pSeats > 5 && pendingTaken <=5 ) { //2ND-01-01 CRITERIA CHECK IF ITS FIRST TIME USER INPUT, COMPUTE THE COST AT $50 AT 1ST TIX + $50*1.05 FOR BALANCE SELECTEDNO
+            if (pSeats === 1) {
+                cost = 91000;
+                pSeats = pSeats - selectedNo;
+                taken = 10 - pSeats;
+                msg = `Last Seat Total Cost : $${cost}, \n remaining seats: ${pSeats}, \n taken: ${taken}`
+            }
+            else if (pSeats > 5 && pendingTaken <=5 ) { //2ND-01-01 CRITERIA CHECK IF ITS FIRST TIME USER INPUT, COMPUTE THE COST AT $50 AT 1ST TIX + $50*1.05 FOR BALANCE SELECTEDNO
                 cost = priceInc3()*selectedNo;
                 pSeats = pSeats - selectedNo; //NO OF SEATS REMAINING AFTER THIS TRANSACTION
                 taken = 10 - pSeats; //MATH OPERATION FINALLY WORKS FOR TAKEN (DOESNT WORK FOR taken + selectedNo)
@@ -62,16 +68,24 @@ function bookSeats(selectedNo){
             msg = `only ${pSeats} seats remaining`
         }
     } else { //2ND-ELSE CRITERIA FOR FN IF INPUT IS NOT A NUM
-        if (pSeats > 5 && selectedNo !== "") { //2ND-ELSE-01 CRITERIA CHECK IF ITS FIRST TIME USER INPUT & TO AVOID PROMPT-FN-BUYING WHEN USER CLEARS THE INPUT BOX
+        if (pSeats === 1 && selectedNo !== ""){
+                cost = 91000;
+                pSeats = pSeats - 1;
+                taken = 10 - pSeats;
+                msg = `Last Seat Total Cost : $${cost}, \n remaining seats: ${pSeats}, \n taken: ${taken}`
+                alert("Sorry we don't recognize your input however we've blocked the last ticket for you.")
+        } else if (pSeats > 5 && selectedNo !== "") { //2ND-ELSE-01 CRITERIA CHECK IF ITS FIRST TIME USER INPUT & TO AVOID PROMPT-FN-BUYING WHEN USER CLEARS THE INPUT BOX
             cost = priceInc3()*1; //COMPUTE 1 NO X $50 FOR WHATEVER LETTERS TYPED
             pSeats = pSeats - 1;
-            msg = `1st-SingleTix - Total Cost : $${cost}, \n remaining seats: ${pSeats}`
+            taken = 10 - pSeats;
+            msg = `1st-SingleTix - Total Cost : $${cost}, \n remaining seats: ${pSeats} \n taken: ${taken}`
             // timesUserInput++;
             alert("Sorry we don't recognize your input however we've blocked a ticket for you.")
         } else if (pSeats > 0 && selectedNo !== "") { //2ND-ELSE-02 CRITERIA CHECK IF ITS 2ND TIME ONWARDS USER INPUT, COMPUTE THE COST AT $50 X 1 X 1.05
             cost = priceInc5()*1; //COMPUTE 1 NO X $50 X 1.05 FOR WHATEVER LETTERS TYPED
             pSeats = pSeats - 1;
-            msg = `2nd-Single-Tix - Total Cost : $${cost}, \n remaining seats: ${pSeats}`
+            taken = 10 - pSeats;
+            msg = `2nd-Single-Tix - Total Cost : $${cost}, \n remaining seats: ${pSeats} \n taken: ${taken}`
             // timesUserInput++; NO NEED TO KNOW IF ITS THE THIRD OR N TIMES
             alert("Sorry we don't recognize your input however we've blocked a ticket for you.")
         }
