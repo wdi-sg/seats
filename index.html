@@ -3,21 +3,20 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <p class="starter" id="output"></p>
-    <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput);
-        display( result );
-      });
-
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
-    </script>
+    <div class="container">
+        <h2>Where to next?</h2>
+    <select id="options" class="dropdown" onchange="updateTicket();">
+        <option value="kl">Kuala Lumpur</option>
+        <option value="bali">Bali</option>
+    </select>
+    <select id="ticketTypes" class="dropdown">
+        <option value="economy">Economy</option>
+        <option value="business">Business</option>
+        <option value="firstclass">First Class</option>
+    </select>
+    <input class="user-input" type="button" id="buy" value="Buy" onclick="buyTicket();"/>
+    <span class="result" id="outputCost"></span>
+    <span class="result" id="outputSeats"></span>
     <script src="script.js"></script>
   </body>
 </html>
