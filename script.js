@@ -10,8 +10,11 @@ var airplane2 = {
   basePrice: 50
 }
 var currentSeats = airplane.seats;
-var currentPrice = 0;
-var availableClassSeats = 15;//airplane2.economySeats + airplane2.businessSeats + airplane2.firstSeats;
+var currentEconomySeats = airplane2.economySeats;
+var currentBusinessSeats = airplane2.businessSeats;
+var currentFirstSeats = airplane2.firstSeats;
+var currentPrice = airplane.basePrice;
+var availableClassSeats = airplane2.economySeats + airplane2.businessSeats + airplane2.firstSeats;
 
 function setCookie(cname, cvalue, exdays){
   var d= new Date();
@@ -36,7 +39,7 @@ function getCookie(cname){
   return "";
 }
 
-  var currentTicket = 0;
+var currentTicket = 0;
   if(getCookie('availableTicket') == "") {
     setCookie('availableTicket', currentSeats, 1);
   } else {
@@ -69,15 +72,68 @@ function updateTicket() {
           console.log("bali ticket change");
         }
       }
-}      
+}
+var calculateEconomyPrice = function(){
+  var seatsTaken = airplane2.economySeats - currentEconomySeats;
+  //for the first half of the plane
+  if(seatsTaken > 0 && seatsTaken < (airplane2.economySeats/2)){
+    currentPrice = currentPrice + (airplane2.basePrice * .03);
+  }
+  else if(seatsTaken >= (airplane2.economySeats/2) && seatsTaken < (airplane2.economySeats-1)){
+    currentPrice = currentPrice + (airplane2.basePrice * .05);
+  }
+  else if(seatsTaken == 0) { //first seat
+    currentPrice = airplane2.basePrice;
+  }
+  else if(seatsTaken == (airplane2.economySeats-1)){
+    currentPrice = 91000;
+  }
+  else{
+    currentPrice = 0;
+  }
+}
+
+var calculateBusinessPrice = function(){
+  var seatsTaken = airplane2.businessSeats - currentBusinessSeats;
+  //for the first half of the plane
+  if(seatsTaken > 0 && seatsTaken < (airplane2.businessSeats/2)){
+    currentPrice = currentPrice + (airplane2.basePrice * .06);
+  }
+  else if(seatsTaken >= (airplane2.businessSeats/2) && seatsTaken < (airplane2.businessSeats-1)){
+    currentPrice = currentPrice + (airplane2.basePrice * .1);
+  }
+  else if(seatsTaken == 0) { //first seat
+    currentPrice = airplane2.basePrice;
+  }
+  else if(seatsTaken == (airplane2.businessSeats-1)){
+    currentPrice = 91000;
+  }
+  else{
+    currentPrice = 0;
+  }
+} 
+var calculateFirstPrice = function(){
+  var seatsTaken = airplane2.firstSeats - currentFirstSeats;
+  //for the first half of the plane
+  if(seatsTaken >= 0 && seatsTaken < (airplane2.firstSeats-1)){
+    currentPrice = currentPrice + (airplane2.basePrice * .15);
+  }
+  else if(seatsTaken == (airplane2.firstSeats-1)){
+    currentPrice = 191000;
+  }
+  else{
+    currentPrice = 0;
+  }
+} 
+
 var calculateCurrentPrice = function(){
-  var seatsTaken = airplane.seats - currentTicket;
+  var seatsTaken = airplane.seats - currentSeats;
   //for the first half of the plane
   if(seatsTaken > 0 && seatsTaken < (airplane.seats/2)){
-    currentPrice = airplane.basePrice + (airplane.basePrice * .03);
+    currentPrice = currentPrice + (airplane.basePrice * .03);
   }
   else if(seatsTaken >= (airplane.seats/2) && seatsTaken < (airplane.seats-1)){
-    currentPrice = airplane.basePrice + (airplane.basePrice * .05);
+    currentPrice = currentPrice + (airplane.basePrice * .05);
   }
   else if(seatsTaken == 0) { //first seat
     currentPrice = airplane.basePrice;
@@ -90,6 +146,35 @@ var calculateCurrentPrice = function(){
   }
 }
 
+var calculateBaliPrice = function(flightClass){
+    if(flightClass == "first"){
+      //calculate first class price here
+      calculateFirstPrice();
+      currentFirstSeats--;
+    } else if(flightClass == "business"){
+      //calculate business class price here
+      calculateBusinessPrice();
+      currentBusinessSeats--;
+    } else if(flightClass == "economy"){
+      //calculate economy class price here
+      calculateEconomyPrice();
+      currentEconomySeats--;
+    } else {
+      //return error
+      return "error";
+    }
+
+
+    
+}
+var minusCookieTicket = function(){
+  if(document.getElementById('destination').value == 'kl'){
+    //set cookie to new value here
+    setCookie('availableTicket', (currentSeats - 1), 1);
+  } else {
+    setCookie('availableClassTicket', (currentTicket - 1), 1);
+  }
+}
 var buyTicket = function(){
   if(checkAvailableSeats()){
     if(document.getElementById('destination').value == 'kl'){
@@ -97,7 +182,9 @@ var buyTicket = function(){
       currentSeats--;
       return "Your ticket costs $" + currentPrice;
     } else if(document.getElementById('destination').value == 'bali'){
-
+//bali price calculation to run here
+      calculateBaliPrice(document.getElementById('flightClass').value);
+      return "Your ticket costs $" + currentPrice;
     }
     
   }else {

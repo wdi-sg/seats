@@ -1,20 +1,41 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" language="javaScript">
+      function dynamicDropDown(listIndex){
+        switch(listIndex){
+          case "kl" :
+            document.getElementById("flightClass").options[0]=new Option("Select Class","");
+            document.getElementById("flightClass").options[1]=new Option("Economy","economy");
+            break;
+          case "bali" :
+            document.getElementById("flightClass").options[0]=new Option("Select Class","");
+            document.getElementById("flightClass").options[1]=new Option("Economy","economy");
+            document.getElementById("flightClass").options[2]=new Option("Business","business");
+            document.getElementById("flightClass").options[3]=new Option("First Class","first");
+            break;
+        }
+        return true;
+      }
+    </script>
   </head>
   <body>
     <div id="inputs">
-    <select id="destination" onchange="updateTicket();">
+    <select id="destination" onchange="updateTicket(); javascript:dynamicDropDown(this.options[this.selectedIndex].value);">
+      <option value="">Select Destination</option>
       <option value="kl">KL</option>
       <option value="bali">Bali</option>
     </select>
+    
     <input id="buy" type="button" value="Buy!"/>
     </div>
     <h2>Output:</h2>
     <p class="panel" id="output"></p>
     <p class="panel" id="message"><span id="totalTicket"></span></p>
     <p class="panel" id="error"></p>
-    <script>
+    <script type="text/javascript" language="javaScript">
+      document.write('<select id="flightClass"><option value="">Select Class:</option></select>');
+
       document.querySelector('#buy').addEventListener('click',function(event){
         var result = buyTicket();
         display(result);
@@ -23,10 +44,25 @@
       var display = function( data ){
         var output = document.querySelector('#output');
         var message = document.querySelector('#message');
+        if(document.getElementById('destination').value == "kl"){
         message.innerText = currentSeats;
+      } else {
+        if(document.getElementById('flightClass').value == "first"){
+          message.innerText = currentFirstSeats;
+        } else if(document.getElementById('flightClass').value == "business"){
+          message.innerText = currentBusinessSeats;
+        } else if(document.getElementById('flightClass').value == "economy"){
+          message.innerText = currentEconomySeats;
+        }
+      }
         output.innerText = data;
       }
     </script>
     <script src="script.js"></script>
+    <noscript>
+      <select id="flightClass">
+        <option value="economy">Economy</option>
+      </select>
+    </noscript>
   </body>
 </html>
