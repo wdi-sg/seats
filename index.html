@@ -3,21 +3,11 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h1>Type anything to buy the tickets.</h1>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <p class="starter" id="output"></p>
-    <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput);
-        display( result );
-      });
 
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
-    </script>
     <script src="script.js"></script>
   </body>
 </html>
