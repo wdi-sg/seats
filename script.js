@@ -81,6 +81,6 @@ function inputHappened(currentInput){
   } else if (input != "buy first class" || input != "buy business class" || input !="buy economy class"){
     //if input not equals to 'buy ..... class', ask user to key the correct phrase
     document.getElementById('input').value = "";
-    return "Please key in YES to buy ticket"
+    return "Please key in the correct value to buy ticket"
   }
 }
