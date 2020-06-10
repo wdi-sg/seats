@@ -1,23 +1,22 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
+    <h1 id="pageTitle"> SEATS </h1>
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
+    <!-- input field for name and seats -->
+    <div class="input1">
+        <label for="buyerName">Enter your name:</label>
+        <input type="text" id="buyerName" placeholder="John Doe"/>
+        <label for="numPassenger">Enter number of passengers</label>
+        <input type="number" id="numPassenger" name="numPassenger" value="0" min="0" max="10">
+        <p>Current ticket price : <span id="currentPrice">$50.00</span></p>
+        <p>Number of seats left : <span id="seatsRemaining">10</span></p>
+    </div>
+
+    <!-- <input type="text" class="starter" id="input" placeholder="input"/> -->
     <h2>output:</h2>
     <p class="starter" id="output"></p>
-    <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput);
-        display( result );
-      });
-
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
-    </script>
     <script src="script.js"></script>
   </body>
 </html>
