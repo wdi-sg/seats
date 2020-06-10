@@ -6,17 +6,19 @@
     <div class="container">
         <h2>Where to next?</h2>
     <select id="options" class="dropdown" onchange="updateTicket();">
-        <option value="kl">Kuala Lumpur</option>
-        <option value="bali">Bali</option>
+        <option selected="selected">Select Destination</option>
+        <option id="kl" value="kl">Kuala Lumpur</option>
+        <option id="bali" value="bali">Bali</option>
     </select>
     <select id="ticketTypes" class="dropdown">
-        <option value="economy">Economy</option>
-        <option value="business">Business</option>
-        <option value="firstclass">First Class</option>
+        <option selected="selected">Select Cabin Class</option>
+        <option id="economy" value="economy">Economy</option>
+        <option id="business" value="business">Business</option>
+        <option id="first" value="firstclass">First Class</option>
     </select>
-    <input class="user-input" type="button" id="buy" value="Buy" onclick="buyTicket();"/>
-    <span class="result" id="outputCost"></span>
-    <span class="result" id="outputSeats"></span>
+    <input class="user-input" type="button" id="buy" value="Buy" onclick="displayResult();"/>
+    <p class="result" id="outputCost"></p>
+    <p class="result" id="outputSeats"></p>
     <script src="script.js"></script>
   </body>
 </html>
