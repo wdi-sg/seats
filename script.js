@@ -1,3 +1,155 @@
+const submitButton = document.getElementById("submit");
+submitButton.onclick = purchaseTicket;
+
+function purchaseTicket() {
+  var currentInput = document.getElementById("input").value;
+  var planeType;
+
+  console.log("Click: " + cookieExists());
+  if (!isValid(currentInput)) { // Return if input is invalid
+    return;
+  }
+
+  if (cookieExists()) {
+    console.log("Cookie exists!");
+    if (getCookie("place") == "KL") {
+      if (currentInput == "buy") {
+        updateRegPlane(KLPlane);
+        planeType = KLPlane;
+        console.log("The current plane type is: " + planeType.name);
+      }
+      else {
+        deleteCookie("place");
+        purchaseTicket();
+      }
+    }
+    else if (getCookie("place") == "bali") {
+      if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
+        const prop = getCabinProp(currentInput);
+        updateCabinSeats(baliPlane, prop);
+        planeType = baliPlane;
+      }
+      else {
+        deleteCookie("place");
+        purchaseTicket();
+      }
+    }
+  }
+
+  else { // Cookie does not exists
+    console.log("Cookie does not exists!");
+    if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
+      const prop = getCabinProp(currentInput);
+      updateCabinSeats(cabinPlane, prop);
+      planeType = cabinPlane;
+    }
+
+    else if (isDestination(currentInput)) { //input == "bali/ KL"
+      if (currentInput == "bali") { // input = "bali"
+        planeType = baliPlane;
+        setCookie("place", "bali");
+      }
+      else { // input = "KL"
+        planeType = KLPlane;
+        setCookie("place", "KL");
+      }
+      // setCookie("place", currentInput);
+    }
+
+    else { // input = anything else
+      updateRegPlane(regPlane);
+      planeType = regPlane;
+    }
+  }
+  displayMessage(planeType);
+}
+
+function displayMessage(planeType) {
+    console.log("Displaying messages: " + planeType.name);
+  // if plane type is cabin
+  if (planeType == baliPlane || planeType == cabinPlane) {
+    overwrite("Tickets for " + planeType.name + ". Economy: $" + planeType.economy.currPrice +
+          " No. of seats left: " + planeType.economy.availSeats +
+          " Business: $" + planeType.business.currPrice +
+          " No. of seats left: " + planeType.business.availSeats +
+          " First class $" + planeType.first.currPrice +
+          " No. of seats left: " + planeType.first.availSeats);
+  }
+  else {
+    if (planeType.availSeats <= 0) {
+      overwrite("Tickets for " + planeType.name + " is TOTALLY full!");
+    }
+    else {
+      overwrite("Tickets for " + planeType.name +
+      ". Price: $" + planeType.currPrice +
+      ". No. of seats left: " + planeType.availSeats);
+    }
+  }
+}
+
+function cookieExists() {
+  return getCookie("place") != "";
+}
+
+function deleteCookie(cname) {
+  document.cookie = cname + "=; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+}
+
+function setCookie(cname, cvalue) {
+  document.cookie = cname + "=" + cvalue;
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function getFleet(currentInput) {
+  if (currentInput == "bali") {
+    return "cabin";
+  }
+  return "regular";
+}
+
+function isDestination(currentInput) {
+  if (currentInput == "bali" || currentInput == "KL") {
+    return true;
+  }
+  return false;
+}
+
+/* WRITING FUNCTIONS */
+var overwrite = function(data){
+    var output = document.querySelector('#output');
+    output.innerText = data;
+}
+
+function append(text) {
+    var output = document.querySelector('#output');
+    output.innerText += text;
+}
+
+// Purpose: checks the validity of input,
+// Input must be a string and must not be empty
+function isValid(input) {
+  if (!isNaN(input) || input === "") {
+    overwrite("Uh oh! Input must be a string and must not be empty ~");
+    return false;
+  }
+  return true;
+}
+
 // Object: A regular plane
 var regPlane = {
   name: "Regular plane",
@@ -42,7 +194,7 @@ var cabinPlane = {
 };
 
 var baliPlane = {
-  name: "Bali (cabin) plane: ",
+  name: "Bali (cabin) plane",
   economy: {
     totalSeats: 15,
     availSeats: 15,
@@ -128,153 +280,4 @@ function getCabinProp(currentInput) {
       return "economy";
     default: return "Error 404";
   }
-}
-
-const submitButton = document.getElementById("submit");
-submitButton.onclick = purchaseTicket;
-
-function purchaseTicket() {
-  var currentInput = document.getElementById("input").value;
-  var planeType;
-
-  console.log("Click: " + cookieExists());
-  if (!isValid(currentInput)) { // Return if input is invalid
-    return;
-  }
-  if (cookieExists()) {
-    console.log("Cookie exists!");
-    if (getCookie("place") == "KL") {
-      if (currentInput == "buy") {
-        updateRegPlane(KLPlane);
-        planeType = KLPlane;
-      }
-      else {
-        deleteCookie("place");
-        purchaseTicket();
-      }
-    }
-    else if (getCookie("place") == "bali") {
-      if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
-        const prop = getCabinProp(currentInput);
-        updateCabinSeats(baliPlane, prop);
-        planeType = baliPlane;
-      }
-      else {
-        deleteCookie("place");
-        purchaseTicket();
-      }
-    }
-  }
-
-  else { // Cookie does not exists
-  console.log("Cookie does not exists!");
-    if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
-      const prop = getCabinProp(currentInput);
-      updateCabinSeats(cabinPlane, prop);
-      planeType = cabinPlane;
-    }
-
-    else if (isDestination(currentInput)) {
-      if (getFleet(currentInput) == "cabin") { // input = "bali"
-        planeType = baliPlane;
-      }
-      else { // input = "KL"
-        planeType = KLPlane;
-      }
-      setCookie("place", currentInput);
-    }
-
-    else { // input = anything else
-      updateRegPlane(regPlane);
-      planeType = regPlane;
-    }
-  }
-  displayMessage(planeType);
-}
-
-function displayMessage(planeType) {
-  // if plane type is cabin
-  if (planeType == baliPlane || planeType == cabinPlane) {
-    overwrite("Tickets for " + planeType.name + ". Economy: $" + planeType.economy.currPrice +
-          " No. of seats left: " + planeType.economy.availSeats +
-          " Business: $" + planeType.business.currPrice +
-          " No. of seats left: " + planeType.business.availSeats +
-          " First class $" + planeType.first.currPrice +
-          " No. of seats left: " + planeType.first.availSeats);
-  }
-  else {
-    if (planeType.availSeats <= 0) {
-      overwrite("Tickets for " + planeType.name + " is TOTALLY full!");
-    }
-    else {
-      overwrite("Tickets for " + planeType.name +
-      ". Price: $" + planeType.currPrice +
-      ". No. of seats left: " + planeType.availSeats);
-    }
-  }
-}
-
-function cookieExists() {
-  return getCookie("place") != "";
-}
-
-function deleteCookie(cname) {
-  document.cookie = cname + "=; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-}
-
-function setCookie(cname, cvalue) {
-  document.cookie = cname + "=" + cvalue;
-}
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function getFleet(currentInput) {
-  if (currentInput == "bali") {
-    return "cabin";
-  }
-  return "regular";
-}
-
-// Purpose: checks if input is a destination
-function isDestination(currentInput) {
-  if (currentInput == "bali" || currentInput == "KL") {
-    return true;
-  }
-  return false;
-}
-
-// This function overwrites current output
-var overwrite = function(data){
-    var output = document.querySelector('#output');
-    output.innerText = data;
-}
-
-// This function appends text to current output
-function append(text) {
-    var output = document.querySelector('#output');
-    output.innerText += text;
-}
-
-// Purpose: checks the validity of input,
-// Input must be a string and must not be empty
-function isValid(input) {
-  if (!isNaN(input) || input === "") {
-    overwrite("Uh oh! Input must be a string and must not be empty ~");
-    return false;
-  }
-  return true;
 }
