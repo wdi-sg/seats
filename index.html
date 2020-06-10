@@ -1,22 +1,31 @@
 <html>
   <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <p class="starter" id="output"></p>
-    <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput);
-        display( result );
-      });
+    <h1><div class='fa fa-paper-plane'></div> TICKETS </h1>
+    <h3>Destination:
+      <select id='destination'>
+      <option selected disbled hidden>--</option>
+      <option>KL</option>
+      <option>Bali</option>
+    </select>
+    Class:
+    <select id='seat class'>
 
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
+      <option>Economy</option>
+      <option>Business</option>
+      <option>First</option>
+    </select>
+    </h3>
+    <h3>Details:</h3>
+    <h2 class="starter" id="output"></h2>
+    <br />
+    <button id='buy'>BUY</button>
+
+    <script>
     </script>
     <script src="script.js"></script>
   </body>
