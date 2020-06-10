@@ -23,8 +23,10 @@ function inputHappened(currentInput){
         seats--;
         price = 50;
     } else {
+        //alert("No more seat left");
         return "No more seat left"
     }
+    alert(seats + " more seats to price change");
     return "You have bought a seat, the price of your seat is $" + price +".";
   }
 }
