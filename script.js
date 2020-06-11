@@ -1,17 +1,20 @@
+var clickCount = 0;
 const submitButton = document.getElementById("submit");
 submitButton.onclick = purchaseTicket;
 
 function purchaseTicket() {
   var currentInput = document.getElementById("input").value;
-  var planeType;
+  var planeType = regPlane;
 
-  console.log("Click: " + cookieExists());
+  console.log(++clickCount + ". Purchase ticket function called");
+  console.log(clickCount + ". Current input: " + currentInput);
+  console.log("Current cookie: " + getCookie("place"));
   if (!isValid(currentInput)) { // Return if input is invalid
     return;
   }
 
   if (cookieExists()) {
-    console.log("Cookie exists!");
+    console.log(clickCount + ". Cookie exists!");
     if (getCookie("place") == "KL") {
       if (currentInput == "buy") {
         updateRegPlane(KLPlane);
@@ -20,6 +23,7 @@ function purchaseTicket() {
       }
       else {
         deleteCookie("place");
+        console.log("Cookie deleted: " + getCookie("place"));
         purchaseTicket();
       }
     }
@@ -31,13 +35,14 @@ function purchaseTicket() {
       }
       else {
         deleteCookie("place");
+        console.log("Cookie deleted: " + getCookie("place"));
         purchaseTicket();
       }
     }
   }
 
   else { // Cookie does not exists
-    console.log("Cookie does not exists!");
+    console.log(clickCount + ". Cookie does not exists!");
     if (isCabinPurchase(currentInput)) { // input = "buy economy/business/first"
       const prop = getCabinProp(currentInput);
       updateCabinSeats(cabinPlane, prop);
@@ -53,6 +58,7 @@ function purchaseTicket() {
         planeType = KLPlane;
         setCookie("place", "KL");
       }
+      console.log("Cookies created: " + getCookie("place"));
       // setCookie("place", currentInput);
     }
 
@@ -61,11 +67,13 @@ function purchaseTicket() {
       planeType = regPlane;
     }
   }
+  console.log(clickCount + ". Plane type is: " + planeType.name);
   displayMessage(planeType);
+  console.log("Purchase ticket function ends.");
 }
 
 function displayMessage(planeType) {
-    console.log("Displaying messages: " + planeType.name);
+    console.log(clickCount + ". Displaying messages: " + planeType.name);
   // if plane type is cabin
   if (planeType == baliPlane || planeType == cabinPlane) {
     overwrite("Tickets for " + planeType.name + ". Economy: $" + planeType.economy.currPrice +
@@ -83,6 +91,7 @@ function displayMessage(planeType) {
       overwrite("Tickets for " + planeType.name +
       ". Price: $" + planeType.currPrice +
       ". No. of seats left: " + planeType.availSeats);
+      console.log(planeType.name + " message displayed.");
     }
   }
 }
@@ -123,7 +132,7 @@ function getFleet(currentInput) {
 }
 
 function isDestination(currentInput) {
-  if (currentInput == "bali" || currentInput == "KL") {
+  if (currentInput === "bali" || currentInput === "KL") {
     return true;
   }
   return false;
