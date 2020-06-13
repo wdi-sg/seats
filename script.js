@@ -8,40 +8,17 @@ var availableClassTickets = {
     business: 6,
     first: 4,
 }
-var economyPrice = 50;
 
+//defining dropdown options as variables
+var destinationOptions = document.querySelector("#options");
+var kualaLumpur = document.querySelector("#kl");
+var baliIndo = document.querySelector("#bali");
+var economyClass = document.querySelector("#economy");
+var businessClass = document.querySelector("#business");
+var firstClass = document.querySelector("#first");
 
-//to store user information in cookie
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i <ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 
 //to hide certain options in second dropdown when user selects an item from first dropdown
-    var destinationOptions = document.querySelector("#options");
-    var kualaLumpur = document.querySelector("#kl");
-    var baliIndo = document.querySelector("#bali");
-    var economyClass = document.querySelector("#economy");
-    var businessClass = document.querySelector("#business");
-    var firstClass = document.querySelector("#first");
-
 function userSelection(e) {
     if (kualaLumpur.selected) {
         businessClass.disabled = true;
@@ -56,54 +33,103 @@ destinationOptions.addEventListener('change', userSelection);
 
 
 //to compute ticket price and available seats
+var economyPrice = 50;
+var businessPrice = 50;
+var firstPrice = 50;
+
 function buyTicket() {
     if (availableTickets >= 6) {
-    for(var i = 0; i < 6; i++) {
-        basicPrice += (basicPrice*0.03);
-        return (basicPrice);
-    }
+        availableTickets--;
+        basicPrice += basicPrice*0.03;
+        return basicPrice;
     } else if (availableTickets >= 2) {
-        for(var i = 6; i < 10; i++) {
-        basicPrice += (basicPrice*0.05);
-        return (basicPrice);
-    }
+        availableTickets--;
+        basicPrice += basicPrice*0.05;
+        return basicPrice;
     } else if (availableTickets === 1) {
+        availableTickets--;
         basicPrice = 91000;
-        return (basicPrice);
+        return basicPrice;
+    } else if (availableTickets === 0) {
+        alert("Uh oh, our seats are fully booked!")
     }
 }
 
 function buyBaliEconomy() {
     if (availableClassTickets.economy >= 8) {
-    for(var i = 0; i < 8; i++) {
-        economyPrice += (economyPrice*0.03);
-        return (economyPrice);
-    }
+        availableClassTickets.economy--;
+        economyPrice += economyPrice*0.03;
+        return economyPrice;
     } else if (availableClassTickets.economy >= 2) {
-        for(var i = 6; i < 10; i++) {
-        economyPrice += (economyPrice*0.05);
-        return (economyPrice);
-    }
+        availableClassTickets.economy--;
+        economyPrice += economyPrice*0.05;
+        return economyPrice;
     } else if (availableClassTickets.economy === 1) {
+        availableClassTickets.economy--;
         economyPrice = 91000;
-        return (economyPrice);
+        return economyPrice;
+    } else if (availableClassTickets.economy === 0) {
+        alert("Uh oh, our seats are fully booked!")
     }
 }
 
+
+function buyBaliBusiness() {
+    if (availableClassTickets.business >= 4) {
+        availableClassTickets.business--;
+        businessPrice += businessPrice*0.06;
+        return businessPrice;
+    } else if (availableClassTickets.business >= 2) {
+        availableClassTickets.business--;
+        businessPrice += businessPrice*0.10;
+        return businessPrice;
+    } else if (availableClassTickets.business === 1) {
+        availableClassTickets.business--;
+        businessPrice = 91000;
+        return businessPrice;
+    } else if (availableClassTickets.business === 0) {
+        alert("Uh oh, our seats are fully booked!")
+    }
+}
+
+function buyBaliFirst() {
+    if (availableClassTickets.first >= 2) {
+        availableClassTickets.first--;
+        firstPrice += firstPrice*0.15;
+        return firstPrice;
+    } else if (availableClassTickets.first === 1) {
+        availableClassTickets.first--;
+        firstPrice = 191000;
+        return firstPrice;
+    } else if (availableClassTickets.first === 0) {
+        alert("Uh oh, our seats are fully booked!")
+    }
+}
+
+
+//Indicates what output to be displayed when user selects options
 function displayResult() {
  if (kualaLumpur.selected && economyClass.selected) {
     buyTicket();
     document.querySelector("#outputCost").innerText = "*Ticket price from $" + basicPrice.toFixed(2);
-    document.querySelector("#outputSeats").innerText = "**Only " + availableTickets + " seats left!"
+    document.querySelector("#outputSeats").innerText = "**Only " + availableTickets + " seats left!";
  } else if (baliIndo.selected && economyClass.selected) {
     buyBaliEconomy();
     document.querySelector("#outputCost").innerText = "*Ticket price from $" + economyPrice.toFixed(2);
-    document.querySelector("#outputSeats").innerText = "**Only " + availableClassTickets.economy + " seats left!"
+    document.querySelector("#outputSeats").innerText = "**Only " + availableClassTickets.economy + " seats left!";
  } else if (baliIndo.selected && businessClass.selected) {
-
+    buyBaliBusiness();
+    document.querySelector("#outputCost").innerText = "*Ticket price from $" + businessPrice.toFixed(2);
+    document.querySelector("#outputSeats").innerText = "**Only " + availableClassTickets.business + " seats left!";
+ } else if (baliIndo.selected && firstClass.selected) {
+    buyBaliFirst();
+    document.querySelector("#outputCost").innerText = "*Ticket price from $" + firstPrice.toFixed(2);
+    document.querySelector("#outputSeats").innerText = "**Only " + availableClassTickets.first + " seats left!";
  }
 }
 
+
+//to clear output text when user changes options from dropdown menu
 function emptyOutput(e) {
     document.querySelector("#outputCost").innerText = "";
     document.querySelector("#outputSeats").innerText = "";
