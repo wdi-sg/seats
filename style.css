@@ -1,11 +1,69 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+@import url('https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&display=swap');
+
+body {
+	background: #E8E8E8;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-#output{
-  background-color:pink;
+h2 {
+	margin: 0px 0px 20px 0px;
+	font-family: 'Arima Madurai';
+	font-size: 60px;
+	text-align: center;
+}
+
+.dropdown {
+	font: 17px Helvetica, sans-serif;
+	border: solid 1px rgba(60,113,172,0.5);
+	display: block;
+	border-radius: 3px;
+	background-color: #fff;
+	padding: 20px;
+	width: 100%;
+	margin: 10px auto;
+	font-size: 18px;
+	outline: none;
+}
+
+.user-input {
+	display: block;
+	width: 100%;
+	height: 50px;
+	margin-bottom: 25px;
+	font: 15px Helvetica, sans-serif;
+}
+
+.result {
+	width: 100%;
+	margin: 10px auto;
+	font: 15px Helvetica, sans-serif;
+	font-weight: bold;
+	color: #005ce6;
+	text-align: center;
+}
+
+/* DEMO */
+.container h2 {
+  color: gray;
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+ 	border-right: .15em solid yellow; /* The typewriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0px 0px 30px 0px; /* Gives that scrolling effect as the typing happens */
+  animation:
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: yellow }
 }
