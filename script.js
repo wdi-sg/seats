@@ -3,6 +3,7 @@ var seatsLeft = numSeats(90950, 3, 5, 50);
 var currentPrice = 50, oriPrice = 50, increment = 0;
 var planeSeats = numSeats(90950, 3, 5, 50);
 var inputHappened = function(currentInput){
+    if(currentInput.toLowerCase() == "buy" || currentInput.toLowerCase() == "skippart1" || currentInput.toLowerCase() == "skippart2"){
     if(seatsLeft == 1){
         currentPrice += 2.5;
         return "No more seats left and the final price of is $" + currentPrice + ".";
@@ -25,6 +26,9 @@ var inputHappened = function(currentInput){
     else if(seatsLeft < planeSeats/2 && seatsLeft >= 0){
         return increasePrice(0.05);
     }
+}
+    else
+        return "Please input 'Buy' to purchase a ticket";
 };
 function numSeats(priceOfLastSeat, x, y, price) {
     return 2 * priceOfLastSeat/((x * price /100 + y * price/100));
