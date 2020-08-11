@@ -3,7 +3,7 @@ console.log("hello script js");
 var firstSeat = 50;
 var seats = 10;
 var confirmation = "Ticket purchased! Your ticket was $"
-var seatsRemaining = "\n\nSeats Available: "
+var seatsRemaining = "\n\nSeats Available before price bracket goes up: "
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
@@ -13,15 +13,25 @@ var inputHappened = function(currentInput){
   *ticket sold when user inputs anything
   */
 
-  if ( seats == 10 ) {
+  if ( seats <= 10 && seats > 5 ) {
     seats --;
-    var output = confirmation + firstSeat + "." + seatsRemaining + seats;
+    var cheaperSeats = seats - 5;
+    console.log(seats);
+    var output = confirmation + threePercent() + "." + seatsRemaining + cheaperSeats;
   }
 
-  else if ( seats > 0 && seats < 10 ) {
+  else if ( seats > 1 && seats < 6 ) {
     seats --;
-    output = confirmation + fivePercent() + "." + seatsRemaining + seats;
+    cheaperSeats = seats - 1;
+    console.log(seats);
+    output = confirmation + fivePercent() + "." + seatsRemaining + cheaperSeats;
+  }
 
+  else if ( seats == 1 ) {
+    seats --;
+    var lastSeat = 91000;
+    console.log(seats);
+    output = "You got the last seat! Your ticket was $" + lastSeat + "."
   }
 
   else {
@@ -36,5 +46,8 @@ var inputHappened = function(currentInput){
 
 var fivePercent = function () {
     return firstSeat * 1.05;
+}
 
+var threePercent = function () {
+    return firstSeat * 1.03;
 }
