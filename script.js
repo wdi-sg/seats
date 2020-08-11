@@ -15,11 +15,26 @@ var inputHappened = function(currentInput){
 
   if (value) {
     if (seats !== 0) {
-      price *= 1.05;
-      price = parseFloat(price.toFixed(2));
-      var output = "current seats: " + seats + " price: " + price;
-      seats--;
-      return output;
+      if (seats === 1) {
+        price = 91000;
+        var output = "current seats: " + seats + " price: $" + price;
+        seats--;
+        return output;
+      } else if (seats > 5) {
+        price *= 1.03;
+        price = parseFloat(price.toFixed(2));
+        console.log(price);
+        var output = "current seats: " + seats + " price: $" + price;
+        seats--;
+        return output;
+      } else {
+        price *= 1.05;
+        price = parseFloat(price.toFixed(2));
+        console.log(price);
+        var output = "current seats: " + seats + " price: $" + price;
+        seats--;
+        return output;
+      }
     } else {
       var output = "Seats are sold out!";
       return output;
@@ -28,3 +43,5 @@ var inputHappened = function(currentInput){
     return "You key nothing!"
   }
 };
+
+// if seats >
