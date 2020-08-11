@@ -43,6 +43,7 @@ var currentUser = {
     'destination' : '',
     'plane': '',
     'seatType' : '',
+    'price' : 0,
 }
 
 var plane = {
@@ -55,6 +56,8 @@ var plane = {
             'basePrice' : 50,
             'lastSeatPrice' : 91000,
             'lastPriceSold' : 0,
+            'firstMulti' : 1.03,
+            'secondMulti': 1.05,
         }
     },
     threeCabin: {
@@ -66,6 +69,8 @@ var plane = {
                 'basePrice' : 50,
                 'lastSeatPrice' : 91000,
                 'lastPriceSold' : 0,
+                'firstMulti' : 1.03,
+                'secondMulti': 1.05,
         },
         'business' : {
                 'seatAmt' : 6,
@@ -75,6 +80,8 @@ var plane = {
                 'basePrice' : 50,
                 'lastSeatPrice' : 91000,
                 'lastPriceSold' : 0,
+                'firstMulti' : 1.06,
+                'secondMulti': 1.1,
         },
         'first' : {
                 'seatAmt' : 4,
@@ -83,6 +90,8 @@ var plane = {
                 'basePrice' : 50,
                 'lastSeatPrice' : 191000,
                 'lastPriceSold' : 0,
+                'firstMulti' : 1.15,
+                'secondMulti': 1.15,
         }
     },
 }
@@ -102,22 +111,40 @@ var plane = {
 // show destinations
 // show amount of seats till next bracket for the planes per cabin
 var dashboard = function(plane){
+        var bE = checkBracket('threeCabin','economy');
+        var bB = checkBracket('threeCabin','business');
+        var bF = checkBracket('threeCabin','first');
+        var tS = checkBracket('tenSeat','standard');
         var output = `Please select your destination:
 
         Bali
         Economy: ${plane.threeCabin.economy.seatsLeft} seats left.
-        _ seats to next price bracket;
+        ${bE} seats to next price bracket;
 
         Business: ${plane.threeCabin.business.seatsLeft} seats left.
-         _ seats to next price bracket;
+        ${bB} seats to next price bracket;
 
         First Class: ${plane.threeCabin.first.seatsLeft} seats left.
 
         KL
         Standard: ${plane.tenSeat.standard.seatsLeft} seats left.
-         _ seats to next price bracket;`;
+        ${tS} seats to next price bracket;`;
         return output;
      }
+
+// helper to check till next bracket
+var checkBracket = function(planeType, seatType){
+    var currentPlane = plane[planeType][seatType];
+    if (currentPlane.seatAmt === currentPlane.seatsLeft) {
+        return 1;
+    } else if (currentPlane.seatsLeft >= Math.floor(currentPlane.seatAmt / 2)) {
+        return currentPlane.seatsLeft - Math.floor(currentPlane.seatAmt / 2);
+    } else if (currentPlane.seatsLeft !== 1) {
+        return currentPlane.seatsLeft - 1;
+    } else {
+        return 0;
+    }
+}
 // global variable to track state
 var state = 0;
 // display default
@@ -161,20 +188,20 @@ var calculatePrice = function(planeType, seatType){
     if (currentPlane.seatAmt === currentPlane.seatsLeft) {
         price = currentPlane.basePrice;
     } else if (currentPlane.seatsLeft >= Math.floor(currentPlane.seatAmt / 2)) {
-        price = currentPlane.lastPriceSold * 1.03;
-    } else if (currentPlane.seatsLeft <= Math.floor(currentPlane.seatAmt / 2)) {
-        price = currentPlane.lastPriceSold * 1.05;
+        price = currentPlane.lastPriceSold * currentPlane.firstMulti;
+    } else if (currentPlane.seatsLeft !== 1) {
+        price = currentPlane.lastPriceSold * currentPlane.secondMulti;
     } else {
         price = currentPlane.lastSeatPrice;
     }
-
-    currentPlane.lastPriceSold = price;
-    return price;
+    return price.toFixed(2);
 }
 
 var purchase = function(){
     // helper function to decrement the plane seat left
     plane[currentUser.plane][currentUser.seatType].seatsLeft--;
+    plane[currentUser.plane][currentUser.seatType].lastPriceSold = currentUser.price;
+
     // calculate price
     // set lastPriceSold to calculated price
 }
@@ -215,8 +242,9 @@ var inputHappened = function(currentInput){
                 currentUser.plane = 'tenSeat'
                 currentUser.seatType = 'standard';
                 var price = showPrice(currentUser)
+                currentUser.price = price
                 output = `The price is ${price}.
-                Enter 'buy' or 'cancel' to proceed;`;
+                Enter 'buy' or 'cancel' to proceed.`;
                 return output;
             }
             // if kl
@@ -240,8 +268,10 @@ var inputHappened = function(currentInput){
             // if pass
             state = 2;
             currentUser.seatType = currentInput;
-            //calc
-            output = "show price buy // cancel"
+            var price = showPrice(currentUser)
+            currentUser.price = price
+            output = `The price is ${price}.
+            Enter 'buy' or 'cancel' to proceed.`;
             return output;
             // state =  2
             // add seat to seatType
@@ -271,6 +301,8 @@ var inputHappened = function(currentInput){
             state = 0;
             currentUser.destination = '';
             currentUser.seatType = '';
+            currentUser.price = '';
+            currentUser.plane = '';
             output = dashboard(plane);
             return output;
             // state = 0
