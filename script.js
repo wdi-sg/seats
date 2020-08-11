@@ -17,15 +17,19 @@ var priceCalc = function(currentInput)  {
   //if statements to check price
     if(seatsSold === 1) {
       price = 50;
+      console.log("first seat is $" + price);
       seatsToNextBracket= 0;
     } else if (seatsSold > 1 && seatsSold < 6){
       price *= 1.03;
       seatsToNextBracket = 5 - parseInt(seatsSold);
+      console.log("seat is $" + price);
     } else if (seatsSold < 9 && seatsSold > 5) {
-      price += 1.05;
+      price *= 1.05;
+      console.log("seat is $" + price);
       seatsToNextBracket = 8 - parseInt(seatsSold);
     } else if (seatsSold === 9) {
       price = 91000;
+      console.log("last seat is $" + price);
       seatsToNextBracket = 0;
     }
     
