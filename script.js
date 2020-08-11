@@ -7,8 +7,18 @@ let seatsLeft = 10;
 const seatNum = 10;
 let seatsToNextBracket = 0;
 
+//helper function to validate input
+const invalid =(currentInput) => {
+  if(parseInt(currentInput)=== NaN)
+  return true
+};
 //for loop for looping user input
 var priceCalc = function(currentInput)  {
+  
+  if (invalid){
+    return ('Please input a number from 1-10');
+  } else {
+
   for( i=0; i < currentInput ; i++) {
     seatsSold ++;
     seatsLeft --;
@@ -36,4 +46,5 @@ var priceCalc = function(currentInput)  {
   }
   //a message tell the user how many tickets are left before the price bracket goes up.
   return `Your most expensive ticket is ${price} and there are only ${seatsLeft} seats left! There are ${seatsToNextBracket} seats left to the next price bracket!`;
+}
 }
