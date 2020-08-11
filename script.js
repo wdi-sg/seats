@@ -30,7 +30,7 @@ function numSeats(priceOfLastSeat, x, y, price) {
     return 2 * priceOfLastSeat/((x * price /100 + y * price/100));
 }
 function increasePrice(x) {
-    currentPrice += oriPrice * x;
+    currentPrice *= 1 + x;
     seatsLeft--;
     return "Price of seat is $" + currentPrice.toFixed(2) + ". " + seatsLeft + "/" + planeSeats + " seats left";
 }
