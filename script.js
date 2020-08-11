@@ -145,6 +145,7 @@ var checkBracket = function(planeType, seatType){
         return 0;
     }
 }
+
 // global variable to track state
 var state = 0;
 // display default
@@ -255,10 +256,9 @@ var inputHappened = function(currentInput){
             break;
         case 1:
             if (!errorCheck(currentInput, ['economy', 'business', 'first'])) {
-                output =
-                `Invalid input. Try again.
-                Please choose your seat type:
-                Economy // Business // First`
+                var price = showPrice(currentUser)
+                output = `The price is ${currentUser.price}.
+                Enter 'buy' or 'cancel' to proceed.`;
                 return output;
             }
             // get input seat type
@@ -280,9 +280,9 @@ var inputHappened = function(currentInput){
             break;
         case 2:
             if (!errorCheck(currentInput, ['buy', 'cancel'])) {
-                output =
-                `Invalid input. Try again.
-                show price buy // cancel`
+                var price = showPrice(currentUser)
+                output = `The price is ${currentUser.price}.
+                Enter 'buy' or 'cancel' to proceed.`;
                 return output;
             }
             // get input to buy or cancel
