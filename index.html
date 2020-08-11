@@ -5,7 +5,11 @@
   <body>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
-    <p class="starter" id="output">Price of current seat: $50. 45475/45475 seats left</p>
+    <p class="starter" id="output">Current available seats are: <br>
+        Economy: 15/15 seats. Current Price: $50.00.<br>
+    Business: 6/6 seats. Current Price: $50.00.<br>
+    First Class: 4/4 seats. Current Price: $50.00.
+    </p>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
