@@ -1,6 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
   </head>
   <body>
     <input class="starter" id="input" placeholder="input"/>
@@ -10,6 +11,7 @@
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput);
+        event.target.value = ""
         display( result );
       });
 
